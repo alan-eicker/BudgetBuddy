@@ -1,7 +1,7 @@
 .expense-group {
   &__head {
     border-bottom: rem(1) solid $blue-gray-100;
-    margin-bottom: rem(32);
+    margin: rem(32 0);
     padding-bottom: rem(8);
     display: flex;
     align-items: center;
@@ -9,13 +9,28 @@
   }
 
   &__title {
-    color: $teal-800;
+    color: $indigo-800;
     font-size: rem(32);
+    font-weight: 600;
 
     span {
       display: block;
       font-size: rem(20);
+      font-weight: 400;
       color: $blue-gray-900;
     }
+  }
+
+  &__body {
+    display: flex;
+  }
+
+  &__expenses {
+    flex: 1;
+  }
+
+  &__summary {
+    flex: rem(250) 0 0;
+    margin-left: rem(32);
   }
 }

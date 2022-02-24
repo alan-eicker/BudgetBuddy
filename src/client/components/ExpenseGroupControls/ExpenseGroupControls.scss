@@ -1,0 +1,34 @@
+.expense-group-controls {
+  align-items: center;
+  display: flex;
+  font-size: rem(14);
+  justify-content: center;
+
+  & > * + * {
+    margin-left: rem(24);
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: 600;
+    color: $indigo-600;
+
+    svg {
+      margin: rem(0 6);
+
+      path {
+        fill: $indigo-600;
+      }
+    }
+
+    &:hover {
+      color: $blue-gray-900;
+
+      svg {
+        path {
+          fill: $blue-gray-900;
+        }
+      }
+    }
+  }
+}

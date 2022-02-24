@@ -1,6 +1,7 @@
 import React from 'react';
 import { ButtonControls, Button } from '@atomikui/core';
 import ExpenseList from '../../components/ExpenseList';
+import ExpenseGroupControls from '../../components/ExpenseGroupControls';
 
 const data = {
   title: 'March 1, 2022 - March 15, 2022',
@@ -33,6 +34,7 @@ const data = {
 
 const ExpenseGroup = () => (
   <div className="expense-group">
+    <ExpenseGroupControls />
     <div className="expense-group__head">
       <h1 className="expense-group__title">
         {data.title}
@@ -50,7 +52,14 @@ const ExpenseGroup = () => (
         </Button>
       </ButtonControls>
     </div>
-    <ExpenseList expenses={data.expenses} />
+    <div className="expense-group__body">
+      <div className="expense-group__expenses">
+        <ExpenseList expenses={data.expenses} />
+      </div>
+      <div className="expense-group__summary">
+        <h2 className="text-size-20">Spending Snapshot</h2>
+      </div>
+    </div>
   </div>
 );
 
