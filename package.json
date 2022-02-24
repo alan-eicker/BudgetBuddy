@@ -1,0 +1,71 @@
+{
+  "name": "budget-buddy",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build src/index.html",
+    "start": "node src/server",
+    "start:client": "parcel src/client/index.html --port 8000",
+    "start:server": "nodemon src/server",
+    "lint:js": "eslint 'src/**/*.js' --fix --ignore-pattern '*.test.js'",
+    "lint:css": "stylelint ./src/**/*.{css,scss}  --config .stylelintrc --fix",
+    "test:unit": "jest --coverage --silent --config=./jest/jest.config.js",
+    "test:accessibility": "URL=http://localhost:8000 npx jest --testTimeout 60000 --testRegex \\(__test__/.*\\|\\(\\.\\|/\\)\\(spec\\)\\)\\.[jt]sx?$"
+  },
+  "dependencies": {
+    "@atomikui/core": "^1.9.0",
+    "@atomikui/core-sass": "^0.6.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
+    "classnames": "^2.2.6",
+    "express": "^4.17.3",
+    "parcel-plugin-prerender": "^1.4.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-axe": "^3.5.4",
+    "react-dom": "^17.0.1",
+    "react-flexbox-grid": "^2.1.2",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^6.2.1",
+    "redux": "^4.1.0",
+    "redux-persist": "^6.0.0",
+    "regenerator-runtime": "^0.13.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.8",
+    "@wordpress/jest-puppeteer-axe": "^1.10.0",
+    "babel-config-atomikui": "^0.1.1",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "core-js": "^3.8.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "eslint": "^7.14.0",
+    "eslint-config-atomikui": "^0.3.2",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "jest": "^26.6.3",
+    "jest-cli": "^26.6.3",
+    "nodemon": "^2.0.15",
+    "puppeteer": "^5.5.0",
+    "redux-mock-store": "^1.5.4",
+    "sass": "^1.29.0",
+    "stylelint": "^13.8.0",
+    "stylelint-config-atomikui": "^0.1.0",
+    "whatwg-fetch": "^3.5.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "@wordpress/jest-puppeteer-axe"
+    ]
+  },
+  "prerender": {
+    "routes": [
+      "/"
+    ]
+  }
+}

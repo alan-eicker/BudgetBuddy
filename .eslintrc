@@ -1,0 +1,13 @@
+{
+  "parser": "babel-eslint",
+  "extends": "atomikui",
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@atomikui-core", "./node_modules/@atomikui/core/dist/components"]
+        ]
+      }
+    }
+  }
+}

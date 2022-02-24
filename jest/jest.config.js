@@ -1,0 +1,42 @@
+module.exports = {
+  verbose: true,
+  rootDir: '../',
+  roots: ['<rootDir>'],
+  modulePaths: ['<rootDir>/node_modules'],
+  collectCoverage: true,
+  setupFiles: ['<rootDir>/jest/globalMocks.js'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx}',
+    '!src/**/*.spec.js',
+    '!src/index.js',
+    '!**/index.js',
+  ],
+  testMatch: ['<rootDir>/src/**/?(*.)(test).{js,jsx,ts,tsx}'],
+  testEnvironment: 'jsdom',
+  testURL: 'http://localhost',
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+    '^.+\\.css$': 'babel-jest',
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '<rootDir>/jest/fileTransform.js',
+  },
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ],
+  moduleNameMapper: {
+    '\\.(css|scss)$': '<rootDir>/jest/cssMock.js',
+    '\\.svg': '<rootDir>/jest/svgMock.js',
+  },
+  moduleFileExtensions: [
+    'web.js',
+    'js',
+    'web.ts',
+    'ts',
+    'web.tsx',
+    'tsx',
+    'json',
+    'web.jsx',
+    'jsx',
+    'node',
+  ],
+};

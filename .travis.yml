@@ -1,0 +1,23 @@
+language: node_js
+
+node_js:
+  - '12.16.2'
+
+install:
+  - npm install
+
+jobs:
+  include:
+    - stage: Test - Accessiblity
+      script:
+        - npm run start &
+        - npm run test:accessibility
+    - stage: Test - Unit
+      script:
+        - npm run test:unit
+    - stage: Lint - JS
+      script:
+        - npm run lint:js
+    - stage: Lint - Sass
+      script:
+        - npm run lint:css
