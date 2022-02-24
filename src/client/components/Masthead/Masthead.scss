@@ -1,0 +1,44 @@
+.masthead {
+  align-items: center;
+  background: $blue-gray-900;
+  color: $white;
+  display: flex;
+  height: rem(65);
+  justify-content: space-between;
+
+  &__logo {
+    align-items: center;
+    background: no-repeat transparent 16px center/contain
+      url('/static/images/budget.png');
+    display: flex;
+    font-size: rem(20);
+    height: rem(36);
+    padding-left: rem(62);
+  }
+
+  &__nav {
+    align-items: stretch;
+    align-self: stretch;
+    display: flex;
+
+    & > * {
+      font-size: rem(16);
+    }
+
+    & > * > a {
+      color: $white;
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      padding: rem(0 14);
+      height: 100%;
+      transition: all 0.2s linear;
+
+      &:hover,
+      &.active {
+        background: $teal-300;
+      }
+    }
+  }
+}
