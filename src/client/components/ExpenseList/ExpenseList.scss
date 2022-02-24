@@ -1,0 +1,5 @@
+.expense-group-list {
+  & > * + * {
+    margin-top: rem(16);
+  }
+}

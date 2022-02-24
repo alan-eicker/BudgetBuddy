@@ -1,6 +1,6 @@
 .masthead {
   align-items: center;
-  background: $blue-gray-900;
+  background: $teal-800;
   color: $white;
   display: flex;
   height: rem(65);
@@ -25,19 +25,22 @@
       font-size: rem(16);
     }
 
-    & > * > a {
-      color: $white;
-      font-weight: 600;
-      text-decoration: none;
-      display: flex;
+    & > * > button {
       align-items: center;
-      padding: rem(0 14);
+      background: transparent;
+      border: 0;
+      color: $white;
+      display: flex;
+      font-size: rem(16);
+      font-weight: 600;
       height: 100%;
+      padding: rem(0 14);
+      text-decoration: none;
       transition: all 0.2s linear;
 
       &:hover,
       &.active {
-        background: $teal-300;
+        background: $teal-500;
       }
     }
   }

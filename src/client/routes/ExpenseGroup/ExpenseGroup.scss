@@ -1,0 +1,21 @@
+.expense-group {
+  &__head {
+    border-bottom: rem(1) solid $blue-gray-100;
+    margin-bottom: rem(32);
+    padding-bottom: rem(8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    color: $teal-800;
+    font-size: rem(32);
+
+    span {
+      display: block;
+      font-size: rem(20);
+      color: $blue-gray-900;
+    }
+  }
+}

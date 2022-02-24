@@ -1,0 +1,15 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+
+  &__body {
+    height: calc(100vh - 65px);
+    overflow: auto;
+    padding: rem(24);
+
+    & > * {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
+}

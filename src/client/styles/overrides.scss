@@ -1,0 +1,16 @@
+.atomikui-switch__toggle {
+  background: $blue-gray-100;
+  margin: rem(4) auto;
+}
+
+.atomikui-switch.is-checked .atomikui-switch__toggle {
+  background: $indigo-500;
+}
+
+.atomikui-btn--indigo {
+  background: $indigo-500;
+
+  &:hover {
+    background: $indigo-800;
+  }
+}

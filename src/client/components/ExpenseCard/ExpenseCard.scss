@@ -1,0 +1,32 @@
+.expense-card {
+  background: lighten($blue-gray-50, 2%);
+  border-radius: rem(4);
+  display: flex;
+  padding: rem(8);
+  width: 100%;
+
+  &__head {
+    flex: 1;
+  }
+
+  &__body {
+    align-items: center;
+    display: flex;
+    text-align: center;
+  }
+
+  &__name {
+    color: $teal-800;
+    font-size: rem(28);
+  }
+
+  &__balance {
+    font-size: rem(18);
+  }
+
+  &__notes {
+    color: $blue-gray-700;
+    font-size: rem(14);
+    margin-top: rem(8);
+  }
+}

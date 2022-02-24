@@ -1,45 +1,32 @@
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import settingsSvg from './static/images/settings.svg';
-import userSvg from './static/images/user.svg';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
 
 import Masthead from './components/Masthead';
 
 const Dashboard = lazy(() => import('./routes/Dashboard'));
+const ExpenseGroup = lazy(() => import('./routes/ExpenseGroup'));
 
 const App = () => (
-  <div>
-    <div>
+  <Layout
+    header={
       <Masthead
         appName="Budget Buddy"
         nav={[
-          <Link
-            to="/settings"
-            className="settings"
-            title="settings"
-            aria-label="settings"
-          >
-            <img src={settingsSvg} alt="settings" />
-          </Link>,
-          <Link
-            to="/user"
-            className="user"
-            aria-label="user profile"
-            title="user profile"
-          >
-            <img src={userSvg} alt="user" />
-          </Link>,
+          <button type="button" to="/user" className="user">
+            log out
+          </button>,
         ]}
       />
-    </div>
-    <div>
-      <Suspense fallback={null}>
-        <Routes>
-          <Route exact path="/" element={<Dashboard />} />
-        </Routes>
-      </Suspense>
-    </div>
-  </div>
+    }
+  >
+    <Suspense fallback={null}>
+      <Routes>
+        <Route exact path="/" element={<Dashboard />} />
+        <Route path="/expense-group/:id" element={<ExpenseGroup />} />
+      </Routes>
+    </Suspense>
+  </Layout>
 );
 
 export default App;
