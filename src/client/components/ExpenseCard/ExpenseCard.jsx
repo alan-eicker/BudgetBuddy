@@ -25,7 +25,8 @@ const ExpenseCard = ({
       <div className="expense-card__head">
         <div className="expense-card__name">{name}</div>
         <div className="expense-card__balance">
-          ${balance} | Due by: {dueDate} {isOverDue && '(Past Due)'}
+          ${balance} {dueDate && `| Due by: ${dueDate}`}{' '}
+          {isOverDue && '(Past Due)'}
         </div>
         {notes && <div className="expense-card__notes">{notes}</div>}
       </div>
