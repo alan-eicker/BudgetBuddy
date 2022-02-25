@@ -4,6 +4,7 @@ import ExpenseList from '../../components/ExpenseList';
 import ExpenseGroupControls from '../../components/ExpenseGroupControls';
 
 const data = {
+  id: 1,
   title: 'March 1, 2022 - March 15, 2022',
   totalBudget: 5600,
   expenses: [
