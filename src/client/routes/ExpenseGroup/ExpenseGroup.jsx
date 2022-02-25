@@ -17,7 +17,7 @@ const data = {
     {
       id: 1,
       name: 'Mortgage',
-      balance: 2320.78,
+      balance: 2319.78,
       dueDate: '2/1/2022',
       isPaid: 0,
       notes: 'First mortgage payment!',
@@ -42,7 +42,7 @@ const data = {
 const ExpenseGroup = () => {
   const subtotal = getSubTotalFromCollection(data.expenses, 'balance');
 
-  const totalBalance = `$${subtotal}`;
+  const totalBalance = `$${formatNumber(subtotal)}`;
 
   const unpaidBalance = `$${formatNumber(
     getUnpaidBalanceFromCollection(data.expenses, 'balance'),
@@ -53,6 +53,8 @@ const ExpenseGroup = () => {
   )}`;
 
   const totalBudge = `$${formatNumber(data.totalBudget)}`;
+
+  const expenseRatio = Math.round((subtotal / data.totalBudget) * 100);
 
   return (
     <div className="expense-group">
@@ -81,6 +83,7 @@ const ExpenseGroup = () => {
         <div className="expense-group__summary">
           <h2 className="text-size-20 margin-bottom-16">Spending Snapshot</h2>
           <Statistic
+            theme={expenseRatio > 75 ? 'red' : 'green'}
             value={totalBalance}
             label="Total Balance"
             size="md"

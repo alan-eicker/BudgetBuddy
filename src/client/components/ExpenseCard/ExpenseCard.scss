@@ -39,17 +39,19 @@
     & > button {
       background: transparent;
       border-radius: 50%;
-      min-height: rem(30);
+      height: rem(32);
+      min-height: auto;
       padding: 0;
-      width: rem(30);
+      width: rem(32);
 
-      &:hover {
+      &:hover,
+      &:focus {
         background: $blue-gray-100;
       }
     }
 
     & > * + * {
-      margin-top: rem(10);
+      margin-top: rem(8);
     }
   }
 
