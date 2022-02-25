@@ -45,6 +45,28 @@ const expenseGroups = [
       },
     ],
   },
+  {
+    id: 2,
+    title: 'March 16, 2022 - March 31, 2022',
+    totalBudget: 5450,
+    expenses: [
+      {
+        id: 1,
+        name: 'Car Payment',
+        balance: 359.48,
+        dueDate: '3/1/2022',
+        isPaid: 0,
+        notes: 'First mortgage payment!',
+      },
+      {
+        id: 2,
+        name: 'ComEd',
+        balance: 119.89,
+        dueDate: '3/15/2022',
+        isPaid: 0,
+      },
+    ],
+  },
 ];
 
 module.exports = {
