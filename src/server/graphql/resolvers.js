@@ -71,8 +71,5 @@ const expenseGroups = [
 
 module.exports = {
   expenseGroups: () => expenseGroups,
-  expenseGroup: ({ id }) => {
-    console.log(expenseGroups.find((group) => group.id === id));
-    return expenseGroups.find((group) => group.id === id);
-  },
+  expenseGroup: ({ id }) => expenseGroups.find((group) => group.id === id),
 };
