@@ -5,6 +5,7 @@ import ExpenseGroupControls from '../../components/ExpenseGroupControls';
 import {
   getSubTotalFromCollection,
   getUnpaidBalanceFromCollection,
+  getLeftOverBalance,
   formatNumber,
 } from '../../utilities/numbers';
 
@@ -39,13 +40,19 @@ const data = {
 };
 
 const ExpenseGroup = () => {
-  const subtotal = `$${formatNumber(
-    getSubTotalFromCollection(data.expenses, 'balance'),
-  )}`;
+  const subtotal = getSubTotalFromCollection(data.expenses, 'balance');
+
+  const totalBalance = `$${subtotal}`;
 
   const unpaidBalance = `$${formatNumber(
     getUnpaidBalanceFromCollection(data.expenses, 'balance'),
   )}`;
+
+  const leftOverBalance = `$${formatNumber(
+    getLeftOverBalance(data.totalBudget, subtotal),
+  )}`;
+
+  const totalBudge = `$${formatNumber(data.totalBudget)}`;
 
   return (
     <div className="expense-group">
@@ -53,7 +60,7 @@ const ExpenseGroup = () => {
       <div className="expense-group__head">
         <h1 className="expense-group__title">
           {data.title}
-          <span>Total Budget: ${data.totalBudget}</span>
+          <span>Total Budget: {totalBudge}</span>
         </h1>
         <ButtonControls align="right">
           <Button theme="indigo" size="md" shape="pill">
@@ -74,7 +81,7 @@ const ExpenseGroup = () => {
         <div className="expense-group__summary">
           <h2 className="text-size-20 margin-bottom-16">Spending Snapshot</h2>
           <Statistic
-            value={subtotal}
+            value={totalBalance}
             label="Total Balance"
             size="md"
             topLabel
@@ -83,6 +90,13 @@ const ExpenseGroup = () => {
             className="margin-top-16"
             value={unpaidBalance}
             label="Unpaid Balance"
+            size="md"
+            topLabel
+          />
+          <Statistic
+            className="margin-top-16"
+            value={leftOverBalance}
+            label="Left Over Balance"
             size="md"
             topLabel
           />

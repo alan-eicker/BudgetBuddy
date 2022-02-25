@@ -15,3 +15,6 @@ export const getUnpaidBalanceFromCollection = (collection, key) =>
       !nextValue.isPaid ? previousValue + nextValue[key] : previousValue,
     0,
   );
+
+export const getLeftOverBalance = (totalBudget, subtotal) =>
+  totalBudget - subtotal;
