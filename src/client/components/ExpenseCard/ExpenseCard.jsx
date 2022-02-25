@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Switch } from '@atomikui/core';
+import { Switch, Button } from '@atomikui/core';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const ExpenseCard = ({
   id,
@@ -24,7 +26,7 @@ const ExpenseCard = ({
       <div className="expense-card__head">
         <div className="expense-card__name">{name}</div>
         <div className="expense-card__balance">
-          ${balance} | Due by: {dueDate}
+          ${balance} | Due by: {dueDate} {isOverDue && '(Past Due)'}
         </div>
         {notes && <div className="expense-card__notes">{notes}</div>}
       </div>
@@ -35,6 +37,14 @@ const ExpenseCard = ({
           onChange={() => onChange(id)}
           checked={paid}
         />
+        <div className="expense-card__action-btns">
+          <Button aria-label="edit" size="md">
+            <Icon icon={faPencilAlt} />
+          </Button>
+          <Button aria-label="delete" size="md">
+            <Icon icon={faTrashAlt} />
+          </Button>
+        </div>
       </div>
     </div>
   );
