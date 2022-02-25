@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import App from './App';
 import './styles/main.scss';
 
@@ -13,9 +14,16 @@ import './styles/main.scss';
   }
 })();
 
+const client = new ApolloClient({
+  uri: 'http://localhost:8080/graphql',
+  cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <ApolloProvider client={client}>
+    <Router>
+      <App />
+    </Router>
+  </ApolloProvider>,
   document.querySelector('#root'),
 );

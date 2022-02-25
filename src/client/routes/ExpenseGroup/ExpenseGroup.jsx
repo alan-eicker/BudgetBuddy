@@ -1,4 +1,6 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
 import { ButtonControls, Button, Statistic } from '@atomikui/core';
 import ExpenseList from '../../components/ExpenseList';
 import ExpenseGroupControls from '../../components/ExpenseGroupControls';
@@ -9,37 +11,44 @@ import {
   formatNumber,
 } from '../../utilities/numbers';
 
-const group = {
-  id: 1,
-  title: 'March 1, 2022 - March 15, 2022',
-  totalBudget: 5600,
-  expenses: [
-    {
-      id: 1,
-      name: 'Mortgage',
-      balance: 2319.78,
-      dueDate: '2/1/2022',
-      isPaid: 0,
-      notes: 'First mortgage payment!',
-    },
-    {
-      id: 2,
-      name: 'Credit Card',
-      balance: 100,
-      dueDate: '2/11/2022',
-      isPaid: 1,
-    },
-    {
-      id: 3,
-      name: 'Groceries',
-      balance: 400,
-      dueDate: '2/13/2022',
-      isPaid: 1,
-    },
-  ],
-};
+const GET_EXPENSE_GROUP = gql`
+  query GetExpenseGroup($id: Int!) {
+    expenseGroup(id: $id) {
+      id
+      title
+      totalBudget
+      expenses {
+        id
+        name
+        balance
+        dueDate
+        isPaid
+        notes
+      }
+    }
+  }
+`;
 
 const ExpenseGroup = () => {
+  const params = useParams();
+  const id = Number(params.id);
+
+  const { loading, error, data } = useQuery(GET_EXPENSE_GROUP, {
+    variables: {
+      id,
+    },
+  });
+
+  if (loading) {
+    return null;
+  }
+
+  if (error) {
+    throw new Error(error);
+  }
+
+  const group = data?.expenseGroup;
+
   const subtotal = getSubTotalFromCollection(group.expenses, 'balance');
 
   const totalBalance = `$${formatNumber(subtotal)}`;
