@@ -5,7 +5,7 @@ import ExpenseCard from '../ExpenseCard';
 const ExpenseList = ({ expenses }) => (
   <ul className="expense-group-list">
     {expenses.map((group, idx) => (
-      <li key={`expense-group-${idx + 1}`} className="expense-card">
+      <li key={`expense-group-${idx + 1}`}>
         <ExpenseCard {...group} />
       </li>
     ))}

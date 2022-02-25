@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { Switch } from '@atomikui/core';
 
 const ExpenseCard = ({
@@ -12,8 +13,14 @@ const ExpenseCard = ({
   onChange,
 }) => {
   const paid = Boolean(isPaid);
+
+  const isOverDue = dueDate ? new Date() > new Date(dueDate) && !isPaid : false;
+
   return (
-    <div key={id} className="expense-card">
+    <div
+      key={id}
+      className={classnames('expense-card', { 'is-overdue': isOverDue })}
+    >
       <div className="expense-card__head">
         <div className="expense-card__name">{name}</div>
         <div className="expense-card__balance">
