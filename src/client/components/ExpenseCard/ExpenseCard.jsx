@@ -15,7 +15,6 @@ const ExpenseCard = ({
   onChange,
 }) => {
   const paid = Boolean(isPaid);
-
   const isOverDue = dueDate ? new Date() > new Date(dueDate) && !isPaid : false;
 
   return (
@@ -38,10 +37,10 @@ const ExpenseCard = ({
           checked={paid}
         />
         <div className="expense-card__action-btns">
-          <Button aria-label="edit" size="md">
+          <Button aria-label="edit" size="md" onClick={() => {}}>
             <Icon icon={faPencilAlt} />
           </Button>
-          <Button aria-label="delete" size="md">
+          <Button aria-label="delete" size="md" onClick={() => {}}>
             <Icon icon={faTrashAlt} />
           </Button>
         </div>

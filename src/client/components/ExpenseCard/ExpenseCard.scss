@@ -46,7 +46,7 @@
 
       &:hover,
       &:focus {
-        background: $blue-gray-100;
+        background: darken($blue-gray-100, 1%);
       }
     }
 

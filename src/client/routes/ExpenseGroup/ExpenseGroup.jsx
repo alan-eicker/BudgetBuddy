@@ -9,7 +9,7 @@ import {
   formatNumber,
 } from '../../utilities/numbers';
 
-const data = {
+const group = {
   id: 1,
   title: 'March 1, 2022 - March 15, 2022',
   totalBudget: 5600,
@@ -40,45 +40,45 @@ const data = {
 };
 
 const ExpenseGroup = () => {
-  const subtotal = getSubTotalFromCollection(data.expenses, 'balance');
+  const subtotal = getSubTotalFromCollection(group.expenses, 'balance');
 
   const totalBalance = `$${formatNumber(subtotal)}`;
 
   const unpaidBalance = `$${formatNumber(
-    getUnpaidBalanceFromCollection(data.expenses, 'balance'),
+    getUnpaidBalanceFromCollection(group.expenses, 'balance'),
   )}`;
 
   const leftOverBalance = `$${formatNumber(
-    getLeftOverBalance(data.totalBudget, subtotal),
+    getLeftOverBalance(group.totalBudget, subtotal),
   )}`;
 
-  const totalBudge = `$${formatNumber(data.totalBudget)}`;
+  const totalBudge = `$${formatNumber(group.totalBudget)}`;
 
-  const expenseRatio = Math.round((subtotal / data.totalBudget) * 100);
+  const expenseRatio = Math.round((subtotal / group.totalBudget) * 100);
 
   return (
     <div className="expense-group">
       <ExpenseGroupControls />
       <div className="expense-group__head">
         <h1 className="expense-group__title">
-          {data.title}
+          {group.title}
           <span>Total Budget: {totalBudge}</span>
         </h1>
         <ButtonControls align="right">
-          <Button theme="indigo" size="md" shape="pill">
+          <Button theme="indigo" size="md" shape="pill" onClick={() => {}}>
             add expense
           </Button>
-          <Button theme="indigo" size="md" shape="pill">
+          <Button theme="indigo" size="md" shape="pill" onClick={() => {}}>
             edit group
           </Button>
-          <Button theme="white" size="md" shape="pill">
+          <Button theme="white" size="md" shape="pill" onClick={() => {}}>
             delete group
           </Button>
         </ButtonControls>
       </div>
       <div className="expense-group__body">
         <div className="expense-group__expenses">
-          <ExpenseList expenses={data.expenses} />
+          <ExpenseList expenses={group.expenses} />
         </div>
         <div className="expense-group__summary">
           <h2 className="text-size-20 margin-bottom-16">Spending Snapshot</h2>
