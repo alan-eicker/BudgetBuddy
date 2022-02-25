@@ -53,6 +53,8 @@ const ExpenseGroup = () => {
 
   const totalBalance = `$${formatNumber(subtotal)}`;
 
+  const totalBudget = `$${formatNumber(group.totalBudget)}`;
+
   const unpaidBalance = `$${formatNumber(
     getUnpaidBalanceFromCollection(group.expenses, 'balance'),
   )}`;
@@ -61,9 +63,9 @@ const ExpenseGroup = () => {
     getLeftOverBalance(group.totalBudget, subtotal),
   )}`;
 
-  const totalBudge = `$${formatNumber(group.totalBudget)}`;
-
   const expenseRatio = Math.round((subtotal / group.totalBudget) * 100);
+
+  const isOverBudget = group.totalBudget - subtotal < 0;
 
   return (
     <div className="expense-group">
@@ -71,7 +73,7 @@ const ExpenseGroup = () => {
       <div className="expense-group__head">
         <h1 className="expense-group__title">
           {group.title}
-          <span>Total Budget: {totalBudge}</span>
+          <span>Total Budget: {totalBudget}</span>
         </h1>
         <ButtonControls align="right">
           <Button theme="indigo" size="md" shape="pill" onClick={() => {}}>
@@ -90,7 +92,7 @@ const ExpenseGroup = () => {
           <ExpenseList expenses={group.expenses} />
         </div>
         <div className="expense-group__summary">
-          <h2 className="text-size-20 margin-bottom-16">Spending Snapshot</h2>
+          <h2 className="text-size-20 margin-bottom-20">Spending Snapshot</h2>
           <Statistic
             theme={expenseRatio > 75 ? 'red' : 'green'}
             value={totalBalance}
@@ -99,14 +101,15 @@ const ExpenseGroup = () => {
             topLabel
           />
           <Statistic
-            className="margin-top-16"
+            className="margin-top-20"
             value={unpaidBalance}
             label="Unpaid Balance"
             size="md"
             topLabel
           />
           <Statistic
-            className="margin-top-16"
+            {...(isOverBudget && { theme: 'red' })}
+            className="margin-top-20"
             value={leftOverBalance}
             label="Left Over Balance"
             size="md"
