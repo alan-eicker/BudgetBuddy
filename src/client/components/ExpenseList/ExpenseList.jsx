@@ -15,7 +15,7 @@ const ExpenseList = ({ expenses }) => (
 ExpenseList.propTypes = {
   expenses: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string,
+      title: PropTypes.string,
       balance: PropTypes.number,
       dueDate: PropTypes.string,
       isPaid: PropTypes.number,

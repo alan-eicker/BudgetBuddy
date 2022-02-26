@@ -7,7 +7,7 @@ import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const ExpenseCard = ({
   id,
-  name,
+  title,
   balance,
   dueDate,
   isPaid,
@@ -23,7 +23,7 @@ const ExpenseCard = ({
       className={classnames('expense-card', { 'is-overdue': isOverDue })}
     >
       <div className="expense-card__head">
-        <div className="expense-card__name">{name}</div>
+        <div className="expense-card__name">{title}</div>
         <div className="expense-card__balance">
           ${balance} {dueDate && `| Due by: ${dueDate}`}{' '}
           {isOverDue && '(Past Due)'}
@@ -51,7 +51,7 @@ const ExpenseCard = ({
 };
 
 ExpenseCard.propTypes = {
-  name: PropTypes.string,
+  title: PropTypes.string,
   balance: PropTypes.number,
   dueDate: PropTypes.string,
   isPaid: PropTypes.number,
@@ -61,7 +61,7 @@ ExpenseCard.propTypes = {
 };
 
 ExpenseCard.defaultProps = {
-  name: '',
+  title: '',
   balance: 0,
   dueDate: null,
   isPaid: false,

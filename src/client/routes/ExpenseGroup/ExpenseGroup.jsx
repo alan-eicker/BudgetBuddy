@@ -19,7 +19,7 @@ const GET_EXPENSE_GROUP = gql`
       totalBudget
       expenses {
         id
-        name
+        title
         balance
         dueDate
         isPaid

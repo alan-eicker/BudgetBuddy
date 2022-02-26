@@ -6,7 +6,7 @@ const expenseGroups = [
     expenses: [
       {
         id: 1,
-        name: 'Mortgage',
+        title: 'Mortgage',
         balance: 2319.78,
         dueDate: '2/1/2022',
         isPaid: 0,
@@ -14,32 +14,32 @@ const expenseGroups = [
       },
       {
         id: 2,
-        name: 'Credit Card',
+        title: 'Credit Card',
         balance: 100,
         dueDate: '2/11/2022',
         isPaid: 1,
       },
       {
         id: 3,
-        name: 'Groceries',
+        title: 'Groceries',
         balance: 400,
         isPaid: 1,
       },
       {
         id: 4,
-        name: 'Gas',
+        title: 'Gas',
         balance: 150,
         isPaid: 0,
       },
       {
         id: 5,
-        name: 'College Funds',
+        title: 'College Funds',
         balance: 600,
         isPaid: 0,
       },
       {
         id: 6,
-        name: 'Roth IRA',
+        title: 'Roth IRA',
         balance: 250,
         isPaid: 1,
       },
@@ -52,7 +52,7 @@ const expenseGroups = [
     expenses: [
       {
         id: 1,
-        name: 'Car Payment',
+        title: 'Car Payment',
         balance: 359.48,
         dueDate: '3/1/2022',
         isPaid: 0,
@@ -60,7 +60,7 @@ const expenseGroups = [
       },
       {
         id: 2,
-        name: 'ComEd',
+        title: 'ComEd',
         balance: 119.89,
         dueDate: '3/15/2022',
         isPaid: 0,
@@ -72,4 +72,10 @@ const expenseGroups = [
 module.exports = {
   expenseGroups: () => expenseGroups,
   expenseGroup: ({ id }) => expenseGroups.find((group) => group.id === id),
+  previousAndNextGroups: ({ id }) => {
+    // 1. Find the index of the current ID
+    // 2. If current ID is first, then return { isFirst: true, result: [{object}] }
+    // 3. If current ID is last, then return { isLast: true, result: [{object}] }
+    // 4. If current ID is not first or last, then return { result: [{object}, {object}] }
+  },
 };

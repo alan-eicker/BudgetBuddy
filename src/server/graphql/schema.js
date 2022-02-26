@@ -11,7 +11,7 @@ module.exports = `
   }
   type Expense {
     id: Int
-    name: String
+    title: String
     balance: Float
     dueDate: String
     isPaid: Int
