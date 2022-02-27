@@ -112,7 +112,8 @@ const ExpenseGroup = () => {
             <div className="expense-group__budget-warning">
               <Icon icon={faExclamationTriangle} />
               <Hint type="error">
-                Your total balance is greater than 75% of this month's budget.
+                Your total balance is greater than {budgetLimitPercentage}% of
+                this month's budget.
               </Hint>
             </div>
           )}
