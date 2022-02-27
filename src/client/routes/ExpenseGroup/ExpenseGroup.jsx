@@ -75,7 +75,7 @@ const ExpenseGroup = () => {
           {group.title}
           <span>Total Budget: {totalBudget}</span>
         </h1>
-        <ButtonControls align="right">
+        <ButtonControls className="expense-group__controls">
           <Button theme="indigo" size="md" shape="pill" onClick={() => {}}>
             add expense
           </Button>
