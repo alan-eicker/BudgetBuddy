@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { ButtonControls, Button, Statistic } from '@atomikui/core';
+import { useAppContent } from '../../AppProvider';
 import ExpenseList from '../../components/ExpenseList';
 import ExpenseGroupControls from '../../components/ExpenseGroupControls';
 import {
@@ -30,6 +31,7 @@ const GET_EXPENSE_GROUP = gql`
 `;
 
 const ExpenseGroup = () => {
+  const { setShowLoader } = useAppContent();
   const params = useParams();
   const { id } = params;
 
@@ -38,6 +40,8 @@ const ExpenseGroup = () => {
       id,
     },
   });
+
+  setShowLoader(loading);
 
   if (loading) {
     return null;
@@ -82,7 +86,7 @@ const ExpenseGroup = () => {
           <Button theme="indigo" size="md" shape="pill" onClick={() => {}}>
             edit group
           </Button>
-          <Button theme="white" size="md" shape="pill" onClick={() => {}}>
+          <Button theme="red" size="md" shape="pill" onClick={() => {}}>
             delete group
           </Button>
         </ButtonControls>
