@@ -1,7 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
-import { ButtonControls, Button, Statistic } from '@atomikui/core';
+import { ButtonControls, Button, Statistic, Hint } from '@atomikui/core';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { useAppContent } from '../../AppProvider';
 import ExpenseList from '../../components/ExpenseList';
 import ExpenseGroupControls from '../../components/ExpenseGroupControls';
@@ -71,6 +73,8 @@ const ExpenseGroup = () => {
 
   const isOverBudget = group.totalBudget - subtotal < 0;
 
+  const isAlmostOverBudget = expenseRatio > 75;
+
   return (
     <div className="expense-group">
       <ExpenseGroupControls />
@@ -104,6 +108,14 @@ const ExpenseGroup = () => {
             size="md"
             topLabel
           />
+          {isAlmostOverBudget && (
+            <div className="expense-group__budget-warning">
+              <Icon icon={faExclamationTriangle} />
+              <Hint type="error">
+                Your total balance is greater than 75% of this month's budget.
+              </Hint>
+            </div>
+          )}
           <Statistic
             className="margin-top-20"
             value={unpaidBalance}
