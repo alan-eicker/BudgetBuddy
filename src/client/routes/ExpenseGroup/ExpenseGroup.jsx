@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
-import { ButtonControls, Button, Statistic, Hint } from '@atomikui/core';
+import { ButtonControls, Button, Statistic, Hint, Alert } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { useAppContent } from '../../AppProvider';
@@ -75,6 +75,13 @@ const ExpenseGroup = () => {
 
   const isAlmostOverBudget = expenseRatio > budgetLimitPercentage;
 
+  const overdueExpenses = group.expenses.filter(
+    (expense) =>
+      expense.dueDate &&
+      new Date(expense.dueDate) < new Date() &&
+      !expense.paid,
+  ).length;
+
   return (
     <div className="expense-group">
       <ExpenseGroupControls />
@@ -97,6 +104,12 @@ const ExpenseGroup = () => {
       </div>
       <div className="expense-group__body">
         <div className="expense-group__expenses">
+          {overdueExpenses > 0 && (
+            <Alert theme="error" className="margin-bottom-16">
+              You have {overdueExpenses} overdue expense
+              {overdueExpenses > 1 ? 's' : ''}.
+            </Alert>
+          )}
           <ExpenseList expenses={group.expenses} />
         </div>
         <div className="expense-group__summary">
