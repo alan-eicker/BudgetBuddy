@@ -33,7 +33,7 @@ const GET_EXPENSE_GROUP = gql`
 `;
 
 const ExpenseGroup = () => {
-  const { setShowLoader } = useAppContent();
+  const { setShowLoader, budgetLimitPercentage } = useAppContent();
   const params = useParams();
   const { id } = params;
 
@@ -73,7 +73,7 @@ const ExpenseGroup = () => {
 
   const isOverBudget = group.totalBudget - subtotal < 0;
 
-  const isAlmostOverBudget = expenseRatio > 75;
+  const isAlmostOverBudget = expenseRatio > budgetLimitPercentage;
 
   return (
     <div className="expense-group">
@@ -102,7 +102,7 @@ const ExpenseGroup = () => {
         <div className="expense-group__summary">
           <h2 className="text-size-20 margin-bottom-20">Spending Snapshot</h2>
           <Statistic
-            theme={expenseRatio > 75 ? 'red' : 'green'}
+            theme={isAlmostOverBudget ? 'red' : 'green'}
             value={totalBalance}
             label="Total Balance"
             size="md"
