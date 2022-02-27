@@ -1,3 +1,5 @@
+const ExpenseGroup = require('../mongoose/schemas');
+
 const expenseGroups = [
   {
     _id: '1',
@@ -70,8 +72,20 @@ const expenseGroups = [
 ];
 
 module.exports = {
-  expenseGroups: () => expenseGroups,
-  expenseGroup: ({ _id }) => expenseGroups.find((group) => group._id === _id),
+  expenseGroups: async () => {
+    try {
+      return await ExpenseGroup.find({});
+    } catch (err) {
+      return { err: err.message };
+    }
+  },
+  expenseGroup: async ({ _id }) => {
+    try {
+      return await ExpenseGroup.findById({ _id });
+    } catch (err) {
+      return { err: err.message };
+    }
+  },
   previousAndNextGroups: ({ _id }) => {
     // 1. Find the index of the current ID
     // 2. If current ID is first, then return { isFirst: true, result: [{object}] }
