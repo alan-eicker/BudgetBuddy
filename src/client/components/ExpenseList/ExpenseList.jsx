@@ -15,12 +15,12 @@ const ExpenseList = ({ expenses }) => (
 ExpenseList.propTypes = {
   expenses: PropTypes.arrayOf(
     PropTypes.shape({
+      _id: PropTypes.string,
       title: PropTypes.string,
       balance: PropTypes.number,
       dueDate: PropTypes.string,
-      isPaid: PropTypes.number,
-      id: PropTypes.number,
-      notes: PropTypes.string,
+      paid: PropTypes.bool,
+      note: PropTypes.string,
     }),
   ),
 };

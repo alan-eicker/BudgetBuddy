@@ -6,20 +6,19 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const ExpenseCard = ({
-  id,
+  _id,
   title,
   balance,
   dueDate,
-  isPaid,
-  notes,
+  paid,
+  note,
   onChange,
 }) => {
-  const paid = Boolean(isPaid);
-  const isOverDue = dueDate ? new Date() > new Date(dueDate) && !isPaid : false;
+  const isOverDue = dueDate ? new Date() > new Date(dueDate) && !paid : false;
 
   return (
     <div
-      key={id}
+      key={_id}
       className={classnames('expense-card', { 'is-overdue': isOverDue })}
     >
       <div className="expense-card__head">
@@ -28,13 +27,13 @@ const ExpenseCard = ({
           ${balance} {dueDate && `| Due by: ${dueDate}`}{' '}
           {isOverDue && '(Past Due)'}
         </div>
-        {notes && <div className="expense-card__notes">{notes}</div>}
+        {note && <div className="expense-card__notes">{note}</div>}
       </div>
       <div className="expense-card__body">
         <Switch
           layout="stacked"
           label={paid ? 'Paid' : 'Not paid'}
-          onChange={() => onChange(id)}
+          onChange={() => onChange(_id)}
           checked={paid}
         />
         <div className="expense-card__action-btns">
@@ -51,22 +50,22 @@ const ExpenseCard = ({
 };
 
 ExpenseCard.propTypes = {
+  _id: PropTypes.string,
   title: PropTypes.string,
   balance: PropTypes.number,
   dueDate: PropTypes.string,
-  isPaid: PropTypes.number,
-  id: PropTypes.number,
-  notes: PropTypes.string,
+  paid: PropTypes.bool,
+  note: PropTypes.string,
   onChange: PropTypes.func,
 };
 
 ExpenseCard.defaultProps = {
+  _id: '',
   title: '',
   balance: 0,
   dueDate: null,
-  isPaid: false,
-  id: '',
-  notes: null,
+  paid: false,
+  note: null,
   onChange: () => {},
 };
 

@@ -9,5 +9,8 @@
         ]
       }
     }
+  },
+  "rules": {
+    "no-underscore-dangle": 0
   }
 }

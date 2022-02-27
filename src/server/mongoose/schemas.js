@@ -5,8 +5,9 @@ const { Schema, model } = mongoose;
 const ExpenseSchema = new Schema({
   title: String,
   balance: Number,
-  isPaid: Boolean,
-  notes: String,
+  dueDate: String,
+  paid: Boolean,
+  note: String,
 });
 
 const ExpenseGroupSchema = new Schema({

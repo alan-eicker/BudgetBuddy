@@ -12,18 +12,18 @@ import {
 } from '../../utilities/numbers';
 
 const GET_EXPENSE_GROUP = gql`
-  query GetExpenseGroup($id: Int!) {
-    expenseGroup(id: $id) {
-      id
+  query GetExpenseGroup($id: String!) {
+    expenseGroup(_id: $id) {
+      _id
       title
       totalBudget
       expenses {
-        id
+        _id
         title
         balance
         dueDate
-        isPaid
-        notes
+        paid
+        note
       }
     }
   }
@@ -31,7 +31,7 @@ const GET_EXPENSE_GROUP = gql`
 
 const ExpenseGroup = () => {
   const params = useParams();
-  const id = Number(params.id);
+  const { id } = params;
 
   const { loading, error, data } = useQuery(GET_EXPENSE_GROUP, {
     variables: {
