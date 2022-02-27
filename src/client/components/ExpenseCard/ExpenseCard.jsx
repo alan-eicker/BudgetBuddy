@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { Switch, Button } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { formatNumber } from '../../utilities/numbers';
 
 const ExpenseCard = ({
   _id,
@@ -24,7 +25,7 @@ const ExpenseCard = ({
       <div className="expense-card__head">
         <div className="expense-card__name">{title}</div>
         <div className="expense-card__balance">
-          ${balance} {dueDate && `| Due by: ${dueDate}`}{' '}
+          ${formatNumber(balance)} {dueDate && `| Due by: ${dueDate}`}{' '}
           {isOverDue && '(Past Due)'}
         </div>
         {note && <div className="expense-card__notes">{note}</div>}
