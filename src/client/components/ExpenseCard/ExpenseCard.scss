@@ -56,7 +56,7 @@
   }
 
   &.is-overdue {
-    box-shadow: inset 0 0 0 rem(2) $red-700;
+    box-shadow: inset 0 0 0 rem(1.5) $red-700;
 
     .expense-card__name,
     .expense-card__balance {
