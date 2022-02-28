@@ -21,12 +21,14 @@ const App = () => (
         />
       }
     >
-      <Suspense fallback={null}>
-        <Routes>
-          <Route exact path="/" element={<Dashboard />} />
-          <Route path="/expense-group/:id" element={<ExpenseGroup />} />
-        </Routes>
-      </Suspense>
+      <main>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route exact path="/" element={<Dashboard />} />
+            <Route path="/expense-group/:id" element={<ExpenseGroup />} />
+          </Routes>
+        </Suspense>
+      </main>
     </Layout>
   </AppProvider>
 );

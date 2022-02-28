@@ -103,7 +103,7 @@ const ExpenseGroup = () => {
             aria-label="add expense"
             onClick={() => {}}
           >
-            <Icon icon={faPlus} size="md" />
+            <Icon icon={faPlus} />
           </Button>
           <Button
             theme="indigo"
@@ -112,7 +112,7 @@ const ExpenseGroup = () => {
             aria-label="edit expense"
             onClick={() => {}}
           >
-            <Icon icon={faPen} size="md" />
+            <Icon icon={faPen} />
           </Button>
           <Button
             theme="red"
@@ -121,7 +121,7 @@ const ExpenseGroup = () => {
             aria-label="delete group"
             onClick={() => {}}
           >
-            <Icon icon={faTimes} size="md" />
+            <Icon icon={faTimes} />
           </Button>
         </ButtonControls>
       </div>

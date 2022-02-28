@@ -3,7 +3,7 @@
     border-bottom: rem(1) solid $blue-gray-100;
     display: flex;
     flex-direction: column;
-    margin: rem(32 0);
+    margin: rem(32 0 20);
     padding-bottom: rem(8);
     text-align: center;
   }
@@ -22,8 +22,13 @@
   }
 
   &__controls {
+    flex-direction: row;
     justify-content: center;
     margin: rem(16 0 0);
+
+    & > * + * {
+      margin: rem(0 0 0 8);
+    }
 
     button {
       padding: 0;
@@ -53,7 +58,7 @@
     padding: rem(0 16);
 
     svg {
-      margin: rem(6) rem(8) 0 0;
+      margin: rem(4) rem(8) 0 0;
 
       path {
         fill: $red-700;
@@ -67,11 +72,6 @@
       flex-direction: row;
       justify-content: space-between;
       text-align: left;
-    }
-
-    &__controls {
-      justify-content: flex-start;
-      margin: 0;
     }
 
     &__title {
