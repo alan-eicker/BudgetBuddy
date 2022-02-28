@@ -3,7 +3,12 @@ import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { ButtonControls, Button, Statistic, Hint, Alert } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExclamationTriangle,
+  faPlus,
+  faPen,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 import { useAppContent } from '../../AppProvider';
 import ExpenseList from '../../components/ExpenseList';
 import ExpenseGroupControls from '../../components/ExpenseGroupControls';
@@ -91,14 +96,32 @@ const ExpenseGroup = () => {
           <span>Total Budget: {totalBudget}</span>
         </h1>
         <ButtonControls className="expense-group__controls">
-          <Button theme="indigo" size="md" shape="pill" onClick={() => {}}>
-            add expense
+          <Button
+            theme="indigo"
+            size="md"
+            shape="pill"
+            aria-label="add expense"
+            onClick={() => {}}
+          >
+            <Icon icon={faPlus} size="md" />
           </Button>
-          <Button theme="indigo" size="md" shape="pill" onClick={() => {}}>
-            edit group
+          <Button
+            theme="indigo"
+            size="md"
+            shape="pill"
+            aria-label="edit expense"
+            onClick={() => {}}
+          >
+            <Icon icon={faPen} size="md" />
           </Button>
-          <Button theme="red" size="md" shape="pill" onClick={() => {}}>
-            delete group
+          <Button
+            theme="red"
+            size="md"
+            shape="pill"
+            aria-label="delete group"
+            onClick={() => {}}
+          >
+            <Icon icon={faTimes} size="md" />
           </Button>
         </ButtonControls>
       </div>

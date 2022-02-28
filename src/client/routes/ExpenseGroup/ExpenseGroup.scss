@@ -24,6 +24,12 @@
   &__controls {
     justify-content: center;
     margin: rem(16 0 0);
+
+    button {
+      padding: 0;
+      height: rem(36);
+      width: rem(36);
+    }
   }
 
   &__body {
