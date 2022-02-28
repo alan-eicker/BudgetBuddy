@@ -22,3 +22,7 @@
 .atomikui-statistic__value {
   font-weight: 500;
 }
+
+.atomikui-statistic__value.atomikui-statistic__value--number.atomikui-statistic__value--md {
+  font-size: rem(28);
+}
