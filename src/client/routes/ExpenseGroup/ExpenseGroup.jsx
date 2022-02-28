@@ -129,7 +129,7 @@ const ExpenseGroup = () => {
         <div className="expense-group__expenses">
           {overdueExpenses > 0 && (
             <Alert theme="error" className="margin-bottom-16">
-              You have {overdueExpenses} overdue expense
+              You have {overdueExpenses} unpaid overdue expense
               {overdueExpenses > 1 ? 's' : ''}.
             </Alert>
           )}
