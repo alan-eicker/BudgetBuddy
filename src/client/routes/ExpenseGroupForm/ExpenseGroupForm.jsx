@@ -5,8 +5,10 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { FormField, Button, CheckOption } from '@atomikui/core';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { useAppContent } from '../../AppProvider';
 
 const ExpenseGroupForm = () => {
+  const { setShowLoader } = useAppContent();
   const { id } = useParams();
   const { pathname } = useLocation();
 
@@ -54,6 +56,10 @@ const ExpenseGroupForm = () => {
     throw new Error(error);
   }
 
+  if (loading) {
+    setShowLoader(true);
+  }
+
   useEffect(() => {
     if (data) {
       setValues({
@@ -61,6 +67,7 @@ const ExpenseGroupForm = () => {
         title: data?.expenseGroup.title,
         totalBudget: data?.expenseGroup.totalBudget,
       });
+      setShowLoader(false);
     }
   }, [data]);
 
