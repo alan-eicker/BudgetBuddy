@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -11,6 +11,7 @@ const ExpenseGroupForm = () => {
   const { setShowLoader } = useAppContent();
   const { id } = useParams();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const isEdit = pathname.match(/\/edit/);
 
@@ -109,6 +110,14 @@ const ExpenseGroupForm = () => {
               shape="pill"
             >
               Submit
+            </Button>
+            <Button
+              className="margin-left-8"
+              theme="white"
+              shape="pill"
+              onClick={() => navigate(-1)}
+            >
+              Cancel
             </Button>
           </Col>
         </Row>
