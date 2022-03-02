@@ -6,6 +6,7 @@ import Masthead from './components/Masthead';
 
 const Dashboard = lazy(() => import('./routes/Dashboard'));
 const ExpenseGroup = lazy(() => import('./routes/ExpenseGroup'));
+const ExpenseGroupForm = lazy(() => import('./routes/ExpenseGroupForm'));
 
 const App = () => (
   <AppProvider>
@@ -26,6 +27,11 @@ const App = () => (
           <Routes>
             <Route exact path="/" element={<Dashboard />} />
             <Route path="/expense-group/:id" element={<ExpenseGroup />} />
+            <Route path="/expense-group/add" element={<ExpenseGroupForm />} />
+            <Route
+              path="/expense-group/edit/:id"
+              element={<ExpenseGroupForm />}
+            />
           </Routes>
         </Suspense>
       </main>

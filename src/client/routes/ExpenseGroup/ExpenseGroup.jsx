@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { ButtonControls, Button, Statistic, Hint, Alert } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
@@ -96,24 +96,12 @@ const ExpenseGroup = () => {
           <span>Total Budget: {totalBudget}</span>
         </h1>
         <ButtonControls className="expense-group__controls">
-          <Button
-            theme="indigo"
-            size="md"
-            shape="pill"
-            aria-label="add expense"
-            onClick={() => {}}
-          >
+          <Link aria-label="add expense" to="/expense-group/add">
             <Icon icon={faPlus} />
-          </Button>
-          <Button
-            theme="indigo"
-            size="md"
-            shape="pill"
-            aria-label="edit expense"
-            onClick={() => {}}
-          >
+          </Link>
+          <Link aria-label="edit expense" to={`/expense-group/edit/${id}`}>
             <Icon icon={faPen} />
-          </Button>
+          </Link>
           <Button
             theme="red"
             size="md"
