@@ -12,6 +12,8 @@ const ExpenseSchema = new Schema({
 
 const ExpenseGroupSchema = new Schema({
   title: String,
+  startDate: String,
+  endDate: String,
   totalBudget: Number,
   expenses: [ExpenseSchema],
 });

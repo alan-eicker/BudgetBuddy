@@ -21,7 +21,8 @@ const ExpenseGroupForm = () => {
     query GetExpenseGroup($id: String!) {
       expenseGroup(_id: $id) {
         _id
-        title
+        startDate
+        endDate
         totalBudget
       }
     }
@@ -35,12 +36,14 @@ const ExpenseGroupForm = () => {
   });
 
   const initialValues = {
-    title: '',
+    startDate: '03/09/2022',
+    endDate: '',
     totalBudget: '',
   };
 
   const validationSchema = yup.object().shape({
-    title: yup.string().required('Title is required'),
+    startDate: yup.string().required('Start date is required'),
+    endDate: yup.string().required('End date is required'),
     totalBudget: yup.string().required('Total budget is required'),
   });
 
@@ -62,15 +65,17 @@ const ExpenseGroupForm = () => {
   }
 
   useEffect(() => {
-    if (data) {
+    if (!loading && data) {
       setValues({
         ...values,
-        title: data?.expenseGroup.title,
-        totalBudget: data?.expenseGroup.totalBudget,
+        totalBudget: data.expenseGroup.totalBudget,
+        startDate: data.expenseGroup.startDate,
+        endDate: data.expenseGroup.endDate,
       });
+
       setShowLoader(false);
     }
-  }, [data]);
+  }, [data, loading]);
 
   return (
     <form className="expense-group-form" onSubmit={handleSubmit} noValidate>
@@ -79,12 +84,26 @@ const ExpenseGroupForm = () => {
         <Row>
           <Col md={6}>
             <FormField
-              name="title"
-              label="Title"
-              defaultValue={values.title}
+              type="date"
+              name="startDate"
+              label="Start Date"
+              value={values.startDate}
               onChange={handleChange}
-              hasError={!!(errors.title && touched.title)}
-              errorText={errors.title}
+              hasError={!!(errors.startDate && touched.startDate)}
+              errorText={errors.startDate}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6}>
+            <FormField
+              type="date"
+              name="endDate"
+              label="End Date"
+              value={values.endDate}
+              onChange={handleChange}
+              hasError={!!(errors.endDate && touched.endDate)}
+              errorText={errors.endDate}
             />
           </Col>
         </Row>

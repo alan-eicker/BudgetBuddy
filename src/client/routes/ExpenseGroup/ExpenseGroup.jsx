@@ -23,7 +23,8 @@ const GET_EXPENSE_GROUP = gql`
   query GetExpenseGroup($id: String!) {
     expenseGroup(_id: $id) {
       _id
-      title
+      startDate
+      endDate
       totalBudget
       expenses {
         _id
@@ -87,12 +88,19 @@ const ExpenseGroup = () => {
       !expense.paid,
   ).length;
 
+  const formatDate = (dateStr) => {
+    const dateStrParts = dateStr.split('-');
+    const dateStrYear = dateStrParts.shift();
+
+    return [...dateStrParts, dateStrYear].join('/');
+  };
+
   return (
     <div className="expense-group">
       <ExpenseGroupControls />
       <div className="expense-group__head">
         <h1 className="expense-group__title">
-          {group.title}
+          {formatDate(group.startDate)} - {formatDate(group.endDate)}
           <span>Total Budget: {totalBudget}</span>
         </h1>
         <ButtonControls className="expense-group__controls">

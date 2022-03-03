@@ -6,6 +6,8 @@ module.exports = `
   type ExpenseGroup {
     _id: String
     title: String
+    startDate: String
+    endDate: String
     totalBudget: Int
     expenses: [Expense]
   }
