@@ -26,11 +26,15 @@
     margin: rem(0);
 
     & > * + * {
-      margin-top: rem(16);
+      margin-top: rem(10);
     }
 
     & > * > * {
       padding: 0;
+    }
+
+    & > :last-child {
+      margin-top: rem(30);
     }
   }
 
