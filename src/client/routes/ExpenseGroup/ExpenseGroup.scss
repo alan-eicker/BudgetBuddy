@@ -52,6 +52,7 @@
 
   &__body {
     display: flex;
+    flex-direction: column;
   }
 
   &__expenses {
@@ -60,6 +61,7 @@
 
   &__summary {
     flex: rem(250) 0 0;
+    margin-top: rem(32);
     margin-left: rem(32);
     text-align: center;
   }
@@ -93,6 +95,14 @@
       span {
         font-size: rem(20);
       }
+    }
+
+    &__body {
+      flex-direction: row;
+    }
+
+    &__summary {
+      margin-top: 0;
     }
   }
 }
