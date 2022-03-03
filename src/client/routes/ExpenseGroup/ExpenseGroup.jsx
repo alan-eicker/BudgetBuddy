@@ -18,6 +18,7 @@ import {
   getLeftOverBalance,
   formatNumber,
 } from '../../utilities/numbers';
+import { formatDate } from '../../utilities/date';
 
 const GET_EXPENSE_GROUP = gql`
   query GetExpenseGroup($id: String!) {
@@ -87,13 +88,6 @@ const ExpenseGroup = () => {
       new Date(expense.dueDate) < new Date() &&
       !expense.paid,
   ).length;
-
-  const formatDate = (dateStr) => {
-    const dateStrParts = dateStr.split('-');
-    const dateStrYear = dateStrParts.shift();
-
-    return [...dateStrParts, dateStrYear].join('/');
-  };
 
   return (
     <div className="expense-group">

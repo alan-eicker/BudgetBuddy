@@ -3,11 +3,11 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { FormField, Button, CheckOption } from '@atomikui/core';
+import { FormField, Button } from '@atomikui/core';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { useAppContent } from '../../AppProvider';
 
-const ExpenseGroupForm = () => {
+const ExpenseGroupEditor = () => {
   const { setShowLoader } = useAppContent();
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -145,4 +145,4 @@ const ExpenseGroupForm = () => {
   );
 };
 
-export default ExpenseGroupForm;
+export default ExpenseGroupEditor;
