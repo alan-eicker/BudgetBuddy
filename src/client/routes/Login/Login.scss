@@ -5,36 +5,33 @@
   justify-content: center;
   text-align: center;
 
-  &__title {
-    background: no-repeat transparent center 0/70px
-      url('/static/images/budget.png');
-    font-size: rem(24);
-    font-weight: 600;
-    margin-bottom: rem(20);
-    padding-top: rem(70);
-  }
-
   &__form {
     border-radius: rem(8);
-    box-shadow: 0 0 rem(45) darken($blue-gray-50, 1%);
+    box-shadow: 0 0 rem(45) darken($blue-gray-50, 2%);
     margin-top: rem(65);
-    padding: rem(20);
+    overflow: hidden;
     width: rem(300);
+  }
+
+  &__title {
+    background: no-repeat $teal-800 center 20px/70px
+      url('/static/images/budget.png');
+    color: $white;
+    font-size: rem(24);
+    font-weight: 600;
+    padding: rem(90 20 20);
   }
 
   &__fields {
     margin: rem(0);
+    padding: rem(20);
 
     & > * + * {
       margin-top: rem(10);
     }
 
-    & > * > * {
-      padding: 0;
-    }
-
     & > :last-child {
-      margin-top: rem(30);
+      margin-top: rem(24);
     }
   }
 
