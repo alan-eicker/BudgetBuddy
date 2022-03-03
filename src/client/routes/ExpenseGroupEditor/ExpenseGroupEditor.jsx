@@ -36,7 +36,7 @@ const ExpenseGroupEditor = () => {
   });
 
   const initialValues = {
-    startDate: '03/09/2022',
+    startDate: '',
     endDate: '',
     totalBudget: '',
   };
@@ -51,7 +51,7 @@ const ExpenseGroupEditor = () => {
     useFormik({
       initialValues,
       validationSchema,
-      handleSubmit: (formValues) => {
+      onSubmit: (formValues) => {
         console.log(formValues);
       },
     });

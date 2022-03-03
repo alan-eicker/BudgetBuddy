@@ -1,0 +1,42 @@
+.login {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+
+  &__title {
+    background: no-repeat transparent center 0/70px
+      url('/static/images/budget.png');
+    font-size: rem(24);
+    font-weight: 600;
+    margin-bottom: rem(20);
+    padding-top: rem(70);
+    text-align: center;
+  }
+
+  &__form {
+    border-radius: rem(8);
+    box-shadow: 0 0 rem(45) darken($blue-gray-50, 1%);
+    margin-top: rem(65);
+    padding: rem(20);
+    width: rem(300);
+  }
+
+  &__fields {
+    margin: rem(0);
+
+    & > * + * {
+      margin-top: rem(16);
+    }
+
+    & > * > * {
+      padding: 0;
+    }
+  }
+
+  @media (min-width: $breakpoint-medium) {
+    &__form {
+      width: rem(350);
+    }
+  }
+}
