@@ -20,14 +20,7 @@ const Layout = ({ header, subheader, children, ...others }) => {
             </div>
           </div>
         )}
-        <div
-          className="layout__body"
-          style={{
-            height: subheader ? 'calc(100vh - 125px)' : 'calc(100vh - 65px)',
-          }}
-        >
-          {children}
-        </div>
+        <div className="layout__body">{children}</div>
       </div>
     </>
   );
@@ -41,7 +34,7 @@ Layout.propTypes = {
 
 Layout.defaultProps = {
   header: <></>,
-  subheader: <></>,
+  subheader: null,
   children: <></>,
 };
 

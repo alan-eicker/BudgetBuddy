@@ -177,9 +177,11 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
       <fieldset className="margin-top-20">
         <legend>Expenses</legend>
         {values.expenses.length === 0 && (
-          <div className="margin-bottom-24">
-            You have not added any expenses.
-          </div>
+          <Grid>
+            <Row>
+              <Col>You have not added any expenses.</Col>
+            </Row>
+          </Grid>
         )}
         {values.expenses.map((expense, idx) => {
           const hasErrors =
@@ -271,7 +273,6 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
         })}
       </fieldset>
       <Button
-        theme="white"
         shape="pill"
         size="md"
         className="margin-top-20 margin-bottom-20"
