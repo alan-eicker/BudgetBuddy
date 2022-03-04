@@ -21,9 +21,8 @@ const App = () => {
             <Masthead
               appName="Budget Buddy"
               nav={[
-                <button type="button" to="/user" className="user">
-                  log out
-                </button>,
+                <button type="button">+ Expense Group</button>,
+                <button type="button">log out</button>,
               ]}
             />
           ) : null
@@ -33,14 +32,14 @@ const App = () => {
           <Suspense fallback={null}>
             <Routes>
               <Route index element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/expense-group/:id" element={<ExpenseGroup />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="expense-group/:id" element={<ExpenseGroup />} />
               <Route
-                path="/expense-group/add"
+                path="expense-group/add"
                 element={<ExpenseGroupEditor />}
               />
               <Route
-                path="/expense-group/edit/:id"
+                path="expense-group/edit/:id"
                 element={<ExpenseGroupEditor />}
               />
             </Routes>
