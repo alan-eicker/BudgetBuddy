@@ -133,7 +133,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
         <legend>Expense Group Details</legend>
         <Grid className="expense-group-form__form-fields">
           <Row>
-            <Col md={6}>
+            <Col md={4}>
               <FormField
                 type="date"
                 name="startDate"
@@ -144,9 +144,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                 errorText={errors.startDate}
               />
             </Col>
-          </Row>
-          <Row>
-            <Col md={6}>
+            <Col md={4}>
               <FormField
                 type="date"
                 name="endDate"
@@ -157,9 +155,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                 errorText={errors.endDate}
               />
             </Col>
-          </Row>
-          <Row>
-            <Col md={6}>
+            <Col md={4}>
               <FormField
                 type="number"
                 name="totalBudget"
@@ -177,8 +173,8 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
       <fieldset className="margin-top-20">
         <legend>Expenses</legend>
         {values.expenses.length === 0 && (
-          <Grid>
-            <Row>
+          <Grid className="expense-group-form__form-fields">
+            <Row md={12}>
               <Col>You have not added any expenses.</Col>
             </Row>
           </Grid>
@@ -196,7 +192,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
               key={['expense-field', idx].join('-')}
             >
               <Row>
-                <Col md={6}>
+                <Col md={12}>
                   <FormField
                     label="Title"
                     name={`expenses[${idx}].title`}
@@ -210,7 +206,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={6}>
+                <Col md={12}>
                   <FormField
                     type="number"
                     label="Balance"
@@ -225,7 +221,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={6}>
+                <Col md={12}>
                   <FormField
                     type="date"
                     label="Due Date"
@@ -236,7 +232,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={6}>
+                <Col md={12}>
                   <FormField
                     label="Note"
                     name={`expenses[${idx}].note`}
@@ -246,7 +242,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={6}>
+                <Col md={12}>
                   <CheckOption
                     label="Is Paid"
                     name={`expenses[${idx}].paid`}
@@ -257,14 +253,16 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
               </Row>
               <Row>
                 <Col>
-                  <Button
-                    theme="red"
-                    size="md"
-                    shape="pill"
-                    onClick={() => deleteExpense(expense._id)}
-                  >
-                    delete
-                  </Button>
+                  <div className="text-align-right">
+                    <Button
+                      theme="red"
+                      size="md"
+                      shape="pill"
+                      onClick={() => deleteExpense(expense._id)}
+                    >
+                      delete
+                    </Button>
+                  </div>
                 </Col>
               </Row>
             </Grid>
@@ -272,12 +270,14 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
         })}
       </fieldset>
       <Button
+        theme="white"
         shape="pill"
         size="md"
         className="margin-top-20 margin-bottom-20"
         onClick={addExpense}
+        block
       >
-        add expense
+        + add expense
       </Button>
     </form>
   );
