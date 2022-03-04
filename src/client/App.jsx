@@ -11,6 +11,7 @@ const Login = lazy(() => import('./routes/Login'));
 const Dashboard = lazy(() => import('./routes/Dashboard'));
 const ExpenseGroup = lazy(() => import('./routes/ExpenseGroup'));
 const ExpenseGroupEditor = lazy(() => import('./routes/ExpenseGroupEditor'));
+const PageNotFound = lazy(() => import('./routes/PageNotFound'));
 
 const App = () => {
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ const App = () => {
                 path="expense-group/edit/:id"
                 element={<ExpenseGroupEditor ref={ExpenseGroupEditorRef} />}
               />
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
           </Suspense>
         </main>

@@ -1,0 +1,47 @@
+.page-not-found {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+
+  &__body {
+    text-align: center;
+    background: $teal-500;
+    border-radius: 50%;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: rem(300);
+    width: rem(300);
+  }
+
+  &__title {
+    font-size: rem(100);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  &__subtitle {
+    font-size: rem(30);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: rem(36);
+  }
+
+  @media (min-width: $breakpoint-medium) {
+    &__body {
+      height: rem(450);
+      width: rem(450);
+    }
+
+    &__title {
+      font-size: rem(160);
+    }
+
+    &__subtitle {
+      font-size: rem(40);
+    }
+  }
+}
