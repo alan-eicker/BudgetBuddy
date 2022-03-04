@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Overlay, Spinner } from '@atomikui/core';
 import { useAppContent } from '../../AppProvider';
 
-const Layout = ({ header, subheader, children, ...others }) => {
+const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
   const { showLoader } = useAppContent();
 
   return (
@@ -20,7 +20,12 @@ const Layout = ({ header, subheader, children, ...others }) => {
             </div>
           </div>
         )}
-        <div className="layout__body">{children}</div>
+        <div
+          className="layout__body"
+          {...(isIndexPage && { style: { height: '100vh' } })}
+        >
+          {children}
+        </div>
       </div>
     </>
   );
@@ -30,12 +35,14 @@ Layout.propTypes = {
   header: PropTypes.node,
   subheader: PropTypes.node,
   children: PropTypes.node,
+  isIndexPage: PropTypes.bool,
 };
 
 Layout.defaultProps = {
   header: <></>,
   subheader: null,
   children: <></>,
+  isIndexPage: false,
 };
 
 export default Layout;

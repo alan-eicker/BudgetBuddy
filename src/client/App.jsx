@@ -23,6 +23,7 @@ const App = () => {
   return (
     <AppProvider>
       <Layout
+        isIndexPage
         header={
           !isIndexPage ? (
             <Masthead

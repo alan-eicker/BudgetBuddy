@@ -86,7 +86,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
         title: '',
         balance: '',
         dueDate: '',
-        paid: '',
+        paid: false,
         note: '',
       },
     ]);
@@ -250,7 +250,6 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                   <CheckOption
                     label="Is Paid"
                     name={`expenses[${idx}].paid`}
-                    value={expense.paid}
                     checked={expense.paid}
                     onChange={handleChange}
                   />
