@@ -2,13 +2,29 @@
   display: flex;
   flex-direction: column;
 
+  &__subheader {
+    background: $blue-gray-50;
+    padding: rem(0 20);
+
+    &__body {
+      max-width: rem(1200);
+      height: rem(60);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+
+      & > * {
+        flex: 1;
+      }
+    }
+  }
+
   &__body {
-    height: calc(100vh - 65px);
     overflow: auto;
     padding: rem(24);
 
     & > * {
-      max-width: 1200px;
+      max-width: rem(1200);
       margin: 0 auto;
     }
   }

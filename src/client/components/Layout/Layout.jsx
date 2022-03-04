@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Overlay, Spinner } from '@atomikui/core';
 import { useAppContent } from '../../AppProvider';
 
-const Layout = ({ header, children, ...others }) => {
+const Layout = ({ header, subheader, children, ...others }) => {
   const { showLoader } = useAppContent();
 
   return (
@@ -13,7 +13,21 @@ const Layout = ({ header, children, ...others }) => {
       </Overlay>
       <div className="layout" {...others}>
         <div className="layout__header">{header}</div>
-        <div className="layout__body">{children}</div>
+        {subheader && (
+          <div className="layout__subheader">
+            <div className="layout__subheader__body">
+              <div className="text-align-right">{subheader}</div>
+            </div>
+          </div>
+        )}
+        <div
+          className="layout__body"
+          style={{
+            height: subheader ? 'calc(100vh - 125px)' : 'calc(100vh - 65px)',
+          }}
+        >
+          {children}
+        </div>
       </div>
     </>
   );
@@ -21,11 +35,13 @@ const Layout = ({ header, children, ...others }) => {
 
 Layout.propTypes = {
   header: PropTypes.node,
+  subheader: PropTypes.node,
   children: PropTypes.node,
 };
 
 Layout.defaultProps = {
   header: <></>,
+  subheader: <></>,
   children: <></>,
 };
 

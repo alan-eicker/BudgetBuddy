@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, forwardRef } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -8,11 +8,10 @@ import { FormField, Button, CheckOption } from '@atomikui/core';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { useAppContent } from '../../AppProvider';
 
-const ExpenseGroupEditor = () => {
+const ExpenseGroupEditor = forwardRef((props, ref) => {
   const { setShowLoader } = useAppContent();
   const { id } = useParams();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const isEdit = pathname.match(/\/edit/);
 
@@ -93,6 +92,13 @@ const ExpenseGroupEditor = () => {
     ]);
   };
 
+  const deleteExpense = (_id) => {
+    setFieldValue(
+      'expenses',
+      values.expenses.filter((exp) => exp._id !== _id),
+    );
+  };
+
   if (error) {
     throw new Error(error);
   }
@@ -116,7 +122,12 @@ const ExpenseGroupEditor = () => {
   }, [data, loading]);
 
   return (
-    <form className="expense-group-form" onSubmit={handleSubmit} noValidate>
+    <form
+      ref={ref}
+      className="expense-group-form"
+      onSubmit={handleSubmit}
+      noValidate
+    >
       <h1 className="expense-group-form__title">{title}</h1>
       <fieldset>
         <legend>Expense Group Details</legend>
@@ -245,7 +256,12 @@ const ExpenseGroupEditor = () => {
               </Row>
               <Row>
                 <Col>
-                  <Button theme="red" size="md" shape="pill">
+                  <Button
+                    theme="red"
+                    size="md"
+                    shape="pill"
+                    onClick={() => deleteExpense(expense._id)}
+                  >
                     delete
                   </Button>
                 </Col>
@@ -263,21 +279,18 @@ const ExpenseGroupEditor = () => {
       >
         add expense
       </Button>
-      <div className="margin-top-20">
-        <Button type="submit" theme="indigo" shape="pill">
-          Submit
-        </Button>
-        <Button
-          className="margin-left-8"
-          theme="white"
-          shape="pill"
-          onClick={() => navigate(-1)}
-        >
-          Cancel
-        </Button>
-      </div>
     </form>
   );
+});
+
+ExpenseGroupEditor.triggerSubmit = (ref) => {
+  if (ref.current) {
+    ref.current.dispatchEvent(
+      new Event('submit', { cancelable: true, bubbles: true }),
+    );
+  }
 };
+
+ExpenseGroupEditor.displayName = 'ExpenseGroupEditor';
 
 export default ExpenseGroupEditor;
