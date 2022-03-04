@@ -6,18 +6,11 @@
 
   &__body {
     text-align: center;
-    background: $teal-500;
     border-radius: 50%;
-    color: $white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: rem(300);
-    width: rem(300);
   }
 
   &__title {
+    color: $teal-500;
     font-size: rem(100);
     font-weight: 900;
     line-height: 1;
@@ -31,11 +24,6 @@
   }
 
   @media (min-width: $breakpoint-medium) {
-    &__body {
-      height: rem(450);
-      width: rem(450);
-    }
-
     &__title {
       font-size: rem(160);
     }
