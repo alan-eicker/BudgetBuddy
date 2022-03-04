@@ -1,4 +1,6 @@
 .expense-group-form {
+  padding-bottom: rem(20);
+
   &__title {
     color: $indigo-800;
     font-size: rem(25);
@@ -7,14 +9,23 @@
   }
 
   &__form-fields {
-    margin: rem(0);
+    margin: rem(0 0 32);
 
     & > * + * {
-      margin-top: rem(16);
+      margin-top: rem(12);
     }
 
     & > * > * {
       padding: 0;
     }
+  }
+
+  fieldset {
+    border-bottom: rem(1) solid $blue-gray-100;
+  }
+
+  legend {
+    font-size: rem(20);
+    margin-bottom: rem(16);
   }
 }

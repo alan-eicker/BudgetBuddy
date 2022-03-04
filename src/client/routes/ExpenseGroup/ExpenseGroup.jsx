@@ -98,16 +98,25 @@ const ExpenseGroup = () => {
           <span>Total Budget: {totalBudget}</span>
         </h1>
         <ButtonControls className="expense-group__controls">
-          <Link aria-label="add expense" to="/expense-group/add">
+          <Link
+            title="add expense"
+            aria-label="add expense"
+            to="/expense-group/add"
+          >
             <Icon icon={faPlus} />
           </Link>
-          <Link aria-label="edit expense" to={`/expense-group/edit/${id}`}>
+          <Link
+            title="edit expense"
+            aria-label="edit expense"
+            to={`/expense-group/edit/${id}`}
+          >
             <Icon icon={faPen} />
           </Link>
           <Button
             theme="red"
             size="md"
             shape="pill"
+            title="delete group"
             aria-label="delete group"
             onClick={() => {}}
           >
@@ -139,7 +148,7 @@ const ExpenseGroup = () => {
               <Icon icon={faExclamationTriangle} />
               <Hint type="error">
                 Your total balance is greater than {budgetLimitPercentage}% of
-                this month's budget.
+                this month&apos;s budget.
               </Hint>
             </div>
           )}

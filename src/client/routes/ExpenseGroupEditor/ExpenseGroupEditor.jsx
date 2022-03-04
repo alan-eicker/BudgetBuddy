@@ -3,7 +3,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { FormField, Button } from '@atomikui/core';
+import { FormField, Button, CheckOption } from '@atomikui/core';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { useAppContent } from '../../AppProvider';
 
@@ -24,6 +24,14 @@ const ExpenseGroupEditor = () => {
         startDate
         endDate
         totalBudget
+        expenses {
+          _id
+          title
+          balance
+          dueDate
+          paid
+          note
+        }
       }
     }
   `;
@@ -39,12 +47,19 @@ const ExpenseGroupEditor = () => {
     startDate: '',
     endDate: '',
     totalBudget: '',
+    expenses: [],
   };
 
   const validationSchema = yup.object().shape({
     startDate: yup.string().required('Start date is required'),
     endDate: yup.string().required('End date is required'),
     totalBudget: yup.string().required('Total budget is required'),
+    expenses: yup.array().of(
+      yup.object().shape({
+        title: yup.string().required('Expense title is required'),
+        balance: yup.number().required('Expense balance is required'),
+      }),
+    ),
   });
 
   const { values, handleChange, handleSubmit, touched, errors, setValues } =
@@ -71,6 +86,7 @@ const ExpenseGroupEditor = () => {
         totalBudget: data.expenseGroup.totalBudget,
         startDate: data.expenseGroup.startDate,
         endDate: data.expenseGroup.endDate,
+        expenses: data.expenseGroup.expenses,
       });
 
       setShowLoader(false);
@@ -80,67 +96,135 @@ const ExpenseGroupEditor = () => {
   return (
     <form className="expense-group-form" onSubmit={handleSubmit} noValidate>
       <h1 className="expense-group-form__title">{title}</h1>
-      <Grid className="expense-group-form__form-fields">
-        <Row>
-          <Col md={6}>
-            <FormField
-              type="date"
-              name="startDate"
-              label="Start Date"
-              value={values.startDate}
-              onChange={handleChange}
-              hasError={!!(errors.startDate && touched.startDate)}
-              errorText={errors.startDate}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <FormField
-              type="date"
-              name="endDate"
-              label="End Date"
-              value={values.endDate}
-              onChange={handleChange}
-              hasError={!!(errors.endDate && touched.endDate)}
-              errorText={errors.endDate}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <FormField
-              type="number"
-              name="totalBudget"
-              label="Total Budget"
-              defaultValue={values.totalBudget}
-              onChange={handleChange}
-              hasError={!!(errors.totalBudget && touched.totalBudget)}
-              errorText={errors.totalBudget}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button
-              className="margin-top-8"
-              type="submit"
-              theme="indigo"
-              shape="pill"
-            >
-              Submit
-            </Button>
-            <Button
-              className="margin-left-8"
-              theme="white"
-              shape="pill"
-              onClick={() => navigate(-1)}
-            >
-              Cancel
-            </Button>
-          </Col>
-        </Row>
-      </Grid>
+      <fieldset>
+        <legend>Expense Group Details</legend>
+        <Grid className="expense-group-form__form-fields">
+          <Row>
+            <Col md={6}>
+              <FormField
+                type="date"
+                name="startDate"
+                label="Start Date"
+                value={values.startDate}
+                onChange={handleChange}
+                hasError={!!(errors.startDate && touched.startDate)}
+                errorText={errors.startDate}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <FormField
+                type="date"
+                name="endDate"
+                label="End Date"
+                value={values.endDate}
+                onChange={handleChange}
+                hasError={!!(errors.endDate && touched.endDate)}
+                errorText={errors.endDate}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <FormField
+                type="number"
+                name="totalBudget"
+                label="Total Budget"
+                defaultValue={values.totalBudget}
+                onChange={handleChange}
+                hasError={!!(errors.totalBudget && touched.totalBudget)}
+                errorText={errors.totalBudget}
+              />
+            </Col>
+          </Row>
+        </Grid>
+      </fieldset>
+      <fieldset className="margin-top-20">
+        <legend>Expenses</legend>
+        {values.expenses && values.expenses.length > 0
+          ? values.expenses.map((expense, idx) => (
+              <Grid
+                className="expense-group-form__form-fields"
+                key={['expense-field', idx].join('-')}
+              >
+                <Row>
+                  <Col md={6}>
+                    <FormField
+                      label="Title"
+                      name={`expenses[${idx}].title`}
+                      value={expense.title}
+                      onChange={handleChange}
+                      hasError={
+                        !!(
+                          errors.expenses[idx].title &&
+                          touched.expenses[idx].title
+                        )
+                      }
+                      errorText={errors.expenses[idx].title}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
+                    <FormField
+                      type="number"
+                      label="Balance"
+                      name={`expenses[${idx}].balance`}
+                      value={expense.balance}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
+                    <FormField
+                      type="date"
+                      label="Due Date"
+                      name={`expenses[${idx}].dueDate`}
+                      value={expense.dueDate}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
+                    <FormField
+                      label="Note"
+                      name={`expenses[${idx}].note`}
+                      value={expense.note}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
+                    <CheckOption
+                      label="Is Paid"
+                      name={`expenses[${idx}].paid`}
+                      value={expense.paid}
+                      checked={expense.paid}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Row>
+              </Grid>
+            ))
+          : null}
+      </fieldset>
+      <div className="margin-top-20">
+        <Button type="submit" theme="indigo" shape="pill">
+          Submit
+        </Button>
+        <Button
+          className="margin-left-8"
+          theme="white"
+          shape="pill"
+          onClick={() => navigate(-1)}
+        >
+          Cancel
+        </Button>
+      </div>
     </form>
   );
 };
