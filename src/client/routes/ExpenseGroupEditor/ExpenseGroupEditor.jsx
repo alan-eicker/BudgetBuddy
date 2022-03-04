@@ -3,6 +3,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import mongoose from 'mongoose';
 import { FormField, Button, CheckOption } from '@atomikui/core';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { useAppContent } from '../../AppProvider';
@@ -62,14 +63,35 @@ const ExpenseGroupEditor = () => {
     ),
   });
 
-  const { values, handleChange, handleSubmit, touched, errors, setValues } =
-    useFormik({
-      initialValues,
-      validationSchema,
-      onSubmit: (formValues) => {
-        console.log(formValues);
+  const {
+    values,
+    handleChange,
+    handleSubmit,
+    touched,
+    errors,
+    setFieldValue,
+    setValues,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (formValues) => {
+      console.log(formValues);
+    },
+  });
+
+  const addExpense = () => {
+    setFieldValue('expenses', [
+      ...values.expenses,
+      {
+        _id: mongoose.Types.ObjectId(),
+        title: '',
+        balance: '',
+        dueDate: '',
+        paid: '',
+        note: '',
       },
-    });
+    ]);
+  };
 
   if (error) {
     throw new Error(error);
@@ -107,7 +129,7 @@ const ExpenseGroupEditor = () => {
                 label="Start Date"
                 value={values.startDate}
                 onChange={handleChange}
-                hasError={!!errors.startDate}
+                hasError={!!(errors.startDate && touched.startDate)}
                 errorText={errors.startDate}
               />
             </Col>
@@ -120,7 +142,7 @@ const ExpenseGroupEditor = () => {
                 label="End Date"
                 value={values.endDate}
                 onChange={handleChange}
-                hasError={!!errors.endDate}
+                hasError={!!(errors.endDate && touched.endDate)}
                 errorText={errors.endDate}
               />
             </Col>
@@ -133,94 +155,114 @@ const ExpenseGroupEditor = () => {
                 label="Total Budget"
                 defaultValue={values.totalBudget}
                 onChange={handleChange}
-                hasError={!!errors.totalBudget}
+                hasError={!!(errors.totalBudget && touched.totalBudget)}
                 errorText={errors.totalBudget}
               />
             </Col>
           </Row>
         </Grid>
       </fieldset>
+
       <fieldset className="margin-top-20">
         <legend>Expenses</legend>
-        {values.expenses && values.expenses.length > 0
-          ? values.expenses.map((expense, idx) => {
-              const hasErrors =
-                errors.expenses &&
-                errors.expenses.length > 0 &&
-                touched.expenses &&
-                touched.expenses.length > 0;
+        {values.expenses.length === 0 && (
+          <div className="margin-bottom-24">
+            You have not added any expenses.
+          </div>
+        )}
+        {values.expenses.map((expense, idx) => {
+          const hasErrors =
+            errors.expenses &&
+            errors.expenses.length > 0 &&
+            touched.expenses &&
+            touched.expenses.length > 0;
 
-              return (
-                <Grid
-                  className="expense-group-form__form-fields"
-                  key={['expense-field', idx].join('-')}
-                >
-                  <Row>
-                    <Col md={6}>
-                      <FormField
-                        label="Title"
-                        name={`expenses[${idx}].title`}
-                        value={expense.title}
-                        onChange={handleChange}
-                        {...(hasErrors && {
-                          hasError: !!errors.expenses[idx]?.title,
-                          errorText: errors.expenses[idx]?.title,
-                        })}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormField
-                        type="number"
-                        label="Balance"
-                        name={`expenses[${idx}].balance`}
-                        value={expense.balance}
-                        onChange={handleChange}
-                        {...(hasErrors && {
-                          hasError: !!errors.expenses[idx]?.balance,
-                          errorText: errors.expenses[idx]?.balance,
-                        })}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormField
-                        type="date"
-                        label="Due Date"
-                        name={`expenses[${idx}].dueDate`}
-                        value={expense.dueDate}
-                        onChange={handleChange}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormField
-                        label="Note"
-                        name={`expenses[${idx}].note`}
-                        value={expense.note}
-                        onChange={handleChange}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <CheckOption
-                        label="Is Paid"
-                        name={`expenses[${idx}].paid`}
-                        value={expense.paid}
-                        checked={expense.paid}
-                        onChange={handleChange}
-                      />
-                    </Col>
-                  </Row>
-                </Grid>
-              );
-            })
-          : null}
+          return (
+            <Grid
+              className="expense-group-form__form-fields"
+              key={['expense-field', idx].join('-')}
+            >
+              <Row>
+                <Col md={6}>
+                  <FormField
+                    label="Title"
+                    name={`expenses[${idx}].title`}
+                    value={expense.title}
+                    onChange={handleChange}
+                    {...(hasErrors && {
+                      hasError: !!errors.expenses[idx]?.title,
+                      errorText: errors.expenses[idx]?.title,
+                    })}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <FormField
+                    type="number"
+                    label="Balance"
+                    name={`expenses[${idx}].balance`}
+                    value={expense.balance}
+                    onChange={handleChange}
+                    {...(hasErrors && {
+                      hasError: !!errors.expenses[idx]?.balance,
+                      errorText: errors.expenses[idx]?.balance,
+                    })}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <FormField
+                    type="date"
+                    label="Due Date"
+                    name={`expenses[${idx}].dueDate`}
+                    value={expense.dueDate}
+                    onChange={handleChange}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <FormField
+                    label="Note"
+                    name={`expenses[${idx}].note`}
+                    value={expense.note}
+                    onChange={handleChange}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <CheckOption
+                    label="Is Paid"
+                    name={`expenses[${idx}].paid`}
+                    value={expense.paid}
+                    checked={expense.paid}
+                    onChange={handleChange}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Button theme="red" size="md" shape="pill">
+                    delete
+                  </Button>
+                </Col>
+              </Row>
+            </Grid>
+          );
+        })}
       </fieldset>
+      <Button
+        theme="white"
+        shape="pill"
+        size="md"
+        className="margin-top-20 margin-bottom-20"
+        onClick={addExpense}
+      >
+        add expense
+      </Button>
       <div className="margin-top-20">
         <Button type="submit" theme="indigo" shape="pill">
           Submit
