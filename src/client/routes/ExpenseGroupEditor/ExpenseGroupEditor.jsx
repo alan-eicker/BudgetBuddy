@@ -233,20 +233,23 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
               </Row>
               <Row>
                 <Col md={12}>
-                  <FormField
-                    label="Note"
-                    name={`expenses[${idx}].note`}
-                    value={expense.note}
+                  <CheckOption
+                    className="margin-top-12"
+                    label="Is Paid"
+                    name={`expenses[${idx}].paid`}
+                    checked={expense.paid}
                     onChange={handleChange}
                   />
                 </Col>
               </Row>
               <Row>
                 <Col md={12}>
-                  <CheckOption
-                    label="Is Paid"
-                    name={`expenses[${idx}].paid`}
-                    checked={expense.paid}
+                  <FormField
+                    style={{ height: 60 }}
+                    type="textarea"
+                    label="Note"
+                    name={`expenses[${idx}].note`}
+                    value={expense.note}
                     onChange={handleChange}
                   />
                 </Col>
@@ -260,7 +263,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                       shape="pill"
                       onClick={() => deleteExpense(expense._id)}
                     >
-                      delete
+                      delete expense
                     </Button>
                   </div>
                 </Col>

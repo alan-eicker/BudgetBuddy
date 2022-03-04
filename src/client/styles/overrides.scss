@@ -30,3 +30,18 @@
 .atomikui-statistic__value.atomikui-statistic__value--number.atomikui-statistic__value--md {
   font-size: rem(28);
 }
+
+.atomikui-formfield__input,
+.atomikui-formfield__textarea {
+  background-color: $white;
+  border-bottom: rem(1.5) solid $blue-gray-100;
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.atomikui-formfield__input:not(:read-only):focus,
+.atomikui-formfield__textarea:not(:read-only):focus {
+  box-shadow: none;
+  border-bottom: rem(1.5) solid $cyan-500;
+}
