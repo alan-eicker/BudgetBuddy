@@ -36,12 +36,24 @@
   background-color: $white;
   border-bottom: rem(1.5) solid $blue-gray-100;
   border-radius: 0;
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .atomikui-formfield__input:not(:read-only):focus,
 .atomikui-formfield__textarea:not(:read-only):focus {
+  background: lighten($cyan-50, 4%);
   box-shadow: none;
   border-bottom: rem(1.5) solid $cyan-500;
+}
+
+.atomikui-formfield.has-error > .atomikui-formfield__input,
+.atomikui-formfield.has-error > .atomikui-formfield__textarea {
+  border: 0;
+  border-bottom: rem(1.5) solid $red-200;
+}
+
+.atomikui-formfield.has-error > .atomikui-formfield__input:focus,
+.atomikui-formfield.has-error > .atomikui-formfield__textarea:focus {
+  background: lighten($red-50, 2%);
+  box-shadow: none;
+  border-bottom: rem(1.5) solid $red-800;
 }
