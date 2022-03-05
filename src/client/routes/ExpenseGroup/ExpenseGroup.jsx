@@ -5,7 +5,6 @@ import { ButtonControls, Button, Statistic, Hint, Alert } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import {
   faExclamationTriangle,
-  faPlus,
   faPen,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
@@ -98,13 +97,6 @@ const ExpenseGroup = () => {
           <span>Total Budget: {totalBudget}</span>
         </h1>
         <ButtonControls className="expense-group__controls">
-          <Link
-            title="add expense"
-            aria-label="add expense"
-            to="/expense-group/add"
-          >
-            <Icon icon={faPlus} />
-          </Link>
           <Link
             title="edit expense"
             aria-label="edit expense"

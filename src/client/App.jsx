@@ -1,5 +1,11 @@
 import React, { Suspense, lazy, useRef } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Link,
+} from 'react-router-dom';
 import { Button } from '@atomikui/core';
 import AppProvider from './AppProvider';
 import Layout from './components/Layout';
@@ -30,7 +36,7 @@ const App = () => {
             <Masthead
               appName="Budget Buddy"
               nav={[
-                <button type="button">+ Expense Group</button>,
+                <Link to="/expense-group/add">+ Expense Group</Link>,
                 <button type="button">log out</button>,
               ]}
             />
