@@ -206,7 +206,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={12}>
+                <Col md={6}>
                   <FormField
                     type="number"
                     label="Balance"
@@ -219,9 +219,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                     })}
                   />
                 </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
+                <Col md={6}>
                   <FormField
                     type="date"
                     label="Due Date"
@@ -234,7 +232,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
               <Row>
                 <Col md={12}>
                   <CheckOption
-                    className="margin-top-12"
+                    className="margin-top-12 margin-bottom-4"
                     label="Is Paid"
                     name={`expenses[${idx}].paid`}
                     checked={expense.paid}
@@ -273,7 +271,8 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
         })}
       </fieldset>
       <Button
-        theme="white"
+        theme="blue-gray"
+        themeVariant="light"
         shape="pill"
         size="md"
         className="margin-top-20 margin-bottom-20"
