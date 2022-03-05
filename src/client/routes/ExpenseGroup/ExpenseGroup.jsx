@@ -124,7 +124,10 @@ const ExpenseGroup = () => {
               {overdueExpenses > 1 ? 's' : ''}.
             </Alert>
           )}
-          <ExpenseList expenses={group.expenses} />
+          <ExpenseList
+            expenses={group.expenses}
+            onPaidStatusChange={(_id, checked) => console.log(_id, checked)}
+          />
         </div>
         <div className="expense-group__summary">
           <h2 className="text-size-20 margin-bottom-20">Spending Snapshot</h2>

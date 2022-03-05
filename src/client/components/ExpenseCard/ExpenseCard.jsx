@@ -13,7 +13,7 @@ const ExpenseCard = ({
   dueDate,
   paid,
   note,
-  onChange,
+  onPaidStatusChange,
 }) => {
   const isOverDue = dueDate ? new Date() > new Date(dueDate) && !paid : false;
 
@@ -34,7 +34,7 @@ const ExpenseCard = ({
         <Switch
           layout="stacked"
           label={paid ? 'Paid' : 'Not paid'}
-          onChange={() => onChange(_id)}
+          onChange={(e) => onPaidStatusChange(_id, !paid)}
           checked={paid}
         />
         <div className="expense-card__action-btns">
@@ -57,7 +57,7 @@ ExpenseCard.propTypes = {
   dueDate: PropTypes.string,
   paid: PropTypes.bool,
   note: PropTypes.string,
-  onChange: PropTypes.func,
+  onPaidStatusChange: PropTypes.func,
 };
 
 ExpenseCard.defaultProps = {
@@ -67,7 +67,7 @@ ExpenseCard.defaultProps = {
   dueDate: null,
   paid: false,
   note: null,
-  onChange: () => {},
+  onPaidStatusChange: () => {},
 };
 
 export default ExpenseCard;
