@@ -64,7 +64,7 @@ const ExpenseGroup = () => {
 
   useEffect(() => {
     setShowLoader(loading);
-  }, [loading]);
+  }, [loading, setShowLoader]);
 
   if (loading) {
     return null;
@@ -74,7 +74,7 @@ const ExpenseGroup = () => {
     throw new Error(error);
   }
 
-  const group = data?.expenseGroup;
+  const group = data.expenseGroup;
 
   const subtotal = getSubTotalFromCollection(group.expenses, 'balance');
 
