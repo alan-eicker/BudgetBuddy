@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const AppContext = createContext({});
 
-export const useAppContent = () => useContext(AppContext);
+export const useAppContext = () => useContext(AppContext);
 
 const AppProvider = ({ children }) => {
   const [showLoader, setShowLoader] = useState(false);

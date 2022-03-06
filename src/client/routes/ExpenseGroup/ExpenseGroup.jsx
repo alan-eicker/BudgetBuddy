@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useMutation } from '@apollo/client';
 import { ButtonControls, Button, Statistic, Hint, Alert } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import {
@@ -8,7 +8,7 @@ import {
   faPen,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
-import { useAppContent } from '../../AppProvider';
+import { useAppContext } from '../../AppProvider';
 import ExpenseList from '../../components/ExpenseList';
 import ExpenseGroupControls from '../../components/ExpenseGroupControls';
 import {
@@ -38,8 +38,21 @@ const GET_EXPENSE_GROUP = gql`
   }
 `;
 
+const UPDATE_PAID_STATUS = gql`
+  mutation UpdatePaidStatus($id: String!, $paid: Boolean!) {
+    updatePaidStatus(_id: $id, paid: $paid) {
+      _id
+      title
+      balance
+      dueDate
+      paid
+      note
+    }
+  }
+`;
+
 const ExpenseGroup = () => {
-  const { setShowLoader, budgetLimitPercentage } = useAppContent();
+  const { setShowLoader, budgetLimitPercentage } = useAppContext();
   const params = useParams();
   const { id } = params;
 
@@ -49,7 +62,9 @@ const ExpenseGroup = () => {
     },
   });
 
-  setShowLoader(loading);
+  useEffect(() => {
+    setShowLoader(loading);
+  }, [loading]);
 
   if (loading) {
     return null;

@@ -6,10 +6,10 @@ import * as yup from 'yup';
 import mongoose from 'mongoose';
 import { FormField, Button, CheckOption } from '@atomikui/core';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import { useAppContent } from '../../AppProvider';
+import { useAppContext } from '../../AppProvider';
 
 const ExpenseGroupEditor = forwardRef((props, ref) => {
-  const { setShowLoader } = useAppContent();
+  const { setShowLoader } = useAppContext();
   const { id } = useParams();
   const { pathname } = useLocation();
 
