@@ -5,11 +5,11 @@
 @import './base';
 
 @import '../routes/Login/Login';
-@import '../routes/ExpenseGroup/ExpenseGroup';
 @import '../routes/ExpenseGroupEditor/ExpenseGroupEditor';
 @import '../routes/PageNotFound/PageNotFound';
 
 @import '../components/Layout/Layout';
+@import '../components/ExpenseGroupLayout/ExpenseGroupLayout';
 @import '../components/Masthead/Masthead';
 @import '../components/ExpenseList/ExpenseList';
 @import '../components/ExpenseCard/ExpenseCard';
