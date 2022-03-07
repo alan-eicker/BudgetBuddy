@@ -24,7 +24,7 @@ const Login = () => {
     },
   });
 
-  return <LoginForm {...formik} />;
+  return <LoginForm authError={authError} {...formik} />;
 };
 
 export default Login;

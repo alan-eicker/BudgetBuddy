@@ -4,9 +4,8 @@
 @import './overrides';
 @import './base';
 
-@import '../containers/Login/Login';
-@import '../containers/PageNotFound/PageNotFound';
-
+@import '../components/LoginForm/LoginForm';
+@import '../components/PageNotFound/PageNotFound';
 @import '../components/Layout/Layout';
 @import '../components/ExpenseGroupLayout/ExpenseGroupLayout';
 @import '../components/ExpenseGroupEditorForm/ExpenseGroupEditorForm';

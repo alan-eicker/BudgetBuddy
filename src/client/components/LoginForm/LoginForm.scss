@@ -12,6 +12,14 @@
     width: rem(300);
   }
 
+  &__error {
+    background: darken($red-50, 2%);
+    color: $red-800;
+    font-weight: 700;
+    margin-bottom: rem(10);
+    padding: rem(10);
+  }
+
   &__title {
     background: no-repeat $teal-800 center 20px/70px
       url('/static/images/budget.png');

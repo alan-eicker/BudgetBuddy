@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormField, Button, Alert } from '@atomikui/core';
+import { FormField, Button } from '@atomikui/core';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const LoginForm = ({
@@ -13,19 +13,20 @@ const LoginForm = ({
 }) => (
   <div className="login">
     <form className="login__form" onSubmit={handleSubmit} noValidate>
-      <div className="login__title">Budget Buddy</div>
-      {authError && (
-        <Alert theme="error" className="margin-bottom-8">
-          {authError}
-        </Alert>
-      )}
+      <h1 className="login__title">Budget Buddy</h1>
+
       <Grid className="login__fields">
         <Row>
+          {authError && (
+            <Col md={12}>
+              <div className="login__error">{authError}</div>
+            </Col>
+          )}
           <Col md={12}>
             <FormField
               name="username"
               label="username"
-              autocomplete="off"
+              autoComplete="off"
               onChange={handleChange}
               value={values.username}
               hasError={!!(errors.username && touched.username)}
@@ -38,7 +39,7 @@ const LoginForm = ({
             <FormField
               name="password"
               label="password"
-              autocomplete="off"
+              autoComplete="off"
               onChange={handleChange}
               value={values.password}
               hasError={!!(errors.password && touched.password)}
