@@ -11,13 +11,15 @@ import AppProvider from './AppProvider';
 import Layout from './components/Layout';
 import Masthead from './components/Masthead';
 
-import ExpenseGroupEditorForm from './routes/ExpenseGroupEditor/ExpenseGroupEditor';
+import ExpenseGroupEditorForm from './containers/ExpenseGroupEditor/ExpenseGroupEditor';
 
-const Login = lazy(() => import('./routes/Login'));
-const Dashboard = lazy(() => import('./routes/Dashboard'));
-const ExpenseGroup = lazy(() => import('./routes/ExpenseGroup'));
-const ExpenseGroupEditor = lazy(() => import('./routes/ExpenseGroupEditor'));
-const PageNotFound = lazy(() => import('./routes/PageNotFound'));
+const Login = lazy(() => import('./containers/Login'));
+const Dashboard = lazy(() => import('./containers/Dashboard'));
+const ExpenseGroup = lazy(() => import('./containers/ExpenseGroup'));
+const ExpenseGroupEditor = lazy(() =>
+  import('./containers/ExpenseGroupEditor'),
+);
+const PageNotFound = lazy(() => import('./containers/PageNotFound'));
 
 const App = () => {
   const navigate = useNavigate();
