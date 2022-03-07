@@ -44,8 +44,7 @@ const UPDATE_PAID_STATUS = gql`
 
 const ExpenseGroup = () => {
   const { setShowLoader, budgetLimitPercentage } = useAppContext();
-  const params = useParams();
-  const { id } = params;
+  const { id } = useParams();
 
   const { loading, error, data } = useQuery(GET_EXPENSE_GROUP, {
     variables: {
@@ -57,58 +56,56 @@ const ExpenseGroup = () => {
     setShowLoader(loading);
   }, [loading, setShowLoader]);
 
-  if (loading) {
-    return null;
-  }
-
   if (error) {
     throw new Error(error);
   }
 
-  const group = data.expenseGroup;
+  if (data) {
+    const group = data.expenseGroup;
 
-  const subtotal = getSubTotalFromCollection(group.expenses, 'balance');
+    const subtotal = getSubTotalFromCollection(group.expenses, 'balance');
 
-  const totalBalance = `$${formatNumber(subtotal)}`;
+    const totalBalance = `$${formatNumber(subtotal)}`;
 
-  const totalBudgetAmount = `$${formatNumber(group.totalBudget)}`;
+    const totalBudgetAmount = `$${formatNumber(group.totalBudget)}`;
 
-  const unpaidBalance = `$${formatNumber(
-    getUnpaidBalanceFromCollection(group.expenses, 'balance'),
-  )}`;
+    const unpaidBalance = `$${formatNumber(
+      getUnpaidBalanceFromCollection(group.expenses, 'balance'),
+    )}`;
 
-  const leftOverBalance = `$${formatNumber(
-    getLeftOverBalance(group.totalBudget, subtotal),
-  )}`;
+    const leftOverBalance = `$${formatNumber(
+      getLeftOverBalance(group.totalBudget, subtotal),
+    )}`;
 
-  const expenseRatio = Math.round((subtotal / group.totalBudget) * 100);
+    const expenseRatio = Math.round((subtotal / group.totalBudget) * 100);
 
-  const isOverBudget = group.totalBudget - subtotal < 0;
+    const isOverBudget = group.totalBudget - subtotal < 0;
 
-  const isAlmostOverBudget = expenseRatio > budgetLimitPercentage;
+    const isAlmostOverBudget = expenseRatio > budgetLimitPercentage;
 
-  const overdueExpenses = group.expenses.filter(
-    (expense) =>
-      expense.dueDate &&
-      new Date(expense.dueDate) < new Date() &&
-      !expense.paid,
-  ).length;
+    const overdueExpenses = group.expenses.filter(
+      (expense) =>
+        expense.dueDate &&
+        new Date(expense.dueDate) < new Date() &&
+        !expense.paid,
+    ).length;
 
-  return (
-    <ExpenseGroupLayout
-      {...{
-        id,
-        totalBalance,
-        totalBudgetAmount,
-        unpaidBalance,
-        leftOverBalance,
-        isOverBudget,
-        isAlmostOverBudget,
-        overdueExpenses,
-        ...group,
-      }}
-    />
-  );
+    const props = {
+      id,
+      totalBalance,
+      totalBudgetAmount,
+      unpaidBalance,
+      leftOverBalance,
+      isOverBudget,
+      isAlmostOverBudget,
+      overdueExpenses,
+      ...group,
+    };
+
+    return <ExpenseGroupLayout {...props} />;
+  }
+
+  return null;
 };
 
 export default ExpenseGroup;

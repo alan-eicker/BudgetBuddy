@@ -103,12 +103,12 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
     throw new Error(error);
   }
 
-  if (loading) {
-    setShowLoader(true);
-  }
+  useEffect(() => {
+    setShowLoader(loading);
+  }, [loading, setShowLoader]);
 
   useEffect(() => {
-    if (!loading && data) {
+    if (data) {
       setValues({
         ...values,
         totalBudget: data.expenseGroup.totalBudget,
@@ -119,7 +119,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
 
       setShowLoader(false);
     }
-  }, [data, loading]);
+  }, [data]);
 
   return (
     <form
@@ -138,7 +138,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                 type="date"
                 name="startDate"
                 label="Start Date"
-                value={values.startDate}
+                defaultValue={values.startDate}
                 onChange={handleChange}
                 hasError={!!(errors.startDate && touched.startDate)}
                 errorText={errors.startDate}
@@ -149,7 +149,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                 type="date"
                 name="endDate"
                 label="End Date"
-                value={values.endDate}
+                defaultValue={values.endDate}
                 onChange={handleChange}
                 hasError={!!(errors.endDate && touched.endDate)}
                 errorText={errors.endDate}
@@ -196,7 +196,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                   <FormField
                     label="Title"
                     name={`expenses[${idx}].title`}
-                    value={expense.title}
+                    defaultValue={expense.title}
                     onChange={handleChange}
                     {...(hasErrors && {
                       hasError: !!errors.expenses[idx]?.title,
@@ -211,7 +211,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                     type="number"
                     label="Balance"
                     name={`expenses[${idx}].balance`}
-                    value={expense.balance}
+                    defaultValue={expense.balance}
                     onChange={handleChange}
                     {...(hasErrors && {
                       hasError: !!errors.expenses[idx]?.balance,
@@ -224,7 +224,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                     type="date"
                     label="Due Date"
                     name={`expenses[${idx}].dueDate`}
-                    value={expense.dueDate}
+                    defaultValue={expense.dueDate}
                     onChange={handleChange}
                   />
                 </Col>
@@ -247,8 +247,8 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
                     type="textarea"
                     label="Note"
                     name={`expenses[${idx}].note`}
-                    value={expense.note}
                     onChange={handleChange}
+                    defaultValue={expense.note}
                   />
                 </Col>
               </Row>
