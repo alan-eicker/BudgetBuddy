@@ -15,7 +15,11 @@ module.exports = {
       return { err: err.message };
     }
   },
-  updatePaidStatus: async ({ _id, paid }) => {},
+  updatePaidStatus: async ({ groupId, expenseId, paid }) => {
+    console.log(groupId);
+    console.log(expenseId);
+    console.log(paid);
+  },
   previousAndNextGroups: ({ _id }) => {
     // 1. Find the index of the current ID
     // 2. If current ID is first, then return { isFirst: true, result: [{object}] }

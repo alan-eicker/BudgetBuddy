@@ -4,7 +4,7 @@ module.exports = `
     expenseGroup(_id: String!): ExpenseGroup
   }
   type Mutation {
-    updatePaidStatus(_id: String!, paid: Boolean!): Expense
+    updatePaidStatus(groupId: String!, expenseId: String!, paid: Boolean!): Expense
   }
   type ExpenseGroup {
     _id: String
@@ -21,5 +21,10 @@ module.exports = `
     dueDate: String
     paid: Boolean
     note: String
+  }
+  type paymentStatus {
+    groupId: String
+    expenseId: String
+    paid: Boolean
   }
 `;
