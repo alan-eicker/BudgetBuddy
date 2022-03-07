@@ -7,6 +7,7 @@ export const useAppContext = () => useContext(AppContext);
 
 const AppProvider = ({ children }) => {
   const [showLoader, setShowLoader] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const budgetLimitPercentage = 80;
 
   return (
@@ -14,6 +15,8 @@ const AppProvider = ({ children }) => {
       value={{
         showLoader,
         setShowLoader,
+        isLoggedIn,
+        setIsLoggedIn,
         budgetLimitPercentage,
       }}
     >
