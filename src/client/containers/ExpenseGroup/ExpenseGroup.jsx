@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { useAppContext } from '../../AppProvider';
-import withRouteGuard from '../../hocs/withRouteGuard';
 import ExpenseGroupLayout from '../../components/ExpenseGroupLayout';
 import {
   getSubTotalFromCollection,
@@ -43,7 +42,7 @@ const UPDATE_PAID_STATUS = gql`
   }
 `;
 
-const ExpenseGroup = withRouteGuard(() => {
+const ExpenseGroup = () => {
   const { setShowLoader, budgetLimitPercentage } = useAppContext();
   const { id } = useParams();
 
@@ -107,6 +106,6 @@ const ExpenseGroup = withRouteGuard(() => {
   }
 
   return null;
-});
+};
 
 export default ExpenseGroup;
