@@ -19,7 +19,7 @@ const ExpenseGroup = lazy(() => import('./containers/ExpenseGroup'));
 const ExpenseGroupEditor = lazy(() =>
   import('./containers/ExpenseGroupEditor'),
 );
-const PageNotFound = lazy(() => import('./containers/PageNotFound'));
+const PageNotFound = lazy(() => import('./components/PageNotFound'));
 
 const App = () => {
   const navigate = useNavigate();
