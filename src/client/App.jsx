@@ -1,11 +1,5 @@
 import React, { Suspense, lazy, useRef } from 'react';
-import {
-  Routes,
-  Route,
-  useLocation,
-  useNavigate,
-  Link,
-} from 'react-router-dom';
+import { Route, Switch, Link, useLocation, useHistory } from 'react-router-dom';
 import { Button } from '@atomikui/core';
 import AppProvider from './AppProvider';
 import Layout from './components/Layout';
@@ -22,7 +16,7 @@ const ExpenseGroupEditor = lazy(() =>
 const PageNotFound = lazy(() => import('./components/PageNotFound'));
 
 const App = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
   const { pathname } = useLocation();
   const isIndexPage = pathname === '/';
   const isExpenseGroupEditor = pathname.match(/add|edit/);
@@ -60,7 +54,7 @@ const App = () => {
                 className="margin-left-8"
                 theme="white"
                 shape="pill"
-                onClick={() => navigate(-1)}
+                onClick={() => history.goBack()}
               >
                 Cancel
               </Button>
@@ -70,20 +64,24 @@ const App = () => {
       >
         <main>
           <Suspense fallback={null}>
-            <Routes>
-              <Route index element={<Login />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="expense-group/:id" element={<ExpenseGroup />} />
-              <Route
-                path="expense-group/add"
-                element={<ExpenseGroupEditor ref={ExpenseGroupEditorRef} />}
-              />
-              <Route
-                path="expense-group/edit/:id"
-                element={<ExpenseGroupEditor ref={ExpenseGroupEditorRef} />}
-              />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
+            <Switch>
+              <Route exact path="/">
+                <Login />
+              </Route>
+              <Route path="/dashboard">
+                <Dashboard />
+              </Route>
+              <Route path="/expense-group/edit/:id">
+                <ExpenseGroupEditor ref={ExpenseGroupEditorRef} />
+              </Route>
+              <Route path="/expense-group/add">
+                <ExpenseGroupEditor ref={ExpenseGroupEditorRef} />
+              </Route>
+              <Route exact path="/expense-group/:id">
+                <ExpenseGroup />
+              </Route>
+              <Route path="*" component={PageNotFound} />
+            </Switch>
           </Suspense>
         </main>
       </Layout>

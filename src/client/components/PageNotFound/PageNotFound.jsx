@@ -1,9 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Button } from '@atomikui/core';
 
 const PageNotFound = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
 
   return (
     <div className="page-not-found">
@@ -14,7 +14,7 @@ const PageNotFound = () => {
           theme="indigo"
           shape="pill"
           size="lg"
-          onClick={() => navigate(-1)}
+          onClick={() => history.goBack()}
         >
           go back
         </Button>
