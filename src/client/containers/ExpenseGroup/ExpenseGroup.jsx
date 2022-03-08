@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { gql, useQuery, useMutation } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { useAppContext } from '../../AppProvider';
 import ExpenseGroupLayout from '../../components/ExpenseGroupLayout';
 import {
@@ -25,19 +25,6 @@ const GET_EXPENSE_GROUP = gql`
         paid
         note
       }
-    }
-  }
-`;
-
-const UPDATE_PAID_STATUS = gql`
-  mutation UpdatePaidStatus($id: String!, $paid: Boolean!) {
-    updatePaidStatus(_id: $id, paid: $paid) {
-      _id
-      title
-      balance
-      dueDate
-      paid
-      note
     }
   }
 `;

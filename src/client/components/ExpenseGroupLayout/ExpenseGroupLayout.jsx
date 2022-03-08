@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ButtonControls, Button, Statistic, Hint, Alert } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
@@ -61,10 +61,7 @@ const ExpenseGroupLayout = ({
             {overdueExpenses > 1 ? 's' : ''}.
           </Alert>
         )}
-        <ExpenseList
-          expenses={expenses}
-          onPaidStatusChange={(_id, checked) => console.log(_id, checked)}
-        />
+        <ExpenseList expenses={expenses} />
       </div>
       <div className="expense-group__summary">
         <h2 className="text-size-20 margin-bottom-20">Spending Snapshot</h2>

@@ -5,7 +5,7 @@ module.exports = `
     verifyToken: TokenStatus
   }
   type Mutation {
-    updatePaidStatus(groupId: String!, expenseId: String!, paid: Boolean!): Expense
+    updatePaidStatus(groupId: String!, expenseId: String!, paid: Boolean!): PaymentStatus
   }
   type ExpenseGroup {
     _id: String
@@ -23,7 +23,7 @@ module.exports = `
     paid: Boolean
     note: String
   }
-  type paymentStatus {
+  type PaymentStatus {
     groupId: String
     expenseId: String
     paid: Boolean

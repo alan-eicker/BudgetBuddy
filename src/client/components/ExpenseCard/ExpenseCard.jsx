@@ -5,16 +5,10 @@ import { Switch, Button } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { formatNumber } from '../../utilities/numbers';
+import useExpenseCard from './useExpenseCard';
 
-const ExpenseCard = ({
-  _id,
-  title,
-  balance,
-  dueDate,
-  paid,
-  note,
-  onPaidStatusChange,
-}) => {
+const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
+  const { onPaidChange } = useExpenseCard();
   const isOverDue = dueDate ? new Date() > new Date(dueDate) && !paid : false;
 
   return (
@@ -34,7 +28,7 @@ const ExpenseCard = ({
         <Switch
           layout="stacked"
           label={paid ? 'Paid' : 'Not paid'}
-          onChange={(e) => onPaidStatusChange(_id, !paid)}
+          onChange={() => onPaidChange(_id, !paid)}
           checked={paid}
         />
         <div className="expense-card__action-btns">
@@ -57,7 +51,6 @@ ExpenseCard.propTypes = {
   dueDate: PropTypes.string,
   paid: PropTypes.bool,
   note: PropTypes.string,
-  onPaidStatusChange: PropTypes.func,
 };
 
 ExpenseCard.defaultProps = {
@@ -67,7 +60,6 @@ ExpenseCard.defaultProps = {
   dueDate: null,
   paid: false,
   note: null,
-  onPaidStatusChange: () => {},
 };
 
 export default ExpenseCard;

@@ -19,6 +19,8 @@ module.exports = {
     console.log(groupId);
     console.log(expenseId);
     console.log(paid);
+
+    return { groupId, expenseId, paid };
   },
   verifyToken: () => ({ isValid: true }),
   previousAndNextGroups: ({ _id }) => {
