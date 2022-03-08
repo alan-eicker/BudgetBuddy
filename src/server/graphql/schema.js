@@ -2,6 +2,7 @@ module.exports = `
   type Query {
     expenseGroups: [ExpenseGroup]
     expenseGroup(_id: String!): ExpenseGroup
+    verifyToken: TokenStatus
   }
   type Mutation {
     updatePaidStatus(groupId: String!, expenseId: String!, paid: Boolean!): Expense
@@ -26,5 +27,8 @@ module.exports = `
     groupId: String
     expenseId: String
     paid: Boolean
+  }
+  type TokenStatus {
+    isValid: Boolean
   }
 `;

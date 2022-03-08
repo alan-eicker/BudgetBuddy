@@ -1,47 +1,54 @@
 import React, { useContext, createContext, useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { gql, useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
+import { gql, useLazyQuery } from '@apollo/client';
 
-// const VERIFY_TOKEN = gql``;
+const VERIFY_TOKEN = gql`
+  query {
+    verifyToken {
+      isValid
+    }
+  }
+`;
 
 const AppContext = createContext({});
 
 export const useAppContext = () => useContext(AppContext);
 
 const AppProvider = ({ children }) => {
-  const { pathname } = useLocation();
   const history = useHistory();
-
+  const { pathname } = useLocation();
   const [showLoader, setShowLoader] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [hasValidToken, setHasValidToken] = useState(true);
 
   const budgetLimitPercentage = 80;
 
-  const isProtectedRoute = pathname.match(/dashboard|expense-group/);
+  const isProtectedRoute = pathname.match(/expense-group|dashboard/);
 
-  // Run useQuery with skip option if isProtectedRoute === false
-  // Otherwise, verify token and return `true` or `false` with response;
-  // const { loading, error, data } = useQuery(VERIFY_TOKEN, {
-  //   skip: !isProtectedRoute
-  // });
+  const [verifyToken, { error, data }] = useLazyQuery(VERIFY_TOKEN);
+
+  if (error) throw new Error(error);
 
   useEffect(() => {
-    if (!hasValidToken) {
-      history.push('/');
-    } else {
-      history.push(pathname);
+    if (isProtectedRoute) {
+      verifyToken();
     }
-  }, [hasValidToken]);
+  }, [pathname]);
 
-  return (
+  useEffect(() => {
+    if (!data) return;
+
+    const { isValid } = data.verifyToken;
+
+    if (!isValid) {
+      history.push('/');
+    }
+  }, [data]);
+
+  return !data ? null : (
     <AppContext.Provider
       value={{
         showLoader,
         setShowLoader,
-        isLoggedIn,
-        setIsLoggedIn,
         budgetLimitPercentage,
       }}
     >
