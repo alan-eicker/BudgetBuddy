@@ -12,7 +12,7 @@ export const getSubTotalFromCollection = (collection, key) =>
 export const getUnpaidBalanceFromCollection = (collection, key) =>
   collection.reduce(
     (previousValue, nextValue) =>
-      !nextValue.isPaid ? previousValue + nextValue[key] : previousValue,
+      !nextValue.paid ? previousValue + nextValue[key] : previousValue,
     0,
   );
 
