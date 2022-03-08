@@ -44,7 +44,7 @@ const AppProvider = ({ children }) => {
     }
   }, [data]);
 
-  return !data ? null : (
+  return !data && isProtectedRoute ? null : (
     <AppContext.Provider
       value={{
         showLoader,
