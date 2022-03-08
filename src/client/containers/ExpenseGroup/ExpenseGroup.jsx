@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useAppContext } from '../../AppProvider';
 import ExpenseGroupLayout from '../../components/ExpenseGroupLayout';
 import {
@@ -9,25 +9,7 @@ import {
   getLeftOverBalance,
   formatNumber,
 } from '../../utilities/numbers';
-
-const GET_EXPENSE_GROUP = gql`
-  query GetExpenseGroup($id: String!) {
-    expenseGroup(_id: $id) {
-      _id
-      startDate
-      endDate
-      totalBudget
-      expenses {
-        _id
-        title
-        balance
-        dueDate
-        paid
-        note
-      }
-    }
-  }
-`;
+import { GET_EXPENSE_GROUP } from '../../queries';
 
 const ExpenseGroup = () => {
   const { setShowLoader, budgetLimitPercentage } = useAppContext();
