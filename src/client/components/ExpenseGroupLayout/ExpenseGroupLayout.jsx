@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ButtonControls, Button, Statistic, Hint, Alert } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,6 @@ import {
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '../../utilities/date';
-import ExpenseGroupControls from '../ExpenseGroupControls';
 import ExpenseList from '../ExpenseList';
 
 const ExpenseGroupLayout = ({
@@ -27,7 +26,6 @@ const ExpenseGroupLayout = ({
   endDate,
 }) => (
   <div className="expense-group">
-    <ExpenseGroupControls />
     <div className="expense-group__head">
       <h1 className="expense-group__title">
         {formatDate(startDate)} - {formatDate(endDate)}
