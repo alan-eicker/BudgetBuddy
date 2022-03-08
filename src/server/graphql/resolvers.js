@@ -15,13 +15,11 @@ module.exports = {
       return { err: err.message };
     }
   },
-  updatePaidStatus: async ({ groupId, expenseId, paid }) => {
-    console.log(groupId);
-    console.log(expenseId);
-    console.log(paid);
-
-    return { groupId, expenseId, paid };
-  },
+  updatePaidStatus: async ({ groupId, expenseId, paid }) => ({
+    groupId,
+    expenseId,
+    paid,
+  }),
   verifyToken: () => ({ isValid: true }),
   previousAndNextGroups: ({ _id }) => {
     // 1. Find the index of the current ID

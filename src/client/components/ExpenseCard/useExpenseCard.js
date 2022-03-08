@@ -1,26 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useAppContext } from '../../AppProvider';
 import { GET_EXPENSE_GROUP } from '../../queries';
-
-const UPDATE_PAID_STATUS = gql`
-  mutation UpdatePaidStatus(
-    $groupId: String!
-    $expenseId: String!
-    $paid: Boolean!
-  ) {
-    paidStatus: updatePaidStatus(
-      groupId: $groupId
-      expenseId: $expenseId
-      paid: $paid
-    ) {
-      groupId
-      expenseId
-      paid
-    }
-  }
-`;
+import { UPDATE_PAID_STATUS } from '../../mutations';
 
 const useExpenseCard = () => {
   const groupId = useParams().id;
