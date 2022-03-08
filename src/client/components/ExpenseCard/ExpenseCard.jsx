@@ -25,12 +25,14 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
         {note && <div className="expense-card__notes">{note}</div>}
       </div>
       <div className="expense-card__body">
-        <Switch
-          layout="stacked"
-          label={paid ? 'Paid' : 'Not paid'}
-          onChange={() => onPaidChange(_id, !paid)}
-          checked={paid}
-        />
+        <div className="expense-card__paid-status">
+          <Switch
+            layout="stacked"
+            label={paid ? 'Paid' : 'Not paid'}
+            onChange={() => onPaidChange(_id, !paid)}
+            checked={paid}
+          />
+        </div>
         <div className="expense-card__action-btns">
           <Button aria-label="edit" size="md" onClick={() => {}}>
             <Icon icon={faPencilAlt} />

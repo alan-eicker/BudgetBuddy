@@ -42,18 +42,18 @@ const useExpenseCard = () => {
           },
         });
 
-        const updatedExpenseGroup = {
-          ...groupProps,
-          expenses: expenses.map((expense) =>
-            expense._id === paidStatus.expenseId
-              ? { ...expense, paid: paidStatus.paid }
-              : expense,
-          ),
-        };
-
         cache.writeQuery({
           query: GET_EXPENSE_GROUP,
-          data: { expenseGroup: updatedExpenseGroup },
+          data: {
+            expenseGroup: {
+              ...groupProps,
+              expenses: expenses.map((expense) =>
+                expense._id === paidStatus.expenseId
+                  ? { ...expense, paid: paidStatus.paid }
+                  : expense,
+              ),
+            },
+          },
         });
       },
     },
