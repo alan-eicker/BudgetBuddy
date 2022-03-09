@@ -5,14 +5,8 @@ import { Switch, Button, Tag } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { formatNumber } from '../../utilities/numbers';
+import { getDaysPastDue } from '../../utilities/date';
 import useExpenseCard from './useExpenseCard';
-
-const getDaysPastDue = (date) => {
-  const now = new Date();
-  const dueDate = new Date(date);
-  const timeDifference = Math.abs(now - dueDate);
-  return Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-};
 
 const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
   const { onPaidChange } = useExpenseCard();

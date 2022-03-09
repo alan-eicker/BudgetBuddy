@@ -68,6 +68,7 @@ const ExpenseGroup = () => {
       isOverBudget,
       isAlmostOverBudget,
       overdueExpenses,
+      budgetLimitPercentage,
       ...group,
     };
 
