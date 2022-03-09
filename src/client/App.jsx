@@ -8,12 +8,21 @@ import Masthead from './components/Masthead';
 import ExpenseGroupEditorForm from './containers/ExpenseGroupEditor/ExpenseGroupEditor';
 
 const Login = lazy(() => import('./containers/Login'));
-const Dashboard = lazy(() => import('./containers/Dashboard'));
+const AllExpenseGroups = lazy(() => import('./containers/AllExpenseGroups'));
 const ExpenseGroup = lazy(() => import('./containers/ExpenseGroup'));
 const ExpenseGroupEditor = lazy(() =>
   import('./containers/ExpenseGroupEditor'),
 );
 const PageNotFound = lazy(() => import('./components/PageNotFound'));
+
+const navItems = [
+  <Link key="nav-item-1" to="/expense-groups/add">
+    + Expense Group
+  </Link>,
+  <button key="nav-item-2" type="button">
+    log out
+  </button>,
+];
 
 const App = () => {
   const history = useHistory();
@@ -29,13 +38,7 @@ const App = () => {
         isIndexPage
         header={
           !isIndexPage ? (
-            <Masthead
-              appName="Budget Buddy"
-              nav={[
-                <Link to="/expense-group/add">+ Expense Group</Link>,
-                <button type="button">log out</button>,
-              ]}
-            />
+            <Masthead appName="Budget Buddy" nav={navItems} />
           ) : null
         }
         {...(isExpenseGroupEditor && {
@@ -68,17 +71,17 @@ const App = () => {
               <Route exact path="/">
                 <Login />
               </Route>
-              <Route path="/dashboard">
-                <Dashboard />
-              </Route>
-              <Route path="/expense-group/edit/:id">
+              <Route path="/expense-groups/edit/:id">
                 <ExpenseGroupEditor ref={ExpenseGroupEditorRef} />
               </Route>
-              <Route path="/expense-group/add">
+              <Route path="/expense-groups/add">
                 <ExpenseGroupEditor ref={ExpenseGroupEditorRef} />
               </Route>
-              <Route exact path="/expense-group/:id">
+              <Route exact path="/expense-groups/:id">
                 <ExpenseGroup />
+              </Route>
+              <Route path="/expense-groups">
+                <AllExpenseGroups />
               </Route>
               <Route path="*" component={PageNotFound} />
             </Switch>

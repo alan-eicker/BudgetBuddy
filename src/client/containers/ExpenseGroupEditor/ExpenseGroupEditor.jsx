@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef } from 'react';
+import React, { useEffect, forwardRef, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { useFormik } from 'formik';
@@ -11,6 +11,13 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
   const { setShowLoader } = useAppContext();
   const { id } = useParams();
   const { pathname } = useLocation();
+
+  const [initialValues, setInitialValues] = useState({
+    startDate: '',
+    endDate: '',
+    totalBudget: '',
+    expenses: [],
+  });
 
   const isEdit = pathname.match(/\/edit/);
 
@@ -42,13 +49,6 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
     },
   });
 
-  const initialValues = {
-    startDate: '',
-    endDate: '',
-    totalBudget: '',
-    expenses: [],
-  };
-
   const validationSchema = yup.object().shape({
     startDate: yup.string().required('Start date is required'),
     endDate: yup.string().required('End date is required'),
@@ -62,6 +62,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
   });
 
   const { setFieldValue, setValues, ...formik } = useFormik({
+    enableReinitialize: true,
     initialValues,
     validationSchema,
     onSubmit: (formValues) => {
@@ -100,8 +101,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (data) {
-      setValues({
-        ...formik.values,
+      setInitialValues({
         totalBudget: data.expenseGroup.totalBudget,
         startDate: data.expenseGroup.startDate,
         endDate: data.expenseGroup.endDate,

@@ -9,25 +9,12 @@ import {
   getLeftOverBalance,
   formatNumber,
 } from '../../utilities/numbers';
-import { GET_EXPENSE_GROUP } from '../../queries';
+import useExpenseGroup from './useExpenseGroup';
 
 const ExpenseGroup = () => {
-  const { setShowLoader, budgetLimitPercentage } = useAppContext();
+  const { budgetLimitPercentage } = useAppContext();
   const { id } = useParams();
-
-  const { loading, error, data } = useQuery(GET_EXPENSE_GROUP, {
-    variables: {
-      id,
-    },
-  });
-
-  useEffect(() => {
-    setShowLoader(loading);
-  }, [loading, setShowLoader]);
-
-  if (error) {
-    throw new Error(error);
-  }
+  const { data } = useExpenseGroup();
 
   if (data) {
     const group = data.expenseGroup;

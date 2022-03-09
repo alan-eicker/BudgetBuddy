@@ -35,7 +35,7 @@ const ExpenseGroupLayout = ({
         <Link
           title="edit expense"
           aria-label="edit expense"
-          to={`/expense-group/edit/${id}`}
+          to={`/expense-groups/edit/${id}`}
         >
           <Icon icon={faPen} />
         </Link>
