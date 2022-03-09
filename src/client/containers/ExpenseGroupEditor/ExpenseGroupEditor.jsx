@@ -41,6 +41,7 @@ const ExpenseGroupEditor = forwardRef((_, ref) => {
     validationSchema,
     onSubmit: (formValues) => {
       // call mutation function here...
+      console.log(formValues);
     },
   });
 

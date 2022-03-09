@@ -8,7 +8,9 @@ import Masthead from './components/Masthead';
 import ExpenseGroupEditorForm from './containers/ExpenseGroupEditor/ExpenseGroupEditor';
 
 const Login = lazy(() => import('./containers/Login'));
-const AllExpenseGroups = lazy(() => import('./containers/AllExpenseGroups'));
+const ExpenseGroupsSummary = lazy(() =>
+  import('./containers/ExpenseGroupsSummary'),
+);
 const ExpenseGroup = lazy(() => import('./containers/ExpenseGroup'));
 const ExpenseGroupEditor = lazy(() =>
   import('./containers/ExpenseGroupEditor'),
@@ -81,7 +83,7 @@ const App = () => {
                 <ExpenseGroup />
               </Route>
               <Route path="/expense-groups">
-                <AllExpenseGroups />
+                <ExpenseGroupsSummary />
               </Route>
               <Route path="*" component={PageNotFound} />
             </Switch>

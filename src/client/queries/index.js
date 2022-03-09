@@ -1,15 +1,17 @@
 import { gql } from '@apollo/client';
 
 export const GET_EXPENSE_GROUPS_PREVIEW = gql`
-  query expenseGroups {
-    _id
-    startDate
-    endDate
-    totalBudget
-    expenses {
-      balance
-      dueDate
-      paid
+  query ExpenseGroups {
+    expenseGroups {
+      _id
+      startDate
+      endDate
+      totalBudget
+      expenses {
+        balance
+        dueDate
+        paid
+      }
     }
   }
 `;
