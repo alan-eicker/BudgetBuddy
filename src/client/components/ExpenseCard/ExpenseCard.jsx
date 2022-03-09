@@ -1,15 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Switch, Button } from '@atomikui/core';
+import { Switch, Button, Tag } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { formatNumber } from '../../utilities/numbers';
 import useExpenseCard from './useExpenseCard';
 
+const getDaysPastDue = (date) => {
+  const now = new Date();
+  const dueDate = new Date(date);
+  const timeDifference = Math.abs(now - dueDate);
+  return Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+};
+
 const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
   const { onPaidChange } = useExpenseCard();
-  const isOverDue = dueDate ? new Date() > new Date(dueDate) && !paid : false;
+  const daysPastDue = getDaysPastDue(dueDate);
+  const isOverDue = dueDate && !paid && daysPastDue > 0;
 
   return (
     <div
@@ -20,7 +28,11 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
         <div className="expense-card__name">{title}</div>
         <div className="expense-card__balance">
           ${formatNumber(balance)} {dueDate && `| Due by: ${dueDate}`}{' '}
-          {isOverDue && '(Past Due)'}
+          {isOverDue && (
+            <Tag theme="red" className="margin-left-4">{`${daysPastDue} ${
+              daysPastDue > 1 ? 'days' : 'day'
+            } past due`}</Tag>
+          )}
         </div>
         {note && <div className="expense-card__notes">{note}</div>}
       </div>
@@ -34,11 +46,8 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
           />
         </div>
         <div className="expense-card__action-btns">
-          <Button aria-label="edit" size="md" onClick={() => {}}>
-            <Icon icon={faPencilAlt} />
-          </Button>
           <Button aria-label="delete" size="md" onClick={() => {}}>
-            <Icon icon={faTrashAlt} />
+            <Icon icon={faTimes} />
           </Button>
         </div>
       </div>

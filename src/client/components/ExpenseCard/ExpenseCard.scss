@@ -42,6 +42,7 @@
     border-left: rem(1) solid $blue-gray-300;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     margin-left: rem(12);
     padding-left: rem(12);
 
@@ -56,6 +57,15 @@
       &:hover,
       &:focus {
         background: darken($blue-gray-100, 1%);
+      }
+
+      svg {
+        height: rem(16);
+        width: rem(16);
+
+        path {
+          fill: $blue-gray-700;
+        }
       }
     }
 
