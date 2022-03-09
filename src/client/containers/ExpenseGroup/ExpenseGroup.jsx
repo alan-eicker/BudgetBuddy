@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
 import { useAppContext } from '../../AppProvider';
 import ExpenseGroupLayout from '../../components/ExpenseGroupLayout';
 import {
