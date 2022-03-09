@@ -1,16 +1,16 @@
 import React, { useEffect, forwardRef, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { gql, useQuery } from '@apollo/client';
+import { useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import mongoose from 'mongoose';
 import ExpenseGroupEditorForm from '../../components/ExpenseGroupEditorForm';
+import useExpenseGroup from '../ExpenseGroup/useExpenseGroup';
 import { useAppContext } from '../../AppProvider';
 
 const ExpenseGroupEditor = forwardRef((props, ref) => {
   const { setShowLoader } = useAppContext();
-  const { id } = useParams();
   const { pathname } = useLocation();
+  const { data } = useExpenseGroup();
 
   const [initialValues, setInitialValues] = useState({
     startDate: '',
@@ -22,32 +22,6 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
   const isEdit = pathname.match(/\/edit/);
 
   const title = isEdit ? 'Edit Expense Group' : 'Add Expense Group';
-
-  const GET_EXPENSE_GROUP = gql`
-    query GetExpenseGroup($id: String!) {
-      expenseGroup(_id: $id) {
-        _id
-        startDate
-        endDate
-        totalBudget
-        expenses {
-          _id
-          title
-          balance
-          dueDate
-          paid
-          note
-        }
-      }
-    }
-  `;
-
-  const { loading, error, data } = useQuery(GET_EXPENSE_GROUP, {
-    skip: !isEdit,
-    variables: {
-      id,
-    },
-  });
 
   const validationSchema = yup.object().shape({
     startDate: yup.string().required('Start date is required'),
@@ -66,7 +40,7 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
     initialValues,
     validationSchema,
     onSubmit: (formValues) => {
-      console.log(formValues);
+      // call mutation function here...
     },
   });
 
@@ -90,14 +64,6 @@ const ExpenseGroupEditor = forwardRef((props, ref) => {
       formik.values.expenses.filter((exp) => exp._id !== _id),
     );
   };
-
-  if (error) {
-    throw new Error(error);
-  }
-
-  useEffect(() => {
-    setShowLoader(loading);
-  }, [loading, setShowLoader]);
 
   useEffect(() => {
     if (data) {
