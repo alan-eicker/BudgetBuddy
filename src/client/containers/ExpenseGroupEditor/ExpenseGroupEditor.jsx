@@ -7,7 +7,7 @@ import ExpenseGroupEditorForm from '../../components/ExpenseGroupEditorForm';
 import useExpenseGroup from '../ExpenseGroup/useExpenseGroup';
 import { useAppContext } from '../../AppProvider';
 
-const ExpenseGroupEditor = forwardRef((props, ref) => {
+const ExpenseGroupEditor = forwardRef((_, ref) => {
   const { setShowLoader } = useAppContext();
   const { pathname } = useLocation();
   const { data } = useExpenseGroup();
