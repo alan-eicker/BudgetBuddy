@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import useExpenseGroupsSummary from './useExpenseGroupsSummary';
 import ExpensCard from '../../components/ExpenseCard';
-import { formatDate } from '../../utilities/date';
+import { formatDate, getDaysPastDue } from '../../utilities/date';
 import { getSubTotalFromCollection } from '../../utilities/numbers';
 
 const ExpenseGroupsSummary = () => {
@@ -23,6 +23,17 @@ const ExpenseGroupsSummary = () => {
               'balance',
             );
 
+            const hasOverdueExpenses =
+              group.expenses.reduce(
+                (prevValue, nextValue) =>
+                  nextValue.dueDate &&
+                  !nextValue.paid &&
+                  getDaysPastDue(nextValue.dueDate) > 0
+                    ? prevValue + 1
+                    : prevValue,
+                0,
+              ) > 0;
+
             return (
               <Col className="margin-bottom-16" key={group._id} md={6}>
                 <Link
@@ -32,6 +43,7 @@ const ExpenseGroupsSummary = () => {
                   <ExpensCard
                     title={title}
                     balance={balance}
+                    hasOverdueExpenses={hasOverdueExpenses}
                     isSummary
                     {...group}
                   />
