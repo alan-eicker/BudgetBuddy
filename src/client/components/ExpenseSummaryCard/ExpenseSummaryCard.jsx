@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
@@ -7,8 +8,9 @@ import {
   faExclamationCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
-const ExpenseSummaryCard = ({ title, balance, overdueExpenses }) => (
-  <div
+const ExpenseSummaryCard = ({ id, title, balance, overdueExpenses }) => (
+  <Link
+    to={`/expense-groups/${id}`}
     className={classnames('expense-group-summary-card', {
       'has-overdue-expense': !!overdueExpenses,
     })}
@@ -36,16 +38,18 @@ const ExpenseSummaryCard = ({ title, balance, overdueExpenses }) => (
     <div className="expense-group-summary-card__footer">
       <Icon icon={faChevronRight} size="xl" />
     </div>
-  </div>
+  </Link>
 );
 
 ExpenseSummaryCard.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   balance: PropTypes.string,
   overdueExpenses: PropTypes.number,
 };
 
 ExpenseSummaryCard.defaultProps = {
+  id: '',
   title: '',
   balance: '$0.00',
   overdueExpenses: 0,

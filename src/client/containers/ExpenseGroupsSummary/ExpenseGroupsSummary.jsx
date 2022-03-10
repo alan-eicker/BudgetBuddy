@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import useExpenseGroupsSummary from './useExpenseGroupsSummary';
 import ExpenseSummaryCard from '../../components/ExpenseSummaryCard';
@@ -39,18 +38,13 @@ const ExpenseGroupsSummary = () => {
 
               return (
                 <Col className="margin-bottom-16" key={group._id} md={6} lg={4}>
-                  <Link
-                    className="text-decoration-none"
-                    to={`/expense-groups/${group._id}`}
-                  >
-                    <ExpenseSummaryCard
-                      title={title}
-                      balance={balance}
-                      overdueExpenses={overdueExpenses}
-                      isSummary
-                      {...group}
-                    />
-                  </Link>
+                  <ExpenseSummaryCard
+                    id={group._id}
+                    title={title}
+                    balance={balance}
+                    overdueExpenses={overdueExpenses}
+                    isSummary
+                  />
                 </Col>
               );
             })}
