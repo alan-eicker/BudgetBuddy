@@ -25,7 +25,8 @@ const ExpenseSummaryCard = ({ id, title, balance, overdueExpenses }) => (
               className="margin-bottom-4"
             />
             <span>
-              {overdueExpenses} overdue expense{overdueExpenses > 1 && 's'}
+              {overdueExpenses} unpaid overdue expense
+              {overdueExpenses > 1 && 's'}
             </span>
           </div>
         )}
