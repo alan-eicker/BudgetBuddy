@@ -50,7 +50,7 @@ const ExpenseCard = ({
         {isSummary && !!overdueExpenses && (
           <div className="expense-card__overdue-icon">
             <Icon icon={faExclamationCircle} size="xl" />
-            {overdueExpenses} overdue expenses
+            {overdueExpenses} overdue expense{overdueExpenses > 1 && 's'}
           </div>
         )}
         {isSummary ? (
