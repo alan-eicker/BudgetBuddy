@@ -14,18 +14,25 @@ const ExpenseSummaryCard = ({ title, balance, overdueExpenses }) => (
     })}
   >
     <div className="expense-group-summary-card__body">
-      <div className="expense-group-summary-card__title">{title}</div>
+      <div className="expense-group-summary-card__title">
+        <div>{title}</div>
+        {!!overdueExpenses && (
+          <div className="expense-group-summary-card__tag">
+            <Icon
+              icon={faExclamationCircle}
+              size="xl"
+              className="margin-bottom-4"
+            />
+            <br />
+            {overdueExpenses} overdue
+          </div>
+        )}
+      </div>
       <div className="expense-group-summary-card__subtitle">
         Total budget:
         <br /> {balance}
       </div>
     </div>
-    {!!overdueExpenses && (
-      <div className="expense-group-summary-card__tag">
-        <Icon icon={faExclamationCircle} size="xl" className="margin-right-4" />
-        {overdueExpenses} overdue
-      </div>
-    )}
     <div className="expense-group-summary-card__footer">
       <Icon icon={faChevronRight} size="xl" />
     </div>

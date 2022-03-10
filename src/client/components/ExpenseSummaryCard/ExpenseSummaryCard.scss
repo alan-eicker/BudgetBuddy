@@ -17,14 +17,7 @@
     }
   }
 
-  &__tag {
-    color: $red-700;
-    font-size: rem(13);
-    margin-right: rem(16);
-  }
-
   &__body {
-    flex: 1;
     font-size: rem(20);
     padding: rem(20);
   }
@@ -45,10 +38,24 @@
   }
 
   &__title {
+    border-bottom: rem(1) solid darken($blue-gray-100, 2%);
     color: $indigo-800;
     font-size: rem(22);
     font-weight: 500;
     line-height: 1.2;
+    margin-bottom: rem(4);
+    padding-bottom: rem(4);
+    display: flex;
+    align-items: center;
+  }
+
+  &__tag {
+    color: $red-700;
+    font-size: rem(13);
+    margin-left: rem(16);
+    flex: 1;
+    white-space: nowrap;
+    text-align: center;
   }
 
   &__subtitle {
@@ -57,6 +64,10 @@
 
   &.has-overdue-expense {
     background: $red-50;
+
+    .expense-group-summary-card__title {
+      border-color: darken($red-100, 2%);
+    }
 
     .expense-group-summary-card__title,
     .expense-group-summary-card__subtitle {
