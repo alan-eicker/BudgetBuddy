@@ -30,7 +30,7 @@ const ExpenseGroupsSummary = () => {
                 (prevValue, nextValue) =>
                   nextValue.dueDate &&
                   !nextValue.paid &&
-                  getDaysPastDue(nextValue.dueDate) > 0
+                  getDaysPastDue(nextValue.dueDate).isPastDate
                     ? prevValue + 1
                     : prevValue,
                 0,
