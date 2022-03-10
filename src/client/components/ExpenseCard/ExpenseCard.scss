@@ -32,6 +32,22 @@
     margin-top: rem(8);
   }
 
+  &__overdue-icon {
+    align-items: center;
+    color: $red-700;
+    display: flex;
+    font-size: rem(13);
+    margin: rem(0 16);
+
+    svg {
+      margin-right: rem(4);
+
+      path {
+        fill: $red-500;
+      }
+    }
+  }
+
   &__chevron-icon {
     align-items: center;
     display: flex;

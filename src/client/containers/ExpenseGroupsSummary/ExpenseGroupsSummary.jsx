@@ -13,18 +13,19 @@ const ExpenseGroupsSummary = () => {
     return (
       <Grid>
         <Row>
-          {data.expenseGroups.map((group) => {
-            const title = `${formatDate(group.startDate)} - ${formatDate(
-              group.endDate,
-            )}`;
+          {[...data.expenseGroups]
+            .sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+            .map((group) => {
+              const title = `${formatDate(group.startDate)} - ${formatDate(
+                group.endDate,
+              )}`;
 
-            const balance = getSubTotalFromCollection(
-              group.expenses,
-              'balance',
-            );
+              const balance = getSubTotalFromCollection(
+                group.expenses,
+                'balance',
+              );
 
-            const hasOverdueExpenses =
-              group.expenses.reduce(
+              const overdueExpenses = group.expenses.reduce(
                 (prevValue, nextValue) =>
                   nextValue.dueDate &&
                   !nextValue.paid &&
@@ -32,25 +33,25 @@ const ExpenseGroupsSummary = () => {
                     ? prevValue + 1
                     : prevValue,
                 0,
-              ) > 0;
+              );
 
-            return (
-              <Col className="margin-bottom-16" key={group._id} md={6}>
-                <Link
-                  className="text-decoration-none"
-                  to={`/expense-groups/${group._id}`}
-                >
-                  <ExpensCard
-                    title={title}
-                    balance={balance}
-                    hasOverdueExpenses={hasOverdueExpenses}
-                    isSummary
-                    {...group}
-                  />
-                </Link>
-              </Col>
-            );
-          })}
+              return (
+                <Col className="margin-bottom-16" key={group._id} md={6}>
+                  <Link
+                    className="text-decoration-none"
+                    to={`/expense-groups/${group._id}`}
+                  >
+                    <ExpensCard
+                      title={title}
+                      balance={balance}
+                      overdueExpenses={overdueExpenses}
+                      isSummary
+                      {...group}
+                    />
+                  </Link>
+                </Col>
+              );
+            })}
         </Row>
       </Grid>
     );

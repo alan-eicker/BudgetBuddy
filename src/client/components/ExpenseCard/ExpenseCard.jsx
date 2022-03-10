@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Switch, Button, Tag } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faTimes, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTimes,
+  faChevronRight,
+  faExclamationCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import { formatNumber } from '../../utilities/numbers';
 import { getDaysPastDue } from '../../utilities/date';
 import useExpenseCard from './useExpenseCard';
@@ -16,7 +20,7 @@ const ExpenseCard = ({
   paid,
   note,
   isSummary,
-  hasOverdueExpenses,
+  overdueExpenses,
 }) => {
   const { onPaidChange } = useExpenseCard();
   const daysPastDue = getDaysPastDue(dueDate);
@@ -26,7 +30,7 @@ const ExpenseCard = ({
     <div
       key={_id}
       className={classnames('expense-card', {
-        'is-overdue': isOverDue || hasOverdueExpenses,
+        'is-overdue': isOverDue || !!overdueExpenses,
       })}
     >
       <div className="expense-card__head">
@@ -43,6 +47,12 @@ const ExpenseCard = ({
         {note && <div className="expense-card__notes">{note}</div>}
       </div>
       <div className="expense-card__body">
+        {isSummary && !!overdueExpenses && (
+          <div className="expense-card__overdue-icon">
+            <Icon icon={faExclamationCircle} size="xl" />
+            {overdueExpenses} overdue expenses
+          </div>
+        )}
         {isSummary ? (
           <div className="expense-card__chevron-icon">
             <Icon icon={faChevronRight} size="lg" />
@@ -77,7 +87,7 @@ ExpenseCard.propTypes = {
   paid: PropTypes.bool,
   note: PropTypes.string,
   isSummary: PropTypes.bool,
-  hasOverdueExpenses: PropTypes.bool,
+  overdueExpenses: PropTypes.number,
 };
 
 ExpenseCard.defaultProps = {
@@ -88,7 +98,7 @@ ExpenseCard.defaultProps = {
   paid: false,
   note: null,
   isSummary: false,
-  hasOverdueExpenses: false,
+  overdueExpenses: 0,
 };
 
 export default ExpenseCard;
