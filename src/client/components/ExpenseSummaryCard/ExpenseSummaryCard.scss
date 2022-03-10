@@ -1,13 +1,21 @@
 .expense-group-summary-card {
   align-items: center;
-  background: lighten($blue-gray-50, 3%);
+  background: lighten($blue-gray-50, 1%);
   border-radius: rem(8);
   color: $blue-gray-900;
   display: flex;
-  justify-content: space-between;
-  margin: rem(8);
-  padding: rem(20);
   height: 100%;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: background 0.2s linear;
+
+  &:hover {
+    background: lighten($cyan-50, 1%);
+
+    .expense-group-summary-card__footer {
+      background: $indigo-900;
+    }
+  }
 
   &__tag {
     color: $red-700;
@@ -18,12 +26,29 @@
   &__body {
     flex: 1;
     font-size: rem(20);
+    padding: rem(20);
+  }
+
+  &__footer {
+    align-items: center;
+    align-self: stretch;
+    background: $indigo-700;
+    display: flex;
+    padding: rem(0 16);
+    transition: background 0.2s linear;
+
+    svg {
+      path {
+        fill: $white;
+      }
+    }
   }
 
   &__title {
     color: $indigo-800;
     font-size: rem(22);
     font-weight: 500;
+    line-height: 1.2;
   }
 
   &__subtitle {
@@ -31,11 +56,23 @@
   }
 
   &.has-overdue-expense {
-    box-shadow: inset 0 0 0 rem(2) $red-700;
+    background: $red-50;
 
     .expense-group-summary-card__title,
     .expense-group-summary-card__subtitle {
       color: $red-700;
+    }
+
+    .expense-group-summary-card__footer {
+      background: $red-700;
+    }
+
+    &:hover {
+      background: darken($red-50, 3%);
+
+      .expense-group-summary-card__footer {
+        background: $red-800;
+      }
     }
   }
 

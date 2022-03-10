@@ -38,7 +38,7 @@ const ExpenseGroupsSummary = () => {
               );
 
               return (
-                <Col className="margin-bottom-16" key={group._id} md={6}>
+                <Col className="margin-bottom-16" key={group._id} md={6} lg={4}>
                   <Link
                     className="text-decoration-none"
                     to={`/expense-groups/${group._id}`}
