@@ -9,6 +9,7 @@ import {
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '../../utilities/date';
+import { formatNumber } from '../../utilities/numbers';
 import ExpenseList from '../ExpenseList';
 
 const ExpenseGroupLayout = ({
@@ -29,7 +30,7 @@ const ExpenseGroupLayout = ({
     <div className="expense-group__head">
       <h1 className="expense-group__title">
         {formatDate(startDate)} - {formatDate(endDate)}
-        <span>Total Budget: {totalBudget}</span>
+        <span>Total Budget: ${formatNumber(totalBudget)}</span>
       </h1>
       <ButtonControls className="expense-group__controls">
         <Link
