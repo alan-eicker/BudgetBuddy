@@ -7,6 +7,7 @@ import {
   faExclamationTriangle,
   faPen,
   faTimes,
+  faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '../../utilities/date';
 import { formatNumber } from '../../utilities/numbers';
@@ -33,6 +34,9 @@ const ExpenseGroupLayout = ({
         <span>Total Budget: ${formatNumber(totalBudget)}</span>
       </h1>
       <ButtonControls className="expense-group__controls">
+        <Link title="go back" aria-label="go back" to="/expense-groups">
+          <Icon icon={faArrowLeft} size="lg" />
+        </Link>
         <Link
           title="edit expense"
           aria-label="edit expense"
