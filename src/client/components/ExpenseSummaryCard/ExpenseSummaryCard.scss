@@ -46,26 +46,27 @@
   &__title {
     border-bottom: rem(1) solid darken($blue-gray-100, 2%);
     color: $indigo-800;
-    font-size: rem(22);
+    font-size: rem(20);
     font-weight: 500;
     line-height: 1.2;
     margin-bottom: rem(4);
     padding-bottom: rem(4);
-    display: flex;
-    align-items: center;
+  }
+
+  &__subtitle {
+    font-size: rem(16);
   }
 
   &__tag {
     color: $red-700;
     font-size: rem(13);
-    margin-left: rem(16);
-    flex: 1;
-    white-space: nowrap;
-    text-align: center;
-  }
+    display: flex;
+    align-items: center;
+    margin-bottom: rem(2);
 
-  &__subtitle {
-    font-size: rem(16);
+    & > :first-child {
+      margin-right: rem(4);
+    }
   }
 
   &.has-overdue-expense {
@@ -99,11 +100,11 @@
 
   @media (min-width: $breakpoint-large) {
     &__title {
-      font-size: rem(28);
+      font-size: rem(24);
     }
 
     &__subtitle {
-      font-size: rem(20);
+      font-size: rem(17);
     }
   }
 }

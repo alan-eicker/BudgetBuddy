@@ -17,7 +17,6 @@ const ExpenseSummaryCard = ({ id, title, balance, overdueExpenses }) => (
   >
     <div className="expense-group-summary-card__body">
       <div className="expense-group-summary-card__title">
-        <div>{title}</div>
         {!!overdueExpenses && (
           <div className="expense-group-summary-card__tag">
             <Icon
@@ -25,10 +24,12 @@ const ExpenseSummaryCard = ({ id, title, balance, overdueExpenses }) => (
               size="xl"
               className="margin-bottom-4"
             />
-            <br />
-            {overdueExpenses} overdue
+            <span>
+              {overdueExpenses} overdue expense{overdueExpenses > 1 && 's'}
+            </span>
           </div>
         )}
+        {title}
       </div>
       <div className="expense-group-summary-card__subtitle">
         Total budget:
