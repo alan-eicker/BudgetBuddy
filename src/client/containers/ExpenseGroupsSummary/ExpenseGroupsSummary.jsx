@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import useExpenseGroupsSummary from './useExpenseGroupsSummary';
-import ExpensCard from '../../components/ExpenseCard';
+import ExpenseSummaryCard from '../../components/ExpenseSummaryCard';
 import { formatDate, getDaysPastDue } from '../../utilities/date';
-import { getSubTotalFromCollection } from '../../utilities/numbers';
+import {
+  getSubTotalFromCollection,
+  formatNumber,
+} from '../../utilities/numbers';
 
 const ExpenseGroupsSummary = () => {
   const { data } = useExpenseGroupsSummary();
@@ -20,10 +23,9 @@ const ExpenseGroupsSummary = () => {
                 group.endDate,
               )}`;
 
-              const balance = getSubTotalFromCollection(
-                group.expenses,
-                'balance',
-              );
+              const balance = `$${formatNumber(
+                getSubTotalFromCollection(group.expenses, 'balance'),
+              )}`;
 
               const overdueExpenses = group.expenses.reduce(
                 (prevValue, nextValue) =>
@@ -41,7 +43,7 @@ const ExpenseGroupsSummary = () => {
                     className="text-decoration-none"
                     to={`/expense-groups/${group._id}`}
                   >
-                    <ExpensCard
+                    <ExpenseSummaryCard
                       title={title}
                       balance={balance}
                       overdueExpenses={overdueExpenses}
