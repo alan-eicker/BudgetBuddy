@@ -10,21 +10,21 @@ import useExpenseCard from './useExpenseCard';
 
 const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
   const { onPaidChange } = useExpenseCard();
-  const { isPastDate, daysOverdue } = getDaysPastDue(dueDate);
-  const isPastDue = isPastDate && !paid && dueDate;
+  const { isPastDue, daysOverdue } = getDaysPastDue(dueDate);
+  const flagAsOverdue = isPastDue && !paid && dueDate;
 
   return (
     <div
       key={_id}
       className={classnames('expense-card', {
-        'is-overdue': isPastDue,
+        'is-overdue': flagAsOverdue,
       })}
     >
       <div className="expense-card__head">
         <div className="expense-card__name">{title}</div>
         <div className="expense-card__balance">
           ${formatNumber(balance)} {dueDate && `| Due by: ${dueDate}`}{' '}
-          {isPastDue && (
+          {flagAsOverdue && (
             <Tag theme="red" className="margin-left-4">{`${daysOverdue} ${
               daysOverdue > 1 ? 'days' : 'day'
             } past due`}</Tag>
