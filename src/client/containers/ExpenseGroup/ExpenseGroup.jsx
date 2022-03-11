@@ -45,6 +45,11 @@ const ExpenseGroup = () => {
         !expense.paid,
     ).length;
 
+    const groupData = {
+      ...group,
+      expenses: [...group.expenses].sort((a, b) => b.balance - a.balance),
+    };
+
     const props = {
       id,
       totalBalance,
@@ -55,7 +60,7 @@ const ExpenseGroup = () => {
       isAlmostOverBudget,
       overdueExpenses,
       budgetLimitPercentage,
-      ...group,
+      ...groupData,
     };
 
     return <ExpenseGroupLayout {...props} />;
