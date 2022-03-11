@@ -15,7 +15,13 @@ const useExpenseCard = () => {
     UPDATE_PAID_STATUS,
     {
       variables,
-      update: (cache, { data: { paidStatus } }) => {
+      update: (cache, { data }) => {
+        const { paidStatus } = data;
+
+        if (paidStatus.error) {
+          return;
+        }
+
         const {
           expenseGroup: { expenses, ...groupProps },
         } = cache.readQuery({

@@ -14,6 +14,7 @@ export const UPDATE_PAID_STATUS = gql`
       groupId
       expenseId
       paid
+      error
     }
   }
 `;

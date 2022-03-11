@@ -27,6 +27,7 @@ module.exports = `
     groupId: String
     expenseId: String
     paid: Boolean
+    error: String
   }
   type TokenStatus {
     isValid: Boolean
