@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import mongoose from 'mongoose';
 import ExpenseGroupEditorForm from '../../components/ExpenseGroupEditorForm';
 import useExpenseGroup from '../ExpenseGroup/useExpenseGroup';
-import { useAppContext } from '../../AppProvider';
+import { useAppContext } from '../../providers/AppProvider';
 
 const ExpenseGroupEditor = forwardRef((_, ref) => {
   const { setShowLoader } = useAppContext();

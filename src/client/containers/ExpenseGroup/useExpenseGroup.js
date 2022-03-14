@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { useAppContext } from '../../AppProvider';
+import { useAppContext } from '../../providers/AppProvider';
 import { GET_EXPENSE_GROUP } from '../../queries';
 
 const useExpenseGroup = () => {

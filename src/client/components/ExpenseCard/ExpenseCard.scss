@@ -3,8 +3,31 @@
   background: lighten($blue-gray-50, 2%);
   border-radius: rem(4);
   display: flex;
+  overflow: hidden;
   padding: rem(16);
+  position: relative;
   width: 100%;
+
+  &__delete-confirm {
+    align-items: center;
+    background: $indigo-800;
+    bottom: 0;
+    color: $white;
+    display: flex;
+    justify-content: space-between;
+    left: 100%;
+    padding: rem(16);
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 9000;
+    transition: all 0.3s ease-in-out;
+    transition-timing-function: cubic-bezier(0.42, 0, 0, 1);
+
+    &.is-active {
+      left: 0;
+    }
+  }
 
   &__head {
     flex: 1;

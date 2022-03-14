@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Overlay, Spinner, Alert } from '@atomikui/core';
-import { useAppContext } from '../../AppProvider';
+import { useAppContext } from '../../providers/AppProvider';
 
 const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
   const { showLoader, error } = useAppContext();

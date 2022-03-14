@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Switch, Button, Tag } from '@atomikui/core';
+import { Switch, Button, Tag, ButtonControls } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { formatNumber } from '../../utilities/numbers';
 import { getDaysPastDue } from '../../utilities/date';
-import useExpenseCard from './useExpenseCard';
+import { useExpense } from '../../providers/ExpenseProvider';
 
 const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
-  const { onPaidChange, onDelete } = useExpenseCard();
+  const { onPaidChange, onDelete, deleteId, setDeleteId } = useExpense();
   const { isPastDue, daysOverdue } = getDaysPastDue(dueDate);
   const flagAsOverdue = isPastDue && !paid && dueDate;
 
@@ -20,6 +20,31 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
         'is-overdue': flagAsOverdue,
       })}
     >
+      <div
+        className={classnames('expense-card__delete-confirm', {
+          'is-active': deleteId === _id,
+        })}
+      >
+        <div className="text-size-20">Delete {title}?</div>
+        <ButtonControls>
+          <Button
+            shape="pill"
+            theme="white"
+            size="md"
+            onClick={() => onDelete(deleteId)}
+          >
+            delete
+          </Button>
+          <Button
+            shape="pill"
+            theme="indigo"
+            size="md"
+            onClick={() => setDeleteId()}
+          >
+            cancel
+          </Button>
+        </ButtonControls>
+      </div>
       <div className="expense-card__head">
         <div className="expense-card__name">{title}</div>
         <div className="expense-card__balance">
@@ -42,7 +67,11 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
           />
         </div>
         <div className="expense-card__action-btns">
-          <Button aria-label="delete" size="md" onClick={() => onDelete(_id)}>
+          <Button
+            aria-label="delete"
+            size="md"
+            onClick={() => setDeleteId(_id)}
+          >
             <Icon icon={faTimes} />
           </Button>
         </div>

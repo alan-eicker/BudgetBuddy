@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useRef } from 'react';
 import { Route, Switch, Link, useLocation, useHistory } from 'react-router-dom';
 import { Button } from '@atomikui/core';
-import AppProvider from './AppProvider';
+import AppProvider from './providers/AppProvider';
 import Layout from './components/Layout';
 import Masthead from './components/Masthead';
 

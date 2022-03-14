@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppContext } from '../../AppProvider';
+import { useAppContext } from '../../providers/AppProvider';
 import ExpenseGroupLayout from '../../components/ExpenseGroupLayout';
 import {
   getSubTotalFromCollection,
@@ -16,7 +16,6 @@ const ExpenseGroup = () => {
   const { data } = useExpenseGroup();
 
   if (data) {
-    console.log(data);
     const group = data.expenseGroup;
 
     const subtotal = getSubTotalFromCollection(group.expenses, 'balance');

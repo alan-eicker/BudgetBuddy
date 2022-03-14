@@ -1,15 +1,21 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect, useContext, createContext } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { useAppContext } from '../../AppProvider';
-import { GET_EXPENSE_GROUP } from '../../queries';
-import { UPDATE_PAID_STATUS, DELETE_EXPENSE } from '../../mutations';
+import { useAppContext } from './AppProvider';
+import { GET_EXPENSE_GROUP } from '../queries';
+import { UPDATE_PAID_STATUS, DELETE_EXPENSE } from '../mutations';
 
-const useExpenseCard = () => {
+const ExpenseContext = createContext({});
+
+export const useExpense = () => useContext(ExpenseContext);
+
+const ExpenseProvider = ({ children }) => {
   const groupId = useParams().id;
   const { setShowLoader, setError } = useAppContext();
 
   const [variables, setVariables] = useState();
+  const [deleteId, setDeleteId] = useState();
 
   const [deleteExpense, deleteResponse] = useMutation(DELETE_EXPENSE, {
     variables,
@@ -101,7 +107,21 @@ const useExpenseCard = () => {
     setShowLoader(updateResponse.loading || deleteResponse.loading);
   }, [updateResponse, deleteResponse, setShowLoader]);
 
-  return { onPaidChange, onDelete };
+  return (
+    <ExpenseContext.Provider
+      value={{ onPaidChange, onDelete, deleteId, setDeleteId }}
+    >
+      {children}
+    </ExpenseContext.Provider>
+  );
 };
 
-export default useExpenseCard;
+ExpenseProvider.propTypes = {
+  children: PropTypes.node,
+};
+
+ExpenseProvider.defaultProps = {
+  children: <></>,
+};
+
+export default ExpenseProvider;

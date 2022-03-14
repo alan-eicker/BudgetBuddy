@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { useAppContext } from '../../AppProvider';
+import { useAppContext } from '../../providers/AppProvider';
 import { GET_EXPENSE_GROUPS_PREVIEW } from '../../queries';
 
 const useAllExpenseGroups = () => {
