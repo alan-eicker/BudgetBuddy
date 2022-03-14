@@ -33,6 +33,13 @@ module.exports = {
       return { error: err.message };
     }
   },
+  deleteExpense: async ({ groupId, expenseId }) => {
+    try {
+      return { groupId, expenseId };
+    } catch (err) {
+      return { error: err.message };
+    }
+  },
   verifyToken: () => ({ isValid: true }),
   previousAndNextGroups: ({ _id }) => {
     // 1. Find the index of the current ID

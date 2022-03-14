@@ -3,68 +3,105 @@ import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useAppContext } from '../../AppProvider';
 import { GET_EXPENSE_GROUP } from '../../queries';
-import { UPDATE_PAID_STATUS } from '../../mutations';
+import { UPDATE_PAID_STATUS, DELETE_EXPENSE } from '../../mutations';
 
 const useExpenseCard = () => {
   const groupId = useParams().id;
-  const { setShowLoader } = useAppContext();
+  const { setShowLoader, setError } = useAppContext();
 
   const [variables, setVariables] = useState();
 
-  const [updatePaidStatus, { error, loading }] = useMutation(
-    UPDATE_PAID_STATUS,
-    {
-      variables,
-      update: (cache, { data }) => {
-        const { paidStatus } = data;
+  const [deleteExpense, deleteResponse] = useMutation(DELETE_EXPENSE, {
+    variables,
+    onError: (err) => setError(err.message),
+    update: (cache, { data }) => {
+      const { response } = data;
 
-        if (paidStatus.error) {
-          return;
-        }
+      if (response.error) {
+        setError(response.error);
+      }
 
-        const {
-          expenseGroup: { expenses, ...groupProps },
-        } = cache.readQuery({
-          query: GET_EXPENSE_GROUP,
-          variables: {
-            id: paidStatus.groupId,
+      const {
+        expenseGroup: { expenses, ...groupProps },
+      } = cache.readQuery({
+        query: GET_EXPENSE_GROUP,
+        variables: {
+          id: response.groupId,
+        },
+      });
+
+      cache.writeQuery({
+        query: GET_EXPENSE_GROUP,
+        data: {
+          expenseGroup: {
+            ...groupProps,
+            expenses: expenses.filter(
+              (expense) => expense._id !== response.expenseId,
+            ),
           },
-        });
-
-        cache.writeQuery({
-          query: GET_EXPENSE_GROUP,
-          data: {
-            expenseGroup: {
-              ...groupProps,
-              expenses: expenses.map((expense) =>
-                expense._id === paidStatus.expenseId
-                  ? { ...expense, paid: paidStatus.paid }
-                  : expense,
-              ),
-            },
-          },
-        });
-      },
+        },
+      });
     },
-  );
+  });
+
+  const [updatePaidStatus, updateResponse] = useMutation(UPDATE_PAID_STATUS, {
+    variables,
+    onError: (err) => setError(err.message),
+    update: (cache, { data }) => {
+      const { response } = data;
+
+      if (response.error) {
+        setError(response.error);
+      }
+
+      const {
+        expenseGroup: { expenses, ...groupProps },
+      } = cache.readQuery({
+        query: GET_EXPENSE_GROUP,
+        variables: {
+          id: response.groupId,
+        },
+      });
+
+      cache.writeQuery({
+        query: GET_EXPENSE_GROUP,
+        data: {
+          expenseGroup: {
+            ...groupProps,
+            expenses: expenses.map((expense) =>
+              expense._id === response.expenseId
+                ? { ...expense, paid: response.paid }
+                : expense,
+            ),
+          },
+        },
+      });
+    },
+  });
+
+  const onDelete = (expenseId) => {
+    setVariables({ groupId, expenseId });
+  };
 
   const onPaidChange = (expenseId, paid) => {
     setVariables({ groupId, expenseId, paid });
   };
 
-  if (error) throw new Error(error);
-
   useEffect(() => {
     if (variables) {
-      updatePaidStatus(variables);
+      if (typeof variables.paid !== 'undefined') {
+        updatePaidStatus(variables);
+      } else {
+        deleteExpense(variables);
+      }
     }
-  }, [variables]);
+  }, [variables, updatePaidStatus, deleteExpense]);
 
   useEffect(() => {
-    setShowLoader(loading);
-  }, [loading]);
+    setShowLoader(updateResponse.loading || deleteResponse.loading);
+  }, [updateResponse, deleteResponse, setShowLoader]);
 
-  return { onPaidChange };
+  return { onPaidChange, onDelete };
 };
 
 export default useExpenseCard;

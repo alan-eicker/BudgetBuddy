@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Overlay, Spinner } from '@atomikui/core';
+import { Overlay, Spinner, Alert } from '@atomikui/core';
 import { useAppContext } from '../../AppProvider';
 
 const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
-  const { showLoader } = useAppContext();
+  const { showLoader, error } = useAppContext();
 
   return (
     <>
@@ -24,7 +24,14 @@ const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
           className="layout__body"
           {...(isIndexPage && { style: { height: '100vh' } })}
         >
-          {children}
+          <div>
+            {error && (
+              <Alert className="margin-bottom-16" theme="error">
+                {error}
+              </Alert>
+            )}
+            {children}
+          </div>
         </div>
       </div>
     </>

@@ -19,14 +19,15 @@ const AppProvider = ({ children }) => {
   const history = useHistory();
   const { pathname } = useLocation();
   const [showLoader, setShowLoader] = useState(false);
+  const [error, setError] = useState();
 
   const budgetLimitPercentage = 80;
 
   const isProtectedRoute = pathname.match(/expense-group|dashboard/);
 
-  const [verifyToken, { error, data }] = useLazyQuery(VERIFY_TOKEN);
-
-  if (error) throw new Error(error);
+  const [verifyToken, { data }] = useLazyQuery(VERIFY_TOKEN, {
+    onError: (err) => setError(err.message),
+  });
 
   useEffect(() => {
     if (isProtectedRoute) {
@@ -47,6 +48,8 @@ const AppProvider = ({ children }) => {
   return !data && isProtectedRoute ? null : (
     <AppContext.Provider
       value={{
+        error,
+        setError,
         showLoader,
         setShowLoader,
         budgetLimitPercentage,

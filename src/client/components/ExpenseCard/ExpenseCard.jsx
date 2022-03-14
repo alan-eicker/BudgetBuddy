@@ -9,7 +9,7 @@ import { getDaysPastDue } from '../../utilities/date';
 import useExpenseCard from './useExpenseCard';
 
 const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
-  const { onPaidChange } = useExpenseCard();
+  const { onPaidChange, onDelete } = useExpenseCard();
   const { isPastDue, daysOverdue } = getDaysPastDue(dueDate);
   const flagAsOverdue = isPastDue && !paid && dueDate;
 
@@ -42,7 +42,7 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
           />
         </div>
         <div className="expense-card__action-btns">
-          <Button aria-label="delete" size="md" onClick={() => {}}>
+          <Button aria-label="delete" size="md" onClick={() => onDelete(_id)}>
             <Icon icon={faTimes} />
           </Button>
         </div>

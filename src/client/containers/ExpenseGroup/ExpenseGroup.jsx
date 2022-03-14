@@ -16,6 +16,7 @@ const ExpenseGroup = () => {
   const { data } = useExpenseGroup();
 
   if (data) {
+    console.log(data);
     const group = data.expenseGroup;
 
     const subtotal = getSubTotalFromCollection(group.expenses, 'balance');
