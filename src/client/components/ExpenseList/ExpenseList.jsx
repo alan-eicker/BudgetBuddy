@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ExpenseCard from '../ExpenseCard';
-import ExpenseProvider from '../../providers/ExpenseProvider';
+import ExpenseListProvider from '../../providers/ExpenseListProvider';
 
 const ExpenseList = ({ expenses, ...props }) => (
-  <ExpenseProvider>
+  <ExpenseListProvider>
     <ul className="expense-group-list">
       {expenses.map((group, idx) => (
         <li key={`expense-group-${idx + 1}`}>
@@ -12,7 +12,7 @@ const ExpenseList = ({ expenses, ...props }) => (
         </li>
       ))}
     </ul>
-  </ExpenseProvider>
+  </ExpenseListProvider>
 );
 
 ExpenseList.propTypes = {

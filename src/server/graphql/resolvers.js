@@ -35,10 +35,25 @@ module.exports = {
   },
   deleteExpense: async ({ groupId, expenseId }) => {
     try {
+      const expenseGroup = await ExpenseGroup.findById({ _id: groupId });
+      const expense = expenseGroup.expenses.id(expenseId);
+
+      expense.remove();
+
+      expenseGroup.save();
+
       return { groupId, expenseId };
     } catch (err) {
       return { error: err.message };
     }
+  },
+  updateExpenseGroup: async ({ input }) => {
+    const expenseGroup = await ExpenseGroup.findOneAndReplace(
+      { _id: input._id },
+      input,
+      { returnNewDocument: false },
+    );
+    return input;
   },
   verifyToken: () => ({ isValid: true }),
   previousAndNextGroups: ({ _id }) => {

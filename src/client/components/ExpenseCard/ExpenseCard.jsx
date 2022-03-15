@@ -6,10 +6,12 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { formatNumber } from '../../utilities/numbers';
 import { getDaysPastDue } from '../../utilities/date';
-import { useExpense } from '../../providers/ExpenseProvider';
+import useExpense from '../../hooks/useExpense';
+import { useExpenseListContext } from '../../providers/ExpenseListProvider';
 
 const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
-  const { onPaidChange, onDelete, deleteId, setDeleteId } = useExpense();
+  const { onPaidChange, onDelete } = useExpense();
+  const { deleteId, setDeleteId } = useExpenseListContext();
   const { isPastDue, daysOverdue } = getDaysPastDue(dueDate);
   const flagAsOverdue = isPastDue && !paid && dueDate;
 

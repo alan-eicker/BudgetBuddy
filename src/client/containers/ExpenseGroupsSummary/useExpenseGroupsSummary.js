@@ -4,14 +4,14 @@ import { useAppContext } from '../../providers/AppProvider';
 import { GET_EXPENSE_GROUPS_PREVIEW } from '../../queries';
 
 const useAllExpenseGroups = () => {
-  const { setShowLoader } = useAppContext();
-  const { loading, error, data } = useQuery(GET_EXPENSE_GROUPS_PREVIEW);
-
-  if (error) throw new Error(error);
+  const { setShowLoader, setError } = useAppContext();
+  const { loading, data } = useQuery(GET_EXPENSE_GROUPS_PREVIEW, {
+    onError: (err) => setError(err.message),
+  });
 
   useEffect(() => {
     setShowLoader(loading);
-  }, [loading]);
+  }, [loading, setShowLoader]);
 
   return { data };
 };

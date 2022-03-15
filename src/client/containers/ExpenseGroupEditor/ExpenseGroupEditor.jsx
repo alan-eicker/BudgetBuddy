@@ -5,12 +5,14 @@ import * as yup from 'yup';
 import mongoose from 'mongoose';
 import ExpenseGroupEditorForm from '../../components/ExpenseGroupEditorForm';
 import useExpenseGroup from '../ExpenseGroup/useExpenseGroup';
+import useExpenseGroupEditor from './useExpenseGroupEditor';
 import { useAppContext } from '../../providers/AppProvider';
 
 const ExpenseGroupEditor = forwardRef((_, ref) => {
   const { setShowLoader } = useAppContext();
   const { pathname } = useLocation();
   const { data } = useExpenseGroup();
+  const { onUpdateExpenseGroup } = useExpenseGroupEditor();
 
   const [initialValues, setInitialValues] = useState({
     startDate: '',
@@ -39,10 +41,7 @@ const ExpenseGroupEditor = forwardRef((_, ref) => {
     enableReinitialize: true,
     initialValues,
     validationSchema,
-    onSubmit: (formValues) => {
-      // call mutation function here...
-      console.log(formValues);
-    },
+    onSubmit: (formValues) => onUpdateExpenseGroup(formValues),
   });
 
   const addExpense = () => {
@@ -68,13 +67,7 @@ const ExpenseGroupEditor = forwardRef((_, ref) => {
 
   useEffect(() => {
     if (data) {
-      setInitialValues({
-        totalBudget: data.expenseGroup.totalBudget,
-        startDate: data.expenseGroup.startDate,
-        endDate: data.expenseGroup.endDate,
-        expenses: data.expenseGroup.expenses,
-      });
-
+      setInitialValues(data.expenseGroup);
       setShowLoader(false);
     }
   }, [data]);

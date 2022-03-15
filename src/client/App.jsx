@@ -53,7 +53,7 @@ const App = () => {
                   ExpenseGroupEditorForm.triggerSubmit(ExpenseGroupEditorRef)
                 }
               >
-                Submit
+                Save
               </Button>
               <Button
                 className="margin-left-8"

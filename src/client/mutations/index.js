@@ -10,6 +10,25 @@ export const DELETE_EXPENSE = gql`
   }
 `;
 
+export const UPDATE_EXPENSE_GROUP = gql`
+  mutation UpdateExpenseGroup($input: ExpenseGroupInput!) {
+    response: updateExpenseGroup(input: $input) {
+      _id
+      startDate
+      endDate
+      totalBudget
+      expenses {
+        _id
+        title
+        balance
+        dueDate
+        paid
+        note
+      }
+    }
+  }
+`;
+
 export const UPDATE_PAID_STATUS = gql`
   mutation UpdatePaidStatus(
     $groupId: String!
