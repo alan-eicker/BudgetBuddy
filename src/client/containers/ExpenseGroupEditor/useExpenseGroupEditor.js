@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { useAppContext } from '../../providers/AppProvider';
+import { GET_EXPENSE_GROUP } from '../../queries';
 import { UPDATE_EXPENSE_GROUP } from '../../mutations';
 
 const useExpenseGroupEditor = () => {
@@ -12,12 +13,44 @@ const useExpenseGroupEditor = () => {
     onError: (err) => setError(err.message),
     update: (cache, { data }) => {
       const { response } = data;
+
       console.log(response);
+
+      // if (response.error) {
+      //   setError(response.error);
+      // }
+
+      // const { expenseGroup } = cache.readQuery({
+      //   query: GET_EXPENSE_GROUP,
+      //   variables: {
+      //     id: response._id,
+      //   },
+      // });
+
+      // cache.writeQuery({
+      //   query: GET_EXPENSE_GROUP,
+      //   data: {
+      //     expenseGroup: response,
+      //   },
+      // });
     },
   });
 
   const onUpdateExpenseGroup = (userInput) => {
-    setVariables({ input: userInput });
+    // __typename needs to be removed or graphql will throw 500 error
+    const userInputCopy = { ...userInput };
+    delete userInputCopy.__typename;
+
+    const input = {
+      ...userInputCopy,
+      expenses: userInputCopy.expenses.map((expense) => {
+        const expenseCopy = { ...expense };
+        delete expenseCopy.__typename;
+        return expenseCopy;
+      }),
+    };
+
+    setVariables({ input });
   };
 
   useEffect(() => {

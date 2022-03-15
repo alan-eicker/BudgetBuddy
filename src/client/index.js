@@ -16,9 +16,7 @@ import './styles/main.scss';
 
 const client = new ApolloClient({
   uri: 'http://localhost:8080/graphql',
-  cache: new InMemoryCache({
-    addTypename: false,
-  }),
+  cache: new InMemoryCache({}),
 });
 
 ReactDOM.render(
