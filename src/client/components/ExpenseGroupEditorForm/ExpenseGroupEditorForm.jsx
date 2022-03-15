@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { FormField, Button, CheckOption } from '@atomikui/core';
+import { FormField, Button, CheckOption, Alert } from '@atomikui/core';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const ExpenseGroupEditorForm = forwardRef(
@@ -14,6 +14,7 @@ const ExpenseGroupEditorForm = forwardRef(
       handleSubmit,
       onAddExpense,
       onDeleteExpense,
+      confirmation,
     },
     ref,
   ) => (
@@ -23,6 +24,11 @@ const ExpenseGroupEditorForm = forwardRef(
       onSubmit={handleSubmit}
       noValidate
     >
+      {confirmation && (
+        <Alert className="margin-bottom-16" theme="success">
+          {confirmation}
+        </Alert>
+      )}
       <h1 className="expense-group-form__title">{title}</h1>
       <fieldset>
         <legend>Expense Group Details</legend>
@@ -185,6 +191,7 @@ ExpenseGroupEditorForm.propTypes = {
   values: PropTypes.object,
   errors: PropTypes.object,
   touched: PropTypes.object,
+  confirmation: PropTypes.string,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   onAddExpense: PropTypes.func,
@@ -196,6 +203,7 @@ ExpenseGroupEditorForm.defaultProps = {
   values: {},
   errors: {},
   touched: {},
+  confirmation: '',
   handleChange: () => {},
   handleSubmit: () => {},
   onAddExpense: () => {},
