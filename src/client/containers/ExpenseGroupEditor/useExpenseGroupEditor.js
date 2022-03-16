@@ -17,7 +17,7 @@ const useExpenseGroupEditor = () => {
       history.push(`/expense-groups/${response._id}`);
       setAlert({
         type: 'success',
-        message: 'Expense group successfully update',
+        message: 'Expense group successfully updated',
       });
     },
     update: (cache, { data }) => {
