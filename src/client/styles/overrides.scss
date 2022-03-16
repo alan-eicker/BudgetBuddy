@@ -61,3 +61,25 @@
 .text-decoration-none {
   text-decoration: none;
 }
+
+.atomikui-alert.atomikui-alert--error {
+  background: $red-50;
+  color: $red-700;
+
+  svg {
+    path {
+      fill: $red-700;
+    }
+  }
+}
+
+.atomikui-alert.atomikui-alert--success {
+  background: $green-50;
+  color: $green-800;
+
+  svg {
+    path {
+      fill: $green-800;
+    }
+  }
+}
