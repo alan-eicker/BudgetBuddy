@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useAppContext } from '../providers/AppProvider';
@@ -9,10 +9,7 @@ const useExpense = () => {
   const groupId = useParams().id;
   const { setShowLoader, setAlert } = useAppContext();
 
-  const [variables, setVariables] = useState();
-
   const [deleteExpense, deleteResponse] = useMutation(DELETE_EXPENSE, {
-    variables,
     onError: (err) => setAlert(err.message),
     update: (cache, { data }) => {
       const { response } = data;
@@ -45,7 +42,6 @@ const useExpense = () => {
   });
 
   const [updatePaidStatus, updateResponse] = useMutation(UPDATE_PAID_STATUS, {
-    variables,
     onError: (err) => setAlert(err.message),
     update: (cache, { data }) => {
       const { response } = data;
@@ -80,22 +76,12 @@ const useExpense = () => {
   });
 
   const onDelete = (expenseId) => {
-    setVariables({ groupId, expenseId });
+    deleteExpense({ variables: { groupId, expenseId } });
   };
 
   const onPaidChange = (expenseId, paid) => {
-    setVariables({ groupId, expenseId, paid });
+    updatePaidStatus({ variables: { groupId, expenseId, paid } });
   };
-
-  useEffect(() => {
-    if (variables) {
-      if (typeof variables.paid !== 'undefined') {
-        updatePaidStatus(variables);
-      } else {
-        deleteExpense(variables);
-      }
-    }
-  }, [variables, updatePaidStatus, deleteExpense]);
 
   useEffect(() => {
     setShowLoader(updateResponse.loading || deleteResponse.loading);

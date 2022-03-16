@@ -32,7 +32,7 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
         <div className="text-size-20">Delete {title}?</div>
         <ButtonControls>
           <Button
-            {...(!deleteInProgress && { tabindex: '-1' })}
+            {...(!deleteInProgress && { tabIndex: '-1' })}
             shape="pill"
             theme="white"
             size="md"
@@ -41,7 +41,7 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
             delete
           </Button>
           <Button
-            {...(!deleteInProgress && { tabindex: '-1' })}
+            {...(!deleteInProgress && { tabIndex: '-1' })}
             shape="pill"
             theme="indigo"
             size="md"

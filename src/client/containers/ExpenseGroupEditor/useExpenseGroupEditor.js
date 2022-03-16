@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useAppContext } from '../../providers/AppProvider';
@@ -7,34 +7,35 @@ import { UPDATE_EXPENSE_GROUP } from '../../mutations';
 
 const useExpenseGroupEditor = () => {
   const { setShowLoader, setAlert } = useAppContext();
-  const [variables, setVariables] = useState();
   const history = useHistory();
 
-  const [updateExpenseGroup, { loading }] = useMutation(UPDATE_EXPENSE_GROUP, {
-    variables,
-    onError: (err) => setAlert({ type: 'error', message: err.message }),
-    onCompleted: ({ response }) => {
-      history.push(`/expense-groups/${response._id}`);
-      setAlert({
-        type: 'success',
-        message: 'Expense group successfully updated',
-      });
-    },
-    update: (cache, { data }) => {
-      const { response } = data;
+  const [updateExpenseGroup, updateRequest] = useMutation(
+    UPDATE_EXPENSE_GROUP,
+    {
+      onError: (err) => setAlert({ type: 'error', message: err.message }),
+      onCompleted: ({ response }) => {
+        history.push(`/expense-groups/${response._id}`);
+        setAlert({
+          type: 'success',
+          message: 'Expense group successfully updated',
+        });
+      },
+      update: (cache, { data }) => {
+        const { response } = data;
 
-      if (response.error) {
-        setAlert({ type: 'error', message: response.error });
-      }
+        if (response.error) {
+          setAlert({ type: 'error', message: response.error });
+        }
 
-      cache.writeQuery({
-        query: GET_EXPENSE_GROUP,
-        data: {
-          expenseGroup: response,
-        },
-      });
+        cache.writeQuery({
+          query: GET_EXPENSE_GROUP,
+          data: {
+            expenseGroup: response,
+          },
+        });
+      },
     },
-  });
+  );
 
   const onUpdateExpenseGroup = (userInput) => {
     // __typename needs to be removed or graphql will throw 500 error
@@ -50,18 +51,12 @@ const useExpenseGroupEditor = () => {
       }),
     };
 
-    setVariables({ input });
+    updateExpenseGroup({ variables: { input } });
   };
 
   useEffect(() => {
-    setShowLoader(loading);
-  }, [loading, setShowLoader]);
-
-  useEffect(() => {
-    if (variables) {
-      updateExpenseGroup(updateExpenseGroup);
-    }
-  }, [variables, updateExpenseGroup]);
+    setShowLoader(updateRequest.loading);
+  }, [updateRequest, setShowLoader]);
 
   return { onUpdateExpenseGroup };
 };
