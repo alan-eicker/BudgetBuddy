@@ -12,7 +12,7 @@ const ExpenseGroupEditor = forwardRef((_, ref) => {
   const { setShowLoader } = useAppContext();
   const { pathname } = useLocation();
   const { data } = useExpenseGroup();
-  const { onUpdateExpenseGroup, confirmation } = useExpenseGroupEditor();
+  const { onUpdateExpenseGroup } = useExpenseGroupEditor();
 
   const [initialValues, setInitialValues] = useState({
     startDate: '',
@@ -79,7 +79,6 @@ const ExpenseGroupEditor = forwardRef((_, ref) => {
         title={title}
         onAddExpense={addExpense}
         onDeleteExpense={deleteExpense}
-        confirmation={confirmation}
         {...formik}
       />
     </>

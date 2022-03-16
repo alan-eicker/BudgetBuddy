@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useAppContext } from '../../providers/AppProvider';
 import { GET_EXPENSE_GROUP } from '../../queries';
@@ -7,12 +8,14 @@ import { UPDATE_EXPENSE_GROUP } from '../../mutations';
 const useExpenseGroupEditor = () => {
   const { setShowLoader, setError } = useAppContext();
   const [variables, setVariables] = useState();
-  const [confirmation, setConfirmation] = useState();
+  const history = useHistory();
 
   const [updateExpenseGroup, { loading }] = useMutation(UPDATE_EXPENSE_GROUP, {
     variables,
     onError: (err) => setError(err.message),
-    onCompleted: () => setConfirmation('Expense group successfully updated'),
+    onCompleted: ({ response }) => {
+      history.push(`/expense-groups/${response._id}`);
+    },
     update: (cache, { data }) => {
       const { response } = data;
 
@@ -56,7 +59,7 @@ const useExpenseGroupEditor = () => {
     }
   }, [variables, updateExpenseGroup]);
 
-  return { onUpdateExpenseGroup, confirmation };
+  return { onUpdateExpenseGroup };
 };
 
 export default useExpenseGroupEditor;

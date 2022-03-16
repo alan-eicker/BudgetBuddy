@@ -24,14 +24,12 @@ const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
           className="layout__body"
           {...(isIndexPage && { style: { height: '100vh' } })}
         >
-          <div>
-            {error && (
-              <Alert className="margin-bottom-16" theme="error">
-                {error}
-              </Alert>
-            )}
-            {children}
-          </div>
+          {error && (
+            <Alert className="margin-bottom-16" theme="error">
+              {error}
+            </Alert>
+          )}
+          {children}
         </div>
       </div>
     </>
