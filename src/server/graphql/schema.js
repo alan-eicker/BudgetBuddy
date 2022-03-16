@@ -11,6 +11,7 @@ module.exports = `
       paid: Boolean!
     ): UpdateExpenseResponse
     updateExpenseGroup(input: ExpenseGroupInput!): ExpenseGroup
+    createExpenseGroup(input: NewExpenseGroupInput!): ExpenseGroup
     deleteExpense(
       groupId: String!,
       expenseId: String!
@@ -56,6 +57,20 @@ module.exports = `
   }
   input ExpenseInput {
     _id: String
+    title: String
+    balance: Float
+    dueDate: String
+    paid: Boolean
+    note: String
+  }
+  input NewExpenseGroupInput {
+    title: String
+    startDate: String
+    endDate: String
+    totalBudget: Int
+    expenses: [NewExpenseInput]
+  }
+  input NewExpenseInput {
     title: String
     balance: Float
     dueDate: String

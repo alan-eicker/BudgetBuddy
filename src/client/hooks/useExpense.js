@@ -9,7 +9,7 @@ const useExpense = () => {
   const groupId = useParams().id;
   const { setShowLoader, setAlert } = useAppContext();
 
-  const [deleteExpense, deleteResponse] = useMutation(DELETE_EXPENSE, {
+  const [deleteExpense, deleteRequest] = useMutation(DELETE_EXPENSE, {
     onError: (err) => setAlert(err.message),
     update: (cache, { data }) => {
       const { response } = data;
@@ -41,7 +41,7 @@ const useExpense = () => {
     },
   });
 
-  const [updatePaidStatus, updateResponse] = useMutation(UPDATE_PAID_STATUS, {
+  const [updatePaidStatus, updateRequest] = useMutation(UPDATE_PAID_STATUS, {
     onError: (err) => setAlert(err.message),
     update: (cache, { data }) => {
       const { response } = data;
@@ -84,8 +84,8 @@ const useExpense = () => {
   };
 
   useEffect(() => {
-    setShowLoader(updateResponse.loading || deleteResponse.loading);
-  }, [updateResponse, deleteResponse, setShowLoader]);
+    setShowLoader(updateRequest.loading || deleteRequest.loading);
+  }, [updateRequest, deleteRequest, setShowLoader]);
 
   return { onDelete, onPaidChange };
 };

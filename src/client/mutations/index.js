@@ -1,5 +1,22 @@
 import { gql } from '@apollo/client';
 
+export const CREATE_EXPENSE_GROUP = gql`
+  mutation CreateExpenseGroup($input: ExpenseGroupInput!) {
+    response: createExpenseGroup(input: $input) {
+      startDate
+      endDate
+      totalBudget
+      expenses {
+        title
+        balance
+        dueDate
+        paid
+        note
+      }
+    }
+  }
+`;
+
 export const DELETE_EXPENSE = gql`
   mutation DeleteExpense($groupId: String!, $expenseId: String!) {
     response: deleteExpense(groupId: $groupId, expenseId: $expenseId) {

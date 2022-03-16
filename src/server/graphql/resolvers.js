@@ -55,6 +55,7 @@ module.exports = {
     );
     return input;
   },
+  createExpenseGroup: ({ input }) => input,
   verifyToken: () => ({ isValid: true }),
   previousAndNextGroups: ({ _id }) => {
     // 1. Find the index of the current ID
