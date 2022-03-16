@@ -23,6 +23,7 @@
     z-index: 9000;
     transition: all 0.35s ease-in-out;
     transition-timing-function: cubic-bezier(0.42, 0, 0, 1);
+    min-width: 100%;
 
     &.is-active {
       left: 0;

@@ -9,6 +9,7 @@ const useExpenseGroup = () => {
   const { setShowLoader, setAlert } = useAppContext();
 
   const { loading, data } = useQuery(GET_EXPENSE_GROUP, {
+    skip: !id,
     variables: {
       id,
     },
@@ -17,7 +18,7 @@ const useExpenseGroup = () => {
 
   useEffect(() => {
     setShowLoader(loading);
-  }, [loading]);
+  }, [loading, setShowLoader]);
 
   return { data };
 };

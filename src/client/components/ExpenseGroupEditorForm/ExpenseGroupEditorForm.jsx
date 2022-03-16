@@ -70,7 +70,11 @@ const ExpenseGroupEditorForm = forwardRef(
         {values.expenses.length === 0 && (
           <Grid className="expense-group-form__form-fields">
             <Row md={12}>
-              <Col>You have not added any expenses.</Col>
+              <Col>
+                <div className="margin-bottom-16">
+                  You have not added any expenses.
+                </div>
+              </Col>
             </Row>
           </Grid>
         )}
@@ -172,7 +176,6 @@ const ExpenseGroupEditorForm = forwardRef(
         shape="pill"
         className="margin-bottom-20"
         onClick={onAddExpense}
-        block
       >
         + add expense
       </Button>

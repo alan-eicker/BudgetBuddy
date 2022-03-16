@@ -15,6 +15,8 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
   const { isPastDue, daysOverdue } = getDaysPastDue(dueDate);
   const flagAsOverdue = isPastDue && !paid && dueDate;
 
+  const deleteInProgress = deleteId === _id;
+
   return (
     <div
       key={_id}
@@ -24,12 +26,13 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
     >
       <div
         className={classnames('expense-card__delete-confirm', {
-          'is-active': deleteId === _id,
+          'is-active': deleteInProgress,
         })}
       >
         <div className="text-size-20">Delete {title}?</div>
         <ButtonControls>
           <Button
+            {...(!deleteInProgress && { tabindex: '-1' })}
             shape="pill"
             theme="white"
             size="md"
@@ -38,6 +41,7 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
             delete
           </Button>
           <Button
+            {...(!deleteInProgress && { tabindex: '-1' })}
             shape="pill"
             theme="indigo"
             size="md"
