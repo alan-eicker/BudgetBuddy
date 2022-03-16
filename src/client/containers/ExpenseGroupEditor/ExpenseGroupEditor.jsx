@@ -73,15 +73,13 @@ const ExpenseGroupEditor = forwardRef((_, ref) => {
   }, [data]);
 
   return (
-    <>
-      <ExpenseGroupEditorForm
-        ref={ref}
-        title={title}
-        onAddExpense={addExpense}
-        onDeleteExpense={deleteExpense}
-        {...formik}
-      />
-    </>
+    <ExpenseGroupEditorForm
+      ref={ref}
+      title={title}
+      onAddExpense={addExpense}
+      onDeleteExpense={deleteExpense}
+      {...formik}
+    />
   );
 });
 
