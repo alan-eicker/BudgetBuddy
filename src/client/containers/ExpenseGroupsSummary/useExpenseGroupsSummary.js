@@ -4,9 +4,9 @@ import { useAppContext } from '../../providers/AppProvider';
 import { GET_EXPENSE_GROUPS_PREVIEW } from '../../queries';
 
 const useAllExpenseGroups = () => {
-  const { setShowLoader, setError } = useAppContext();
+  const { setShowLoader, setAlert } = useAppContext();
   const { loading, data } = useQuery(GET_EXPENSE_GROUPS_PREVIEW, {
-    onError: (err) => setError(err.message),
+    onError: (err) => setAlert({ type: 'error', message: err.message }),
   });
 
   useEffect(() => {

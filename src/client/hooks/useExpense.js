@@ -7,18 +7,18 @@ import { UPDATE_PAID_STATUS, DELETE_EXPENSE } from '../mutations';
 
 const useExpense = () => {
   const groupId = useParams().id;
-  const { setShowLoader, setError } = useAppContext();
+  const { setShowLoader, setAlert } = useAppContext();
 
   const [variables, setVariables] = useState();
 
   const [deleteExpense, deleteResponse] = useMutation(DELETE_EXPENSE, {
     variables,
-    onError: (err) => setError(err.message),
+    onError: (err) => setAlert(err.message),
     update: (cache, { data }) => {
       const { response } = data;
 
       if (response.error) {
-        setError(response.error);
+        setAlert({ type: 'error', message: response.error });
       }
 
       const {
@@ -46,12 +46,12 @@ const useExpense = () => {
 
   const [updatePaidStatus, updateResponse] = useMutation(UPDATE_PAID_STATUS, {
     variables,
-    onError: (err) => setError(err.message),
+    onError: (err) => setAlert(err.message),
     update: (cache, { data }) => {
       const { response } = data;
 
       if (response.error) {
-        setError(response.error);
+        setAlert({ type: 'error', message: response.error });
       }
 
       const {

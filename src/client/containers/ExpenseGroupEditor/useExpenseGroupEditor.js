@@ -6,21 +6,25 @@ import { GET_EXPENSE_GROUP } from '../../queries';
 import { UPDATE_EXPENSE_GROUP } from '../../mutations';
 
 const useExpenseGroupEditor = () => {
-  const { setShowLoader, setError } = useAppContext();
+  const { setShowLoader, setAlert } = useAppContext();
   const [variables, setVariables] = useState();
   const history = useHistory();
 
   const [updateExpenseGroup, { loading }] = useMutation(UPDATE_EXPENSE_GROUP, {
     variables,
-    onError: (err) => setError(err.message),
+    onError: (err) => setAlert({ type: 'error', message: err.message }),
     onCompleted: ({ response }) => {
       history.push(`/expense-groups/${response._id}`);
+      setAlert({
+        type: 'success',
+        message: 'Expense group successfully update',
+      });
     },
     update: (cache, { data }) => {
       const { response } = data;
 
       if (response.error) {
-        setError(response.error);
+        setAlert({ type: 'error', message: response.error });
       }
 
       cache.writeQuery({

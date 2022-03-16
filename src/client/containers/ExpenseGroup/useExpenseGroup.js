@@ -6,13 +6,13 @@ import { GET_EXPENSE_GROUP } from '../../queries';
 
 const useExpenseGroup = () => {
   const { id } = useParams();
-  const { setShowLoader, setError } = useAppContext();
+  const { setShowLoader, setAlert } = useAppContext();
 
   const { loading, data } = useQuery(GET_EXPENSE_GROUP, {
     variables: {
       id,
     },
-    onError: (err) => setError(err.message),
+    onError: (err) => setAlert({ type: 'error', message: err.message }),
   });
 
   useEffect(() => {

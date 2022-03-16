@@ -4,7 +4,7 @@ import { Overlay, Spinner, Alert } from '@atomikui/core';
 import { useAppContext } from '../../providers/AppProvider';
 
 const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
-  const { showLoader, error } = useAppContext();
+  const { showLoader, alert, setAlert } = useAppContext();
 
   return (
     <>
@@ -24,10 +24,12 @@ const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
           className="layout__body"
           {...(isIndexPage && { style: { height: '100vh' } })}
         >
-          {error && (
-            <Alert className="margin-bottom-16" theme="error">
-              {error}
-            </Alert>
+          {alert && (
+            <div className="layout__alert">
+              <Alert theme={alert.type} onClose={() => setAlert()}>
+                {alert.message}
+              </Alert>
+            </div>
           )}
           {children}
         </div>

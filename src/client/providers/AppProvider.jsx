@@ -19,15 +19,22 @@ const AppProvider = ({ children }) => {
   const history = useHistory();
   const { pathname } = useLocation();
   const [showLoader, setShowLoader] = useState(false);
-  const [error, setError] = useState();
+  const [alert, setAlert] = useState();
 
   const budgetLimitPercentage = 80;
 
   const isProtectedRoute = pathname.match(/expense-group|dashboard/);
 
   const [verifyToken, { data }] = useLazyQuery(VERIFY_TOKEN, {
-    onError: (err) => setError(err.message),
+    onError: (err) => setAlert({ type: 'error', message: err.message }),
   });
+
+  useEffect(() => {
+    // resets the alert every time route changes
+    history.listen(() => {
+      setAlert();
+    });
+  }, []);
 
   useEffect(() => {
     if (isProtectedRoute) {
@@ -48,8 +55,8 @@ const AppProvider = ({ children }) => {
   return !data && isProtectedRoute ? null : (
     <AppContext.Provider
       value={{
-        error,
-        setError,
+        alert,
+        setAlert,
         showLoader,
         setShowLoader,
         budgetLimitPercentage,
