@@ -82,95 +82,95 @@ const ExpenseGroupEditorForm = forwardRef(
             touched.expenses.length > 0;
 
           return (
-            <Grid
-              className="expense-group-form__form-fields"
-              key={['expense-field', idx].join('-')}
+            <div
+              className="expense-group-form__fieldset__content"
+              key={['expense-fieldset', idx].join('-')}
             >
-              <Row>
-                <Col md={12}>
-                  <FormField
-                    label="Title"
-                    name={`expenses[${idx}].title`}
-                    defaultValue={expense.title}
-                    onChange={handleChange}
-                    {...(hasErrors && {
-                      hasError: !!errors.expenses[idx]?.title,
-                      errorText: errors.expenses[idx]?.title,
-                    })}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col md={6}>
-                  <FormField
-                    type="number"
-                    label="Balance"
-                    name={`expenses[${idx}].balance`}
-                    defaultValue={expense.balance}
-                    onChange={handleChange}
-                    {...(hasErrors && {
-                      hasError: !!errors.expenses[idx]?.balance,
-                      errorText: errors.expenses[idx]?.balance,
-                    })}
-                  />
-                </Col>
-                <Col md={6}>
-                  <FormField
-                    type="date"
-                    label="Due Date"
-                    name={`expenses[${idx}].dueDate`}
-                    defaultValue={expense.dueDate}
-                    onChange={handleChange}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
-                  <CheckOption
-                    className="margin-top-12 margin-bottom-4"
-                    label="Is Paid"
-                    name={`expenses[${idx}].paid`}
-                    checked={expense.paid}
-                    onChange={handleChange}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
-                  <FormField
-                    style={{ height: 60 }}
-                    type="textarea"
-                    label="Note"
-                    name={`expenses[${idx}].note`}
-                    onChange={handleChange}
-                    defaultValue={expense.note}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <div className="text-align-right">
-                    <Button
-                      theme="red"
-                      size="md"
-                      shape="pill"
-                      onClick={() => onDeleteExpense(expense._id)}
-                    >
-                      delete expense
-                    </Button>
-                  </div>
-                </Col>
-              </Row>
-            </Grid>
+              <Grid className="expense-group-form__form-fields">
+                <Row>
+                  <Col md={12}>
+                    <FormField
+                      label="Title"
+                      name={`expenses[${idx}].title`}
+                      defaultValue={expense.title}
+                      onChange={handleChange}
+                      {...(hasErrors && {
+                        hasError: !!errors.expenses[idx]?.title,
+                        errorText: errors.expenses[idx]?.title,
+                      })}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
+                    <FormField
+                      type="number"
+                      label="Balance"
+                      name={`expenses[${idx}].balance`}
+                      defaultValue={expense.balance}
+                      onChange={handleChange}
+                      {...(hasErrors && {
+                        hasError: !!errors.expenses[idx]?.balance,
+                        errorText: errors.expenses[idx]?.balance,
+                      })}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <FormField
+                      type="date"
+                      label="Due Date"
+                      name={`expenses[${idx}].dueDate`}
+                      defaultValue={expense.dueDate}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={12}>
+                    <CheckOption
+                      className="margin-top-12 margin-bottom-4"
+                      label="Is Paid"
+                      name={`expenses[${idx}].paid`}
+                      checked={expense.paid}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={12}>
+                    <FormField
+                      style={{ height: 60 }}
+                      type="textarea"
+                      label="Note"
+                      name={`expenses[${idx}].note`}
+                      onChange={handleChange}
+                      defaultValue={expense.note}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <div className="text-align-right">
+                      <Button
+                        theme="red"
+                        size="md"
+                        shape="pill"
+                        onClick={() => onDeleteExpense(expense._id)}
+                      >
+                        delete expense
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
+              </Grid>
+            </div>
           );
         })}
       </fieldset>
       <Button
-        theme="blue-gray"
-        themeVariant="light"
+        theme="white"
         shape="pill"
-        size="md"
-        className="margin-top-20 margin-bottom-20"
+        className="margin-bottom-20"
         onClick={onAddExpense}
         block
       >
