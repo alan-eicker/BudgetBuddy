@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const GET_EXPENSE_GROUPS_PREVIEW = gql`
+export const GET_EXPENSE_GROUPS = gql`
   query ExpenseGroups {
     expenseGroups {
       _id
@@ -8,9 +8,12 @@ export const GET_EXPENSE_GROUPS_PREVIEW = gql`
       endDate
       totalBudget
       expenses {
+        _id
+        title
         balance
         dueDate
         paid
+        note
       }
     }
   }

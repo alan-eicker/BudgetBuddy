@@ -12,7 +12,8 @@ const ExpenseGroupEditor = forwardRef((_, ref) => {
   const { setShowLoader } = useAppContext();
   const { pathname } = useLocation();
   const { data } = useExpenseGroup();
-  const { onUpdateExpenseGroup } = useExpenseGroupEditor();
+  const { onUpdateExpenseGroup, onCreateExpenseGroup } =
+    useExpenseGroupEditor();
 
   const [initialValues, setInitialValues] = useState({
     startDate: '',
@@ -41,7 +42,13 @@ const ExpenseGroupEditor = forwardRef((_, ref) => {
     enableReinitialize: true,
     initialValues,
     validationSchema,
-    onSubmit: (formValues) => onUpdateExpenseGroup(formValues),
+    onSubmit: (formValues) => {
+      if (isEdit) {
+        onUpdateExpenseGroup(formValues);
+      } else {
+        onCreateExpenseGroup(formValues);
+      }
+    },
   });
 
   const addExpense = () => {

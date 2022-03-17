@@ -48,14 +48,16 @@ module.exports = {
     }
   },
   updateExpenseGroup: async ({ input }) => {
-    const expenseGroup = await ExpenseGroup.findOneAndReplace(
-      { _id: input._id },
-      input,
-      { returnNewDocument: false },
-    );
+    await ExpenseGroup.findOneAndReplace({ _id: input._id }, input, {
+      returnNewDocument: false,
+    });
     return input;
   },
-  createExpenseGroup: ({ input }) => input,
+  createExpenseGroup: async ({ input }) => {
+    const newExpenseGroup = new ExpenseGroup(input);
+    newExpenseGroup.save();
+    return newExpenseGroup;
+  },
   verifyToken: () => ({ isValid: true }),
   previousAndNextGroups: ({ _id }) => {
     // 1. Find the index of the current ID

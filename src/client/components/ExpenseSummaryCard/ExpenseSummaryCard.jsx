@@ -33,7 +33,7 @@ const ExpenseSummaryCard = ({ id, title, balance, overdueExpenses }) => (
         {title}
       </div>
       <div className="expense-group-summary-card__subtitle">
-        Total budget:
+        Total balance:
         <br /> {balance}
       </div>
     </div>

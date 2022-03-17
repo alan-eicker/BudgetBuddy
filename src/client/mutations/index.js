@@ -1,12 +1,14 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_EXPENSE_GROUP = gql`
-  mutation CreateExpenseGroup($input: ExpenseGroupInput!) {
+  mutation CreateExpenseGroup($input: NewExpenseGroupInput!) {
     response: createExpenseGroup(input: $input) {
+      _id
       startDate
       endDate
       totalBudget
       expenses {
+        _id
         title
         balance
         dueDate
