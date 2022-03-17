@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { useAppContext } from '../../providers/AppProvider';
-import { GET_EXPENSE_GROUP, GET_EXPENSE_GROUPS } from '../../queries';
+import { GET_EXPENSE_GROUP } from '../../queries';
 import { DELETE_EXPENSE_GROUP } from '../../mutations';
 
 const useExpenseGroup = () => {
@@ -32,19 +32,6 @@ const useExpenseGroup = () => {
         });
         cache.evict({ id: normalizedId });
         cache.gc();
-
-        // const { expenseGroups } = cache.readQuery({
-        //   query: GET_EXPENSE_GROUPS,
-        // });
-
-        // cache.writeQuery({
-        //   query: GET_EXPENSE_GROUPS,
-        //   data: {
-        //     expenseGroups: expenseGroups.filter(
-        //       (expenseGroup) => expenseGroup._id !== response.groupId,
-        //     ),
-        //   },
-        // });
       },
     },
   );

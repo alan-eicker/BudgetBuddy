@@ -74,6 +74,7 @@ module.exports = `
     expenses: [NewExpenseInput]
   }
   input NewExpenseInput {
+    _id: String
     title: String
     balance: Float
     dueDate: String

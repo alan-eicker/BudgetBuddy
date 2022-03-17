@@ -2,6 +2,7 @@ import React, { useEffect, forwardRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import mongoose from 'mongoose';
 import ExpenseGroupEditorForm from '../../components/ExpenseGroupEditorForm';
 import useExpenseGroup from '../ExpenseGroup/useExpenseGroup';
 import useExpenseGroupEditor from './useExpenseGroupEditor';
@@ -54,6 +55,7 @@ const ExpenseGroupEditor = forwardRef((_, ref) => {
     setFieldValue('expenses', [
       ...formik.values.expenses,
       {
+        _id: mongoose.Types.ObjectId(),
         title: '',
         balance: '',
         dueDate: '',
