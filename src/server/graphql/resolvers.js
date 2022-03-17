@@ -15,6 +15,33 @@ module.exports = {
       return { error: err.message };
     }
   },
+  updateExpenseGroup: async ({ input }) => {
+    try {
+      await ExpenseGroup.findOneAndReplace({ _id: input._id }, input, {
+        returnNewDocument: false,
+      });
+      return input;
+    } catch (err) {
+      return { error: err.message };
+    }
+  },
+  createExpenseGroup: async ({ input }) => {
+    try {
+      const newExpenseGroup = new ExpenseGroup(input);
+      newExpenseGroup.save();
+      return newExpenseGroup;
+    } catch (err) {
+      return { error: err.message };
+    }
+  },
+  deleteExpenseGroup: async ({ groupId }) => {
+    try {
+      await ExpenseGroup.deleteOne({ _id: groupId });
+      return { groupId };
+    } catch (err) {
+      return { error: err.message };
+    }
+  },
   updatePaidStatus: async ({ groupId, expenseId, paid }) => {
     try {
       const expenseGroup = await ExpenseGroup.findById({ _id: groupId });
@@ -47,22 +74,5 @@ module.exports = {
       return { error: err.message };
     }
   },
-  updateExpenseGroup: async ({ input }) => {
-    await ExpenseGroup.findOneAndReplace({ _id: input._id }, input, {
-      returnNewDocument: false,
-    });
-    return input;
-  },
-  createExpenseGroup: async ({ input }) => {
-    const newExpenseGroup = new ExpenseGroup(input);
-    newExpenseGroup.save();
-    return newExpenseGroup;
-  },
   verifyToken: () => ({ isValid: true }),
-  previousAndNextGroups: ({ _id }) => {
-    // 1. Find the index of the current ID
-    // 2. If current ID is first, then return { isFirst: true, result: [{object}] }
-    // 3. If current ID is last, then return { isLast: true, result: [{object}] }
-    // 4. If current ID is not first or last, then return { result: [{object}, {object}] }
-  },
 };

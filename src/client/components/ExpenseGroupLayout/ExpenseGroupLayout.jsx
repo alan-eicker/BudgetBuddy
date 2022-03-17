@@ -12,6 +12,7 @@ import {
 import { formatDate } from '../../utilities/date';
 import { formatNumber } from '../../utilities/numbers';
 import ExpenseList from '../ExpenseList';
+import useExpenseGroup from '../../containers/ExpenseGroup/useExpenseGroup';
 
 const ExpenseGroupLayout = ({
   id,
@@ -28,6 +29,7 @@ const ExpenseGroupLayout = ({
   endDate,
 }) => {
   const [showAlert, setShowAlert] = useState(false);
+  const { onDeleteExpenseGroup } = useExpenseGroup();
 
   useEffect(() => {
     setShowAlert(overdueExpenses > 0);
@@ -57,7 +59,7 @@ const ExpenseGroupLayout = ({
             shape="pill"
             title="delete group"
             aria-label="delete group"
-            onClick={() => {}}
+            onClick={() => onDeleteExpenseGroup(id)}
           >
             <Icon icon={faTimes} />
           </Button>

@@ -12,6 +12,7 @@ module.exports = `
     ): UpdateExpenseResponse
     updateExpenseGroup(input: ExpenseGroupInput!): ExpenseGroup
     createExpenseGroup(input: NewExpenseGroupInput!): ExpenseGroup
+    deleteExpenseGroup(groupId: String!): DeleteExpenseGroupResponse
     deleteExpense(
       groupId: String!,
       expenseId: String!
@@ -44,6 +45,9 @@ module.exports = `
     expenseId: String
     error: String
   }
+  type DeleteExpenseGroupResponse {
+    groupId: String
+  }
   type TokenStatus {
     isValid: Boolean
   }
@@ -64,7 +68,6 @@ module.exports = `
     note: String
   }
   input NewExpenseGroupInput {
-    title: String
     startDate: String
     endDate: String
     totalBudget: Int

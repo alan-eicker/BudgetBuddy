@@ -19,6 +19,14 @@ export const CREATE_EXPENSE_GROUP = gql`
   }
 `;
 
+export const DELETE_EXPENSE_GROUP = gql`
+  mutation DeleteExpenseGroup($groupId: String!) {
+    response: deleteExpenseGroup(groupId: $groupId) {
+      groupId
+    }
+  }
+`;
+
 export const DELETE_EXPENSE = gql`
   mutation DeleteExpense($groupId: String!, $expenseId: String!) {
     response: deleteExpense(groupId: $groupId, expenseId: $expenseId) {
