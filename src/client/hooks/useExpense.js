@@ -24,38 +24,6 @@ const useExpense = () => {
       });
       cache.evict({ id: normalizedId });
       cache.gc();
-
-      // cache.modify({
-      //   // id: cache.identify(response.groupId),
-      //   fields: {
-      //     expenseGroup(existingExpenseGroupRefs, { readField }) {
-      //       return existingExpenseGroupRefs.filter(
-      //         (groupRef) => response.expenseId !== readField('id', groupRef),
-      //       );
-      //     },
-      //   },
-      // });
-
-      // const {
-      //   expenseGroup: { expenses, ...groupProps },
-      // } = cache.readQuery({
-      //   query: GET_EXPENSE_GROUP,
-      //   variables: {
-      //     id: response.groupId,
-      //   },
-      // });
-
-      // cache.writeQuery({
-      //   query: GET_EXPENSE_GROUP,
-      //   data: {
-      //     expenseGroup: {
-      //       ...groupProps,
-      //       expenses: expenses.filter(
-      //         (expense) => expense._id !== response.expenseId,
-      //       ),
-      //     },
-      //   },
-      // });
     },
   });
 

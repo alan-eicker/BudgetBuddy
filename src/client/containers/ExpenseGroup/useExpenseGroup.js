@@ -26,18 +26,25 @@ const useExpenseGroup = () => {
       update: (cache, { data }) => {
         const { response } = data;
 
-        const { expenseGroups } = cache.readQuery({
-          query: GET_EXPENSE_GROUPS,
+        const normalizedId = cache.identify({
+          id: response.groupId,
+          __typename: 'ExpenseGroup',
         });
+        cache.evict({ id: normalizedId });
+        cache.gc();
 
-        cache.writeQuery({
-          query: GET_EXPENSE_GROUPS,
-          data: {
-            expenseGroups: expenseGroups.filter(
-              (expenseGroup) => expenseGroup._id !== response.groupId,
-            ),
-          },
-        });
+        // const { expenseGroups } = cache.readQuery({
+        //   query: GET_EXPENSE_GROUPS,
+        // });
+
+        // cache.writeQuery({
+        //   query: GET_EXPENSE_GROUPS,
+        //   data: {
+        //     expenseGroups: expenseGroups.filter(
+        //       (expenseGroup) => expenseGroup._id !== response.groupId,
+        //     ),
+        //   },
+        // });
       },
     },
   );
