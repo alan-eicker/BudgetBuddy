@@ -36,25 +36,14 @@ const useExpense = () => {
         setAlert({ type: 'error', message: response.error });
       }
 
-      const {
-        expenseGroup: { expenses, ...groupProps },
-      } = cache.readQuery({
-        query: GET_EXPENSE_GROUP,
-        variables: {
-          id: response.groupId,
-        },
-      });
-
-      cache.writeQuery({
-        query: GET_EXPENSE_GROUP,
-        data: {
-          expenseGroup: {
-            ...groupProps,
-            expenses: expenses.map((expense) =>
-              expense._id === response.expenseId
-                ? { ...expense, paid: response.paid }
-                : expense,
-            ),
+      cache.modify({
+        id: cache.identify({
+          id: response.expenseId,
+          __typename: 'Expense',
+        }),
+        fields: {
+          paid() {
+            return response.paid;
           },
         },
       });

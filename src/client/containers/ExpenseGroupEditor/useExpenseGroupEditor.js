@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useMutation, makeReference } from '@apollo/client';
 import { useAppContext } from '../../providers/AppProvider';
-import { GET_EXPENSE_GROUP, GET_EXPENSE_GROUPS } from '../../queries';
 import { UPDATE_EXPENSE_GROUP, CREATE_EXPENSE_GROUP } from '../../mutations';
 import { removeTypename } from '../../utilities/graphql';
 
@@ -28,14 +27,14 @@ const useExpenseGroupEditor = () => {
           setAlert({ type: 'error', message: response.error });
         }
 
-        const { expenseGroups } = cache.readQuery({
-          query: GET_EXPENSE_GROUPS,
-        });
+        const cachedId = cache.identify(makeReference('ROOT_QUERY'));
 
-        cache.writeQuery({
-          query: GET_EXPENSE_GROUPS,
-          data: {
-            expenseGroups: [...expenseGroups, response],
+        cache.modify({
+          fields: {
+            expenseGroups: (existingExpenseGroups, { toReference }) => [
+              ...existingExpenseGroups,
+              toReference(cachedId),
+            ],
           },
         });
       },
@@ -60,10 +59,12 @@ const useExpenseGroupEditor = () => {
           setAlert({ type: 'error', message: response.error });
         }
 
-        cache.writeQuery({
-          query: GET_EXPENSE_GROUP,
-          data: {
-            expenseGroup: response,
+        cache.modify({
+          id: cache.identify({ id: response._id, __typename: 'ExpenseGroup' }),
+          fields: {
+            expenseGroup() {
+              return response;
+            },
           },
         });
       },

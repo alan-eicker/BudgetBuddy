@@ -21,6 +21,7 @@ const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
           </div>
         )}
         <div
+          id="layout-body"
           className="layout__body"
           {...(isIndexPage && { style: { height: '100vh' } })}
         >

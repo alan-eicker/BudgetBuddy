@@ -33,6 +33,7 @@ const AppProvider = ({ children }) => {
     // resets the alert every time route changes
     history.listen(() => {
       setAlert();
+      document.querySelector('#layout-body').scrollTop = 0;
     });
   }, []);
 
