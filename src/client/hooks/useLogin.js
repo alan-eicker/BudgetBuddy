@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { AUTHENTICATE_USER } from '../mutations';
 import { useAppContext } from '../providers/AppProvider';
 
 const useLogin = () => {
-  const { setShowLoader } = useAppContext();
+  const history = useHistory();
+  const { setShowLoader, setLoggedIn } = useAppContext();
   const [error, setError] = useState();
 
   const [authenticateUser, { loading }] = useMutation(AUTHENTICATE_USER, {
@@ -14,6 +16,9 @@ const useLogin = () => {
 
       if (response.error || !response.loggedIn) {
         setError('Invalid login');
+      } else {
+        setLoggedIn(true);
+        history.push('/expense-groups');
       }
     },
   });

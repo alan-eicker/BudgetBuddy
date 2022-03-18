@@ -1,6 +1,7 @@
 const ExpenseGroup = require('../mongoose/schemas');
 
 module.exports = {
+  verifyToken: () => ({ isValid: true }),
   authenticateUser: async ({ input }) => {
     try {
       return { loggedIn: true };
@@ -81,5 +82,4 @@ module.exports = {
       return { error: err.message };
     }
   },
-  verifyToken: () => ({ isValid: true }),
 };

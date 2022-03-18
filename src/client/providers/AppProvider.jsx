@@ -5,7 +5,7 @@ import { gql, useLazyQuery } from '@apollo/client';
 
 const VERIFY_TOKEN = gql`
   query {
-    verifyToken {
+    response: verifyToken {
       isValid
     }
   }
@@ -20,13 +20,20 @@ const AppProvider = ({ children }) => {
   const { pathname } = useLocation();
   const [showLoader, setShowLoader] = useState(false);
   const [alert, setAlert] = useState();
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const budgetLimitPercentage = 80;
 
-  const isProtectedRoute = pathname.match(/expense-group|dashboard/);
+  const isProtectedRoute = pathname.match(/expense-groups/);
 
-  const [verifyToken, { data }] = useLazyQuery(VERIFY_TOKEN, {
+  const [verifyToken] = useLazyQuery(VERIFY_TOKEN, {
     onError: (err) => setAlert({ type: 'error', message: err.message }),
+    onCompleted: ({ response }) => {
+      if (!response.isValid) {
+        history.push('/');
+        setLoggedIn(false);
+      }
+    },
   });
 
   useEffect(() => {
@@ -43,23 +50,14 @@ const AppProvider = ({ children }) => {
     }
   }, [pathname]);
 
-  useEffect(() => {
-    if (!data) return;
-
-    const { isValid } = data.verifyToken;
-
-    if (!isValid) {
-      history.push('/');
-    }
-  }, [data]);
-
-  return !data && isProtectedRoute ? null : (
+  return !loggedIn && isProtectedRoute ? null : (
     <AppContext.Provider
       value={{
         alert,
         setAlert,
         showLoader,
         setShowLoader,
+        setLoggedIn,
         budgetLimitPercentage,
       }}
     >
