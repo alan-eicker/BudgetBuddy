@@ -50,7 +50,7 @@ const AppProvider = ({ children }) => {
     if (isProtectedRoute) {
       verifyToken();
     }
-  }, [pathname]);
+  }, [pathname, isProtectedRoute, verifyToken]);
 
   return !loggedIn && isProtectedRoute ? null : (
     <AppContext.Provider
