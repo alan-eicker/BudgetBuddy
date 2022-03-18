@@ -40,6 +40,11 @@
       height: rem(36);
       justify-content: center;
       width: rem(36);
+      transition: background 0.2s linear;
+
+      &:hover {
+        background: $indigo-900;
+      }
     }
 
     button {
@@ -61,8 +66,8 @@
 
   &__summary {
     flex: rem(250) 0 0;
-    margin-top: rem(32);
     margin-left: rem(32);
+    margin-top: rem(32);
     text-align: center;
   }
 
@@ -78,6 +83,24 @@
       path {
         fill: $red-700;
       }
+    }
+  }
+
+  &__confirm-delete-modal {
+    background: $indigo-800;
+    box-shadow: 0 0 rem(30) $blue-gray-300;
+    color: $white;
+    padding: rem(8);
+    text-align: center;
+
+    [class$='__close-button'] {
+      display: none;
+    }
+
+    [class$='__title'] {
+      flex: 1;
+      text-align: center;
+      text-transform: inherit;
     }
   }
 
