@@ -11,7 +11,7 @@ const useLogin = () => {
 
   const [authenticateUser, { loading }] = useMutation(AUTHENTICATE_USER, {
     onError: (err) => setError(err.message),
-    update: (cache, { data }) => {
+    update: (_, { data }) => {
       const { response } = data;
 
       if (response.error || !response.loggedIn) {

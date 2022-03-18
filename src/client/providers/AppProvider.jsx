@@ -30,8 +30,9 @@ const AppProvider = ({ children }) => {
     onError: (err) => setAlert({ type: 'error', message: err.message }),
     onCompleted: ({ response }) => {
       if (!response.isValid) {
-        history.push('/');
         setLoggedIn(false);
+      } else {
+        history.push('/');
       }
     },
   });
@@ -40,7 +41,9 @@ const AppProvider = ({ children }) => {
     // resets the alert every time route changes
     history.listen(() => {
       setAlert();
-      document.querySelector('#layout-body').scrollTop = 0;
+      if (loggedIn) {
+        document.querySelector('#layout-body').scrollTop = 0;
+      }
     });
   }, []);
 
