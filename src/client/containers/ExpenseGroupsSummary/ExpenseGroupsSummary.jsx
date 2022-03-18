@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import useExpenseGroupsSummary from './useExpenseGroupsSummary';
+import useExpenseGroupsSummary from '../../hooks/useExpenseGroupsSummary';
 import ExpenseSummaryCard from '../../components/ExpenseSummaryCard';
 import { formatDate, getDaysPastDue } from '../../utilities/date';
 import {

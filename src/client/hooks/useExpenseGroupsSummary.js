@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { useAppContext } from '../../providers/AppProvider';
-import { GET_EXPENSE_GROUPS } from '../../queries';
+import { useAppContext } from '../providers/AppProvider';
+import { GET_EXPENSE_GROUPS } from '../queries';
 
-const useAllExpenseGroups = () => {
+const useExpenseGroupsSummary = () => {
   const { setShowLoader, setAlert } = useAppContext();
   const { loading, data } = useQuery(GET_EXPENSE_GROUPS, {
     onError: (err) => setAlert({ type: 'error', message: err.message }),
@@ -16,4 +16,4 @@ const useAllExpenseGroups = () => {
   return { data };
 };
 
-export default useAllExpenseGroups;
+export default useExpenseGroupsSummary;

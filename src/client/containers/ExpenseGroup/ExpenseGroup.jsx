@@ -8,7 +8,7 @@ import {
   getLeftOverBalance,
   formatNumber,
 } from '../../utilities/numbers';
-import useExpenseGroup from './useExpenseGroup';
+import useExpenseGroup from '../../hooks/useExpenseGroup';
 
 const ExpenseGroup = () => {
   const { budgetLimitPercentage } = useAppContext();

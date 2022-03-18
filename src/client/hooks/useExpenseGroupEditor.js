@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation, makeReference } from '@apollo/client';
-import { useAppContext } from '../../providers/AppProvider';
-import { UPDATE_EXPENSE_GROUP, CREATE_EXPENSE_GROUP } from '../../mutations';
-import { removeTypename } from '../../utilities/graphql';
+import { useAppContext } from '../providers/AppProvider';
+import { UPDATE_EXPENSE_GROUP, CREATE_EXPENSE_GROUP } from '../mutations';
+import { removeTypename } from '../utilities/graphql';
 
 const useExpenseGroupEditor = () => {
   const { setShowLoader, setAlert } = useAppContext();

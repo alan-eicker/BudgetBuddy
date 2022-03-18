@@ -12,7 +12,7 @@ import {
 import { formatDate } from '../../utilities/date';
 import { formatNumber } from '../../utilities/numbers';
 import ExpenseList from '../ExpenseList';
-import useExpenseGroup from '../../containers/ExpenseGroup/useExpenseGroup';
+import useExpenseGroup from '../../hooks/useExpenseGroup';
 
 const ExpenseGroupLayout = ({
   id,

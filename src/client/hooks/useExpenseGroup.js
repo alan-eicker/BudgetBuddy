@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import { useAppContext } from '../../providers/AppProvider';
-import { GET_EXPENSE_GROUP } from '../../queries';
-import { DELETE_EXPENSE_GROUP } from '../../mutations';
+import { useAppContext } from '../providers/AppProvider';
+import { GET_EXPENSE_GROUP } from '../queries';
+import { DELETE_EXPENSE_GROUP } from '../mutations';
 
 const useExpenseGroup = () => {
   const history = useHistory();
