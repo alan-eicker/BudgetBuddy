@@ -49,7 +49,7 @@ const LoginForm = ({
         </Row>
         <Row>
           <Col md={12}>
-            <Button type="submit" shape="pill" theme="teal" block>
+            <Button type="submit" shape="pill" theme="indigo" block>
               Login
             </Button>
           </Col>
