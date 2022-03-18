@@ -38,7 +38,6 @@ const AppProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    // resets the alert every time route changes
     history.listen(() => {
       setAlert();
       if (loggedIn) {
