@@ -18,12 +18,12 @@ const useExpense = () => {
         setAlert({ type: 'error', message: response.error });
       }
 
-      const normalizedId = cache.identify({
-        id: response.expenseId,
-        __typename: 'Expense',
+      cache.evict({
+        id: cache.identify({
+          id: response.expenseId,
+          __typename: 'Expense',
+        }),
       });
-      cache.evict({ id: normalizedId });
-      cache.gc();
     },
   });
 

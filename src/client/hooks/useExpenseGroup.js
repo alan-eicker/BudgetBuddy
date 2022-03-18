@@ -26,12 +26,12 @@ const useExpenseGroup = () => {
       update: (cache, { data }) => {
         const { response } = data;
 
-        const normalizedId = cache.identify({
-          id: response.groupId,
-          __typename: 'ExpenseGroup',
+        cache.evict({
+          id: cache.identify({
+            id: response.groupId,
+            __typename: 'ExpenseGroup',
+          }),
         });
-        cache.evict({ id: normalizedId });
-        cache.gc();
       },
     },
   );
