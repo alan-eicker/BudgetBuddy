@@ -1,5 +1,13 @@
 import { gql } from '@apollo/client';
 
+export const AUTHENTICATE_USER = gql`
+  mutation AuthenticateUser($input: AuthenticationInput!) {
+    response: authenticateUser(input: $input) {
+      loggedIn
+    }
+  }
+`;
+
 export const CREATE_EXPENSE_GROUP = gql`
   mutation CreateExpenseGroup($input: NewExpenseGroupInput!) {
     response: createExpenseGroup(input: $input) {

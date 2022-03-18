@@ -28,7 +28,7 @@ const LoginForm = ({
               label="username"
               autoComplete="off"
               onChange={handleChange}
-              value={values.username}
+              defaultValue={values.username}
               hasError={!!(errors.username && touched.username)}
               errorText={errors.username}
             />
@@ -41,7 +41,7 @@ const LoginForm = ({
               label="password"
               autoComplete="off"
               onChange={handleChange}
-              value={values.password}
+              defaultValue={values.password}
               hasError={!!(errors.password && touched.password)}
               errorText={errors.password}
             />

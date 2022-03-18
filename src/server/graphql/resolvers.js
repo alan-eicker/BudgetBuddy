@@ -1,6 +1,13 @@
 const ExpenseGroup = require('../mongoose/schemas');
 
 module.exports = {
+  authenticateUser: async ({ input }) => {
+    try {
+      return { loggedIn: true };
+    } catch (err) {
+      return { error: err.message };
+    }
+  },
   expenseGroups: async () => {
     try {
       return await ExpenseGroup.find({});

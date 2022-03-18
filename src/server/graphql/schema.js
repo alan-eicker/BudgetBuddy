@@ -5,18 +5,22 @@ module.exports = `
     verifyToken: TokenStatus
   }
   type Mutation {
+    updateExpenseGroup(input: ExpenseGroupInput!): ExpenseGroup
+    createExpenseGroup(input: NewExpenseGroupInput!): ExpenseGroup
+    deleteExpenseGroup(groupId: String!): DeleteExpenseGroupResponse
     updatePaidStatus(
       groupId: String!,
       expenseId: String!, 
       paid: Boolean!
     ): UpdateExpenseResponse
-    updateExpenseGroup(input: ExpenseGroupInput!): ExpenseGroup
-    createExpenseGroup(input: NewExpenseGroupInput!): ExpenseGroup
-    deleteExpenseGroup(groupId: String!): DeleteExpenseGroupResponse
     deleteExpense(
       groupId: String!,
       expenseId: String!
     ): DeleteExpenseResponse
+    authenticateUser(input: AuthenticationInput!): AuthenticationResponse
+  }
+  type AuthenticationResponse {
+    loggedIn: Boolean
   }
   type ExpenseGroup {
     _id: String
@@ -80,5 +84,9 @@ module.exports = `
     dueDate: String
     paid: Boolean
     note: String
+  }
+  input AuthenticationInput {
+    username: String
+    password: String
   }
 `;
