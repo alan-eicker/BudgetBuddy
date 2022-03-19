@@ -5,7 +5,7 @@ import { Switch, Button, Tag, ButtonControls } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { formatNumber } from '../../utilities/numbers';
-import { getDaysPastDue } from '../../utilities/date';
+import { getDaysPastDue, formatDate } from '../../utilities/date';
 import useExpense from '../../hooks/useExpense';
 import { useExpenseListContext } from '../../providers/ExpenseListProvider';
 
@@ -54,7 +54,8 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
       <div className="expense-card__head">
         <div className="expense-card__name">{title}</div>
         <div className="expense-card__balance">
-          ${formatNumber(balance)} {dueDate && `| Due by: ${dueDate}`}{' '}
+          ${formatNumber(balance)}{' '}
+          {dueDate && `| Due by: ${formatDate(dueDate)}`}{' '}
           {flagAsOverdue && (
             <Tag theme="red" className="margin-left-4">{`${daysOverdue} ${
               daysOverdue > 1 ? 'days' : 'day'

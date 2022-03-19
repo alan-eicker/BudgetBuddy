@@ -31,8 +31,6 @@ const AppProvider = ({ children }) => {
     onCompleted: ({ response }) => {
       if (!response.isValid) {
         setLoggedIn(false);
-      } else {
-        history.push('/');
       }
     },
   });
@@ -50,7 +48,13 @@ const AppProvider = ({ children }) => {
     if (isProtectedRoute) {
       verifyToken();
     }
-  }, [pathname, isProtectedRoute, verifyToken]);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!loggedIn) {
+      history.push('/');
+    }
+  }, [loggedIn, history]);
 
   return !loggedIn && isProtectedRoute ? null : (
     <AppContext.Provider
