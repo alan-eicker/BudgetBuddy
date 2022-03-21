@@ -6,7 +6,7 @@ import { useAppContext } from '../providers/AppProvider';
 
 const useLogin = () => {
   const history = useHistory();
-  const { setShowLoader, setLoggedIn } = useAppContext();
+  const { setShowLoader, setLoggedIn, destinationPath } = useAppContext();
   const [error, setError] = useState();
 
   const [authenticateUser, { loading }] = useMutation(AUTHENTICATE_USER, {
@@ -18,7 +18,9 @@ const useLogin = () => {
         setError('Invalid login');
       } else {
         setLoggedIn(true);
-        history.push('/expense-groups');
+        history.push(
+          destinationPath === '/' ? '/expense-groups' : destinationPath,
+        );
       }
     },
   });

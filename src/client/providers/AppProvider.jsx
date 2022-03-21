@@ -1,4 +1,10 @@
-import React, { useContext, createContext, useState, useEffect } from 'react';
+import React, {
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+  useLayoutEffect,
+} from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { gql, useLazyQuery } from '@apollo/client';
@@ -21,6 +27,7 @@ const AppProvider = ({ children }) => {
   const [showLoader, setShowLoader] = useState(false);
   const [alert, setAlert] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [destinationPath, setDestinationPath] = useState('/');
 
   const budgetLimitPercentage = 80;
 
@@ -37,6 +44,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     history.listen(() => {
+      setDestinationPath(pathname);
       setAlert();
       if (loggedIn) {
         document.querySelector('#layout-body').scrollTop = 0;
@@ -52,7 +60,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     if (!loggedIn) {
-      history.push('/');
+      history.push(destinationPath);
     }
   }, [loggedIn, history]);
 
@@ -65,6 +73,8 @@ const AppProvider = ({ children }) => {
         setShowLoader,
         setLoggedIn,
         budgetLimitPercentage,
+        destinationPath,
+        setDestinationPath,
       }}
     >
       {children}

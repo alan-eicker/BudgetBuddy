@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import App from './App';
+import AppProvider from './providers/AppProvider';
 import './styles/main.scss';
 
 (async () => {
@@ -22,7 +23,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Router>
-      <App />
+      <AppProvider>
+        <App />
+      </AppProvider>
     </Router>
   </ApolloProvider>,
   document.querySelector('#root'),

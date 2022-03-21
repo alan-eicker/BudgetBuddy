@@ -1,4 +1,7 @@
-const ExpenseGroup = require('../mongoose/schemas');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const ExpenseGroup = require('../mongoose/expenseGroupSchema');
+const User = require('../mongoose/userSchema');
 
 module.exports = {
   verifyToken: () => ({ isValid: true }),

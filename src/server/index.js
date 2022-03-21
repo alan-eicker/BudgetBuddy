@@ -1,9 +1,10 @@
 const dotenv = require('dotenv');
 const express = require('express');
-const { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require('graphql');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { graphqlHTTP } = require('express-graphql');
+const { buildSchema } = require('graphql');
 
 const rootValue = require('./graphql/resolvers');
 const schema = buildSchema(require('./graphql/schema'));
@@ -27,6 +28,7 @@ try {
 app.use(cors());
 app.use(express.json());
 app.use(express.static('dist'));
+app.use(cookieParser());
 
 app.use(
   '/graphql',
