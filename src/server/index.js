@@ -32,11 +32,16 @@ app.use(cookieParser());
 
 app.use(
   '/graphql',
-  graphqlHTTP({
+  // (req, res, next) => {
+  //   console.log(req.cookies.token);
+  //   return next();
+  // },
+  graphqlHTTP((req, res) => ({
     schema,
     rootValue,
     graphiql: true,
-  }),
+    context: { req, res },
+  })),
 );
 
 app.listen(port, () => {

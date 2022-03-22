@@ -37,6 +37,7 @@ const LoginForm = ({
         <Row>
           <Col md={12}>
             <FormField
+              type="password"
               name="password"
               label="password"
               autoComplete="off"
