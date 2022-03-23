@@ -32,10 +32,6 @@ app.use(cookieParser());
 
 app.use(
   '/graphql',
-  // (req, res, next) => {
-  //   console.log(req.cookies.token);
-  //   return next();
-  // },
   graphqlHTTP((req, res) => ({
     schema,
     rootValue,
