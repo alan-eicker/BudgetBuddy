@@ -2,11 +2,8 @@ import React from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import LoginForm from '../../components/LoginForm';
-import useLogin from '../../hooks/useLogin';
 
 const Login = () => {
-  const { authenticateUser, error } = useLogin();
-
   const initialValues = {
     username: '',
     password: '',
@@ -20,11 +17,10 @@ const Login = () => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (formValues) =>
-      authenticateUser({ variables: { input: formValues } }),
+    onSubmit: (formValues) => console.log(formValues),
   });
 
-  return <LoginForm authError={error} {...formik} />;
+  return <LoginForm authError="" {...formik} />;
 };
 
 export default Login;

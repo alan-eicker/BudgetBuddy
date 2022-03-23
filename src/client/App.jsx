@@ -4,7 +4,6 @@ import { Button } from '@atomikui/core';
 import Layout from './components/Layout';
 import Masthead from './components/Masthead';
 import ExpenseGroupEditorForm from './containers/ExpenseGroupEditor/ExpenseGroupEditor';
-import useLogout from './hooks/useLogout';
 
 const Login = lazy(() => import('./containers/Login'));
 const ExpenseGroupsSummary = lazy(() =>
@@ -19,7 +18,6 @@ const PageNotFound = lazy(() => import('./components/PageNotFound'));
 const App = () => {
   const history = useHistory();
   const { pathname } = useLocation();
-  const { logoutUser } = useLogout();
   const isIndexPage = pathname === '/';
   const isExpenseGroupEditor = pathname.match(/add|edit/);
 
@@ -34,9 +32,6 @@ const App = () => {
             <Link key="nav-item-1" to="/expense-groups/add">
               + Expense Group
             </Link>
-            <button key="nav-item-2" type="button" onClick={logoutUser}>
-              log out
-            </button>
           </Masthead>
         ) : null
       }

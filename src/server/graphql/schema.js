@@ -2,7 +2,6 @@ module.exports = `
   type Query {
     expenseGroups: [ExpenseGroup]
     expenseGroup(_id: String!): ExpenseGroup
-    verifyToken: TokenStatus
   }
   type Mutation {
     updateExpenseGroup(input: ExpenseGroupInput!): ExpenseGroup
@@ -17,10 +16,6 @@ module.exports = `
       groupId: String!,
       expenseId: String!
     ): DeleteExpenseResponse
-    authenticateUser(input: AuthenticationInput!): AuthenticationResponse
-  }
-  type AuthenticationResponse {
-    loggedIn: Boolean
   }
   type ExpenseGroup {
     _id: String
@@ -52,9 +47,6 @@ module.exports = `
   type DeleteExpenseGroupResponse {
     groupId: String
   }
-  type TokenStatus {
-    isValid: Boolean
-  }
   input ExpenseGroupInput {
     _id: String
     title: String
@@ -84,9 +76,5 @@ module.exports = `
     dueDate: String
     paid: Boolean
     note: String
-  }
-  input AuthenticationInput {
-    username: String
-    password: String
   }
 `;

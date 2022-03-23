@@ -1,44 +1,6 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const ExpenseGroup = require('../mongoose/expenseGroupSchema');
-const User = require('../mongoose/userSchema');
 
 module.exports = {
-  verifyToken: (args, context) => {
-    const {
-      cookies: { token },
-    } = context.req;
-
-    console.log(token);
-
-    // jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-    //   const err = error || decoded === undefined;
-    //   res.send({ err });
-    // });
-
-    return { isValid: true };
-  },
-  authenticateUser: async ({ input }, context) => {
-    try {
-      const { username, password } = input;
-      const user = await User.findOne({ username });
-      const loggedIn = bcrypt.compareSync(password, user.password);
-
-      if (!loggedIn) {
-        return { error: 'Invalid login' };
-      }
-
-      const token = jwt.sign({}, process.env.JWT_SECRET, {
-        expiresIn: '1h',
-      });
-
-      context.res.cookie('token', token, { httpOnly: true });
-
-      return { loggedIn };
-    } catch (err) {
-      return { error: err.message };
-    }
-  },
   expenseGroups: async () => {
     try {
       return await ExpenseGroup.find({});
