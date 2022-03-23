@@ -1,6 +1,8 @@
 const ExpenseGroup = require('../mongoose/expenseGroupSchema');
+const User = require('../mongoose/usersSchema');
 
 module.exports = {
+  authenticate: async ({ username, password }) => {},
   expenseGroups: async () => {
     try {
       return await ExpenseGroup.find({});
