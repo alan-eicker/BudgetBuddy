@@ -13,6 +13,7 @@ const AppProvider = ({ children }) => {
     routeMatchers: /expense-groups/,
     onErrorRedirect: '/',
   });
+
   const [showLoader, setShowLoader] = useState(false);
   const [alert, setAlert] = useState();
 
@@ -22,7 +23,7 @@ const AppProvider = ({ children }) => {
     verifyToken();
     setAlert();
     document.querySelector('#layout-body').scrollTop = 0;
-  }, [pathname]);
+  }, [pathname, verifyToken]);
 
   return (
     <AppContext.Provider
