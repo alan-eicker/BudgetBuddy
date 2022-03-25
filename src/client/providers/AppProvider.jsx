@@ -9,19 +9,20 @@ export const useAppContext = () => useContext(AppContext);
 
 const AppProvider = ({ children }) => {
   const { pathname } = useLocation();
-  const { verifyToken } = useRouteGuard({ onErrorRedirect: '/' });
+  const { verifyToken } = useRouteGuard({
+    routeMatchers: /expense-groups/,
+    onErrorRedirect: '/',
+  });
   const [showLoader, setShowLoader] = useState(false);
   const [alert, setAlert] = useState();
 
   const budgetLimitPercentage = 80;
 
   useEffect(() => {
-    if (pathname !== '/') {
-      verifyToken();
-      setAlert();
-      document.querySelector('#layout-body').scrollTop = 0;
-    }
-  }, [pathname, verifyToken]);
+    verifyToken();
+    setAlert();
+    document.querySelector('#layout-body').scrollTop = 0;
+  }, [pathname]);
 
   return (
     <AppContext.Provider
