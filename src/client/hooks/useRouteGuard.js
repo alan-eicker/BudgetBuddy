@@ -20,6 +20,7 @@ const useRouteGuard = ({ routeMatchers, onErrorRedirect }) => {
     const isValidToken = jwt.verify(token, secret);
 
     if (!isValidToken) {
+      Cookies.remove('userToken', { path: '/' });
       history.push(onErrorRedirect);
     }
   };
