@@ -1,8 +1,31 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const ExpenseGroup = require('../mongoose/expenseGroupSchema');
 const User = require('../mongoose/usersSchema');
 
 module.exports = {
-  authenticate: async ({ username, password }) => {},
+  login: async ({ username, password }) => {
+    const loginErrorMessage = 'invalid user';
+    const tokenExpiration = 1;
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      throw new Error(loginErrorMessage);
+    }
+
+    const isValidUser = await bcrypt.compare(password, user.password);
+
+    if (!isValidUser) {
+      throw new Error(loginErrorMessage);
+    }
+
+    const token = jwt.sign({ username }, process.env.JWT_SECRET, {
+      expiresIn: `${tokenExpiration}h`,
+    });
+
+    return { username, token, tokenExpiration };
+  },
   expenseGroups: async () => {
     try {
       return await ExpenseGroup.find({});

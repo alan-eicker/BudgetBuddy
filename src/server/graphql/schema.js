@@ -2,6 +2,7 @@ module.exports = `
   type Query {
     expenseGroups: [ExpenseGroup]
     expenseGroup(_id: String!): ExpenseGroup
+    login(username: String!, password: String!): User
   }
   type Mutation {
     updateExpenseGroup(input: ExpenseGroupInput!): ExpenseGroup
@@ -16,6 +17,11 @@ module.exports = `
       groupId: String!,
       expenseId: String!
     ): DeleteExpenseResponse
+  }
+  type User {
+    username: String
+    token: String
+    tokenExpiration: Int
   }
   type ExpenseGroup {
     _id: String
