@@ -1,5 +1,5 @@
 import { useHistory, useLocation } from 'react-router-dom';
-import cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 
 const useRouteGuard = ({ routeMatchers, onErrorRedirect }) => {
@@ -9,7 +9,7 @@ const useRouteGuard = ({ routeMatchers, onErrorRedirect }) => {
   const verifyToken = () => {
     if (!pathname.match(routeMatchers)) return;
 
-    const token = cookie.get('userToken');
+    const token = Cookies.get('userToken');
 
     if (!token) {
       history.push(onErrorRedirect);
