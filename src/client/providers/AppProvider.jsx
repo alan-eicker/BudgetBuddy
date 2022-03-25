@@ -1,24 +1,27 @@
 import React, { useContext, createContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import useRouteGuard from '../hooks/useRouteGuard';
 
 const AppContext = createContext({});
 
 export const useAppContext = () => useContext(AppContext);
 
 const AppProvider = ({ children }) => {
-  const history = useHistory();
+  const { pathname } = useLocation();
+  const { verifyToken } = useRouteGuard({ onErrorRedirect: '/' });
   const [showLoader, setShowLoader] = useState(false);
   const [alert, setAlert] = useState();
 
   const budgetLimitPercentage = 80;
 
   useEffect(() => {
-    history.listen(() => {
+    if (pathname !== '/') {
+      verifyToken();
       setAlert();
       document.querySelector('#layout-body').scrollTop = 0;
-    });
-  }, []);
+    }
+  }, [pathname, verifyToken]);
 
   return (
     <AppContext.Provider

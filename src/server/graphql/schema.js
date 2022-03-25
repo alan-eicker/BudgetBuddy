@@ -21,7 +21,6 @@ module.exports = `
   type User {
     username: String
     token: String
-    tokenExpiration: Int
     error: String
   }
   type ExpenseGroup {

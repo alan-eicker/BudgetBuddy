@@ -7,7 +7,6 @@ module.exports = {
   login: async ({ username, password }) => {
     try {
       const loginErrorMessage = 'invalid user';
-      const tokenExpiration = 1;
 
       const user = await User.findOne({ username });
 
@@ -22,10 +21,10 @@ module.exports = {
       }
 
       const token = jwt.sign({ username }, process.env.JWT_SECRET, {
-        expiresIn: `${tokenExpiration}h`,
+        expiresIn: `1h`,
       });
 
-      return { username, token, tokenExpiration };
+      return { username, token };
     } catch (err) {
       return { error: err.message };
     }

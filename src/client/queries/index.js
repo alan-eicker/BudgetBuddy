@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 
-export const AUTHENTICATE_USER = `
-  query AuthenticateUser() {
-    response: login() {
+export const LOGIN = gql`
+  query Login($username: String!, $password: String!) {
+    response: login(username: $username, password: $password) {
       username
       token
-      tokenExpiration
+      error
     }
   }
 `;
