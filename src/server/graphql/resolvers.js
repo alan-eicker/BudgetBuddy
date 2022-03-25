@@ -5,26 +5,30 @@ const User = require('../mongoose/usersSchema');
 
 module.exports = {
   login: async ({ username, password }) => {
-    const loginErrorMessage = 'invalid user';
-    const tokenExpiration = 1;
+    try {
+      const loginErrorMessage = 'invalid user';
+      const tokenExpiration = 1;
 
-    const user = await User.findOne({ username });
+      const user = await User.findOne({ username });
 
-    if (!user) {
-      throw new Error(loginErrorMessage);
+      if (!user) {
+        throw new Error(loginErrorMessage);
+      }
+
+      const isValidUser = await bcrypt.compare(password, user.password);
+
+      if (!isValidUser) {
+        throw new Error(loginErrorMessage);
+      }
+
+      const token = jwt.sign({ username }, process.env.JWT_SECRET, {
+        expiresIn: `${tokenExpiration}h`,
+      });
+
+      return { username, token, tokenExpiration };
+    } catch (err) {
+      return { error: err.message };
     }
-
-    const isValidUser = await bcrypt.compare(password, user.password);
-
-    if (!isValidUser) {
-      throw new Error(loginErrorMessage);
-    }
-
-    const token = jwt.sign({ username }, process.env.JWT_SECRET, {
-      expiresIn: `${tokenExpiration}h`,
-    });
-
-    return { username, token, tokenExpiration };
   },
   expenseGroups: async () => {
     try {

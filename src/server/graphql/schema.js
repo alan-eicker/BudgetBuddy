@@ -22,6 +22,7 @@ module.exports = `
     username: String
     token: String
     tokenExpiration: Int
+    error: String
   }
   type ExpenseGroup {
     _id: String
