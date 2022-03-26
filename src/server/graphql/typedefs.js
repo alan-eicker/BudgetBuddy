@@ -1,4 +1,6 @@
-module.exports = `
+const { gql } = require('apollo-server-express');
+
+module.exports = gql`
   type Query {
     expenseGroups: [ExpenseGroup]
     expenseGroup(_id: String!): ExpenseGroup
@@ -9,14 +11,11 @@ module.exports = `
     createExpenseGroup(input: NewExpenseGroupInput!): ExpenseGroup
     deleteExpenseGroup(groupId: String!): DeleteExpenseGroupResponse
     updatePaidStatus(
-      groupId: String!,
-      expenseId: String!, 
+      groupId: String!
+      expenseId: String!
       paid: Boolean!
     ): UpdateExpenseResponse
-    deleteExpense(
-      groupId: String!,
-      expenseId: String!
-    ): DeleteExpenseResponse
+    deleteExpense(groupId: String!, expenseId: String!): DeleteExpenseResponse
   }
   type User {
     username: String
