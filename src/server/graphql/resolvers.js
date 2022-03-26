@@ -1,17 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { AuthenticationError } = require('apollo-server-express');
+const verifyToken = require('../utilities/verifyToken');
 const ExpenseGroup = require('../mongoose/expenseGroupSchema');
 const User = require('../mongoose/usersSchema');
-
-const hasValidToken = (token) => {
-  console.log(token);
-  if (!token) {
-    throw new AuthenticationError(
-      'Authentication token is invalid, please log in',
-    );
-  }
-};
 
 module.exports = {
   Query: {
@@ -41,7 +32,7 @@ module.exports = {
       }
     },
     expenseGroups: async (root, args, context) => {
-      hasValidToken(context.token);
+      verifyToken(context.token);
 
       try {
         return await ExpenseGroup.find({});
@@ -49,7 +40,9 @@ module.exports = {
         return { error: err.message };
       }
     },
-    expenseGroup: async (root, { _id }) => {
+    expenseGroup: async (root, { _id }, context) => {
+      verifyToken(context.token);
+
       try {
         return await ExpenseGroup.findById({ _id });
       } catch (err) {
@@ -58,7 +51,9 @@ module.exports = {
     },
   },
   Mutation: {
-    updateExpenseGroup: async (root, { input }) => {
+    updateExpenseGroup: async (root, { input }, context) => {
+      verifyToken(context.token);
+
       try {
         await ExpenseGroup.findOneAndReplace({ _id: input._id }, input, {
           returnNewDocument: false,
@@ -68,7 +63,9 @@ module.exports = {
         return { error: err.message };
       }
     },
-    createExpenseGroup: async (root, { input }) => {
+    createExpenseGroup: async (root, { input }, context) => {
+      verifyToken(context.token);
+
       try {
         const newExpenseGroup = new ExpenseGroup(input);
         newExpenseGroup.save();
@@ -77,7 +74,9 @@ module.exports = {
         return { error: err.message };
       }
     },
-    deleteExpenseGroup: async (root, { groupId }) => {
+    deleteExpenseGroup: async (root, { groupId }, context) => {
+      verifyToken(context.token);
+
       try {
         await ExpenseGroup.deleteOne({ _id: groupId });
         return { groupId };
@@ -85,7 +84,9 @@ module.exports = {
         return { error: err.message };
       }
     },
-    updatePaidStatus: async (root, { groupId, expenseId, paid }) => {
+    updatePaidStatus: async (root, { groupId, expenseId, paid }, context) => {
+      verifyToken(context.token);
+
       try {
         const expenseGroup = await ExpenseGroup.findById({ _id: groupId });
         const expense = expenseGroup.expenses.id(expenseId);
@@ -103,7 +104,9 @@ module.exports = {
         return { error: err.message };
       }
     },
-    deleteExpense: async (root, { groupId, expenseId }) => {
+    deleteExpense: async (root, { groupId, expenseId }, context) => {
+      verifyToken(context.token);
+
       try {
         const expenseGroup = await ExpenseGroup.findById({ _id: groupId });
         const expense = expenseGroup.expenses.id(expenseId);

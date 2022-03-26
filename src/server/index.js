@@ -1,9 +1,8 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const { ApolloServer, AuthenticationError } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 
 const resolvers = require('./graphql/resolvers');
 const typeDefs = require('./graphql/typedefs');
@@ -29,15 +28,7 @@ const typeDefs = require('./graphql/typedefs');
   app.use(express.json());
   app.use(express.static('dist'));
 
-  const context = ({ req }) => {
-    const token = req.headers.authorization || '';
-
-    return {
-      token: !token
-        ? false
-        : jwt.verify(token.split(' ')[1], process.env.JWT_SECRET),
-    };
-  };
+  const context = ({ req }) => ({ token: req.headers.authorization });
 
   const server = new ApolloServer({
     typeDefs,
