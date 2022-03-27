@@ -28,6 +28,14 @@ const typeDefs = require('./graphql/typedefs');
   app.use(express.json());
   app.use(express.static('dist'));
 
+  app.get('/:type(expense-groups/*)', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'dist/index.html'), (error) => {
+      if (error) {
+        res.status(500).send(error);
+      }
+    });
+  });
+
   const context = ({ req }) => ({ token: req.headers.authorization });
 
   const server = new ApolloServer({

@@ -4,5 +4,5 @@ WORKDIR /src
 COPY package.json . /src/
 RUN npm install
 RUN npm build
-EXPOSE 9000
+EXPOSE 8080
 CMD ["node", "src/server"]
