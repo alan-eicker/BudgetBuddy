@@ -1,5 +1,5 @@
 import React, { useContext, createContext, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useRouteGuard from '../hooks/useRouteGuard';
 
@@ -8,6 +8,7 @@ const AppContext = createContext({});
 export const useAppContext = () => useContext(AppContext);
 
 const AppProvider = ({ children }) => {
+  const history = useHistory();
   const { pathname } = useLocation();
   const { verifyToken } = useRouteGuard({
     routeMatchers: /expense-groups/,
@@ -22,7 +23,9 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     verifyToken();
     setAlert();
-    document.querySelector('#layout-body').scrollTop = 0;
+    history.listen(() => {
+      document.querySelector('#layout-body').scrollTop = 0;
+    });
   }, [pathname, verifyToken]);
 
   return (

@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
 
 const resolvers = require('./graphql/resolvers');
