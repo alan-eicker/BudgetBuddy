@@ -45,7 +45,7 @@ const Login = () => {
         return setAuthError(error);
       }
 
-      cookie.set('userToken', token, { expires: 0.04, path: '/' });
+      cookie.set('userToken', token, { expires: 0.02, path: '/' });
       history.push('/expense-groups');
     }
   }, [data, history]);
