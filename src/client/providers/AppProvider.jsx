@@ -26,7 +26,7 @@ const AppProvider = ({ children }) => {
     history.listen(() => {
       document.querySelector('#layout-body').scrollTop = 0;
     });
-  }, [pathname, verifyToken]);
+  }, [history, pathname, verifyToken]);
 
   return (
     <AppContext.Provider
