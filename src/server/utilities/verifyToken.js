@@ -7,7 +7,7 @@ const verifyToken = (token) => {
   }
 
   const hasValidToken = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
-  console.log(hasValidToken);
+
   if (!hasValidToken) {
     throw new AuthenticationError('401 Unauthorized: Invalid Token');
   }
