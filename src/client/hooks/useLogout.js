@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { useHistory } from 'react-router-dom';
 
-export const useLogout = () => {
+const useLogout = () => {
   const history = useHistory();
 
   const logout = () => {
