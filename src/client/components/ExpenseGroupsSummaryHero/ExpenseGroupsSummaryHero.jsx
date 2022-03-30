@@ -22,7 +22,9 @@ const ExpenseGroupsSummaryHero = ({ _id, startDate, endDate, expenses }) => {
           Your Current Expenses
         </h1>
         <h2 className="expense-group-summary-hero__subtitle">{title}</h2>
-        <div className="expense-group-summary-hero__balance">{balance}</div>
+        <div className="expense-group-summary-hero__balance">
+          Total balance: {balance}
+        </div>
       </div>
       <div className="expense-group-summary-hero__footer">
         <Icon icon={faChevronRight} size="2x" color="white" />
