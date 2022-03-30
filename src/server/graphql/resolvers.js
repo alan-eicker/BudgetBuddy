@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../utilities/verifyToken');
-const ExpenseGroup = require('../mongoose/expenseGroupSchema');
-const User = require('../mongoose/usersSchema');
+const ExpenseGroup = require('../mongodb/expenseGroupSchema');
+const User = require('../mongodb/usersSchema');
 
 module.exports = {
   Query: {

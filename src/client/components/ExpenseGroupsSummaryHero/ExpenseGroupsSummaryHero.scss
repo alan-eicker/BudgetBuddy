@@ -6,7 +6,7 @@
   color: $white;
   display: flex;
   justify-content: space-between;
-  padding: rem(36 20);
+  padding: rem(48 20);
   text-decoration: none;
   transition: background 0.2s linear;
 
@@ -31,12 +31,14 @@
   }
 
   @media (min-width: $breakpoint-medium) {
+    padding: rem(48);
+
     &__title {
       font-size: rem(18);
     }
 
     &__subtitle {
-      font-size: rem(36);
+      font-size: rem(40);
     }
 
     &__balance {
