@@ -1,0 +1,45 @@
+.expense-group-summary-hero {
+  align-items: center;
+  background: $indigo-700;
+  border-radius: rem(8);
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+  padding: rem(36 20);
+  text-decoration: none;
+  transition: background 0.2s linear;
+
+  &:hover {
+    background: $indigo-800;
+  }
+
+  &__title {
+    font-size: rem(16);
+  }
+
+  &__subtitle {
+    font-size: rem(25);
+  }
+
+  &__balance {
+    font-size: rem(16);
+  }
+
+  &__footer {
+    margin-left: rem(16);
+  }
+
+  @media (min-width: $breakpoint-medium) {
+    &__title {
+      font-size: rem(18);
+    }
+
+    &__subtitle {
+      font-size: rem(36);
+    }
+
+    &__balance {
+      font-size: rem(24);
+    }
+  }
+}
