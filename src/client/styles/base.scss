@@ -33,3 +33,7 @@ button {
 ::placeholder {
   color: $indigo-300;
 }
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

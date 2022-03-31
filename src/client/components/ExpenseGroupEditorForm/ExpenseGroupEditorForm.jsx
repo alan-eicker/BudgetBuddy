@@ -1,6 +1,8 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormField, Button, CheckOption } from '@atomikui/core';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const ExpenseGroupEditorForm = forwardRef(
@@ -156,12 +158,17 @@ const ExpenseGroupEditorForm = forwardRef(
                   <Col>
                     <div className="text-align-right">
                       <Button
-                        theme="red"
+                        theme="white"
                         size="md"
                         shape="pill"
                         onClick={() => onDeleteExpense(expense._id)}
                       >
-                        delete expense
+                        <Icon
+                          icon={faTimes}
+                          color="#f44336"
+                          className="margin-right-4"
+                        />
+                        delete
                       </Button>
                     </div>
                   </Col>

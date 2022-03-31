@@ -4,10 +4,11 @@
   padding-bottom: rem(20);
 
   &__title {
-    color: $indigo-800;
+    border-bottom: rem(1) solid $indigo-400;
     font-size: rem(25);
     font-weight: 600;
     margin-bottom: rem(20);
+    padding-bottom: rem(16);
   }
 
   &__form-fields {
@@ -23,8 +24,7 @@
   }
 
   &__fieldset__content {
-    border: rem(1) solid $blue-gray-100;
-    border-left: rem(3) solid $indigo-500;
+    background: $indigo-700;
     margin-bottom: rem(32);
     padding: rem(16);
   }
