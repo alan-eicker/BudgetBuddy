@@ -7,24 +7,22 @@
   color: $white;
 
   &__form {
-    background: $indigo-500;
     border-radius: rem(8);
-    //box-shadow: 0 0 rem(45) darken($indigo-900, 3%);
     overflow: hidden;
     width: rem(300);
   }
 
   &__error {
-    background: darken($red-50, 2%);
-    color: $red-800;
+    background: $white;
+    color: $red-500;
+    border-radius: rem(6);
     font-weight: 700;
-    margin-bottom: rem(10);
+    margin-bottom: rem(16);
     padding: rem(10);
   }
 
   &__title {
-    background: no-repeat $black center 20px/70px
-      url('/static/images/budget.png');
+    background: no-repeat center 20px/70px url('/static/images/budget.png');
     color: $white;
     font-size: rem(24);
     font-weight: 600;
@@ -41,6 +39,12 @@
 
     & > :last-child {
       margin-top: rem(24);
+    }
+
+    input {
+      background: $indigo-900 !important;
+      text-align: center;
+      margin-bottom: rem(3);
     }
   }
 

@@ -8,7 +8,7 @@ const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
 
   return (
     <>
-      <Overlay theme="white" isActive={showLoader}>
+      <Overlay isActive={showLoader}>
         <Spinner size="xlg" theme="teal" />
       </Overlay>
       <div className="layout" {...others}>

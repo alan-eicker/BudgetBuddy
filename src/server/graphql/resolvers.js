@@ -8,7 +8,7 @@ module.exports = {
   Query: {
     login: async (root, { username, password }) => {
       try {
-        const loginErrorMessage = 'invalid user';
+        const loginErrorMessage = 'invalid user credentials';
 
         const user = await User.findOne({ username });
 

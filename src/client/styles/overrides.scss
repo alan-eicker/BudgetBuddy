@@ -46,7 +46,6 @@
 .atomikui-formfield__input,
 .atomikui-formfield__textarea {
   background: $indigo-800;
-  text-align: center;
   border-radius: rem(6);
   border: 0;
   color: $white;
@@ -62,8 +61,7 @@
 
 .atomikui-formfield.has-error > .atomikui-formfield__input,
 .atomikui-formfield.has-error > .atomikui-formfield__textarea {
-  border: 0;
-  border-bottom: rem(1.5) solid $red-200;
+  border: rem(2) solid $red-500;
 }
 
 .atomikui-formfield.has-error > .atomikui-formfield__input:focus,
@@ -73,8 +71,8 @@
   border-bottom: rem(1.5) solid $red-800;
 }
 
-.text-decoration-none {
-  text-decoration: none;
+.atomikui-hint--error {
+  color: $red-300;
 }
 
 .atomikui-alert {
