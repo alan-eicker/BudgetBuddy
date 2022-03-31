@@ -5,7 +5,6 @@ import {
   ButtonControls,
   Button,
   Statistic,
-  Hint,
   Alert,
   Modal,
 } from '@atomikui/core';
@@ -63,14 +62,14 @@ const ExpenseGroupLayout = ({
               <Icon icon={faPen} />
             </Link>
             <Button
-              theme="red"
+              theme="white"
               size="md"
               shape="pill"
               title="delete group"
               aria-label="delete group"
               onClick={() => setShowDeleteConfirm(true)}
             >
-              <Icon icon={faTimes} />
+              <Icon icon={faTimes} color="#f44336" />
             </Button>
           </ButtonControls>
         </div>
@@ -91,19 +90,22 @@ const ExpenseGroupLayout = ({
           <div className="expense-group__summary">
             <h2 className="text-size-20 margin-bottom-20">Spending Snapshot</h2>
             <Statistic
-              theme={isAlmostOverBudget ? 'red' : 'green'}
               value={totalBalance}
               label="Total Balance"
               size="md"
               topLabel
             />
             {isAlmostOverBudget && (
-              <div className="expense-group__budget-warning">
-                <Icon icon={faExclamationTriangle} />
-                <Hint type="error">
-                  Your total balance is greater than {budgetLimitPercentage}% of
-                  this month&apos;s budget.
-                </Hint>
+              <div className="margin-top-8">
+                <div className="expense-group__budget-warning">
+                  <div className="expense-group__budget-warning__icon">
+                    <Icon icon={faExclamationTriangle} />
+                  </div>
+                  <div className="expense-group__budget-warning__text">
+                    Your total balance is greater than {budgetLimitPercentage}%
+                    of this month&apos;s budget.
+                  </div>
+                </div>
               </div>
             )}
             <Statistic
@@ -128,12 +130,11 @@ const ExpenseGroupLayout = ({
         isOpen={showDeleteConfirm}
         className="expense-group__confirm-delete-modal"
         title="Whoa, hold on a second!"
-        overlayTheme="white"
         footer={
           <>
             <Button
               shape="pill"
-              theme="white"
+              theme="lime"
               onClick={() => onDeleteExpenseGroup(id)}
             >
               delete
@@ -141,7 +142,7 @@ const ExpenseGroupLayout = ({
             <Button
               shape="pill"
               className="margin-left-16"
-              theme="indigo"
+              theme="white"
               onClick={() => setShowDeleteConfirm(false)}
             >
               cancel

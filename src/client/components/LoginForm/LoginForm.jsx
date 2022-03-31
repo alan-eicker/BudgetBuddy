@@ -25,7 +25,8 @@ const LoginForm = ({
           <Col md={12}>
             <FormField
               name="username"
-              label="username"
+              placeholder="username"
+              ariaLable="username"
               autoComplete="off"
               onChange={handleChange}
               defaultValue={values.username}
@@ -39,7 +40,8 @@ const LoginForm = ({
             <FormField
               type="password"
               name="password"
-              label="password"
+              ariaLabel="password"
+              placeholder="password"
               autocomplete="off"
               onChange={handleChange}
               defaultValue={values.password}
@@ -50,7 +52,7 @@ const LoginForm = ({
         </Row>
         <Row>
           <Col md={12}>
-            <Button type="submit" shape="pill" theme="indigo" block>
+            <Button type="submit" shape="pill" theme="lime" block>
               Login
             </Button>
           </Col>

@@ -1,6 +1,6 @@
 .masthead {
   align-items: center;
-  background: $teal-800;
+  background: $black;
   color: $white;
   display: flex;
   height: rem(65);
@@ -40,7 +40,7 @@
 
       &:hover,
       &.active {
-        background: $teal-500;
+        background: $indigo-500;
       }
     }
   }

@@ -1,6 +1,6 @@
 .expense-group {
   &__head {
-    border-bottom: rem(1) solid $blue-gray-100;
+    border-bottom: rem(1) solid $indigo-400;
     display: flex;
     flex-direction: column;
     margin: rem(0 0 20);
@@ -9,12 +9,10 @@
   }
 
   &__title {
-    color: $indigo-800;
     font-size: rem(25);
     font-weight: 500;
 
     span {
-      color: $blue-gray-900;
       display: block;
       font-size: rem(17);
       font-weight: 400;
@@ -32,7 +30,7 @@
 
     a {
       align-items: center;
-      background: $indigo-500;
+      background: $indigo-400;
       border-radius: 50%;
       color: $white;
       display: flex;
@@ -43,7 +41,7 @@
       transition: background 0.2s linear;
 
       &:hover {
-        background: $indigo-900;
+        background: $indigo-300;
       }
     }
 
@@ -72,23 +70,36 @@
   }
 
   &__budget-warning {
+    background: $red-500;
     display: flex;
     margin: rem(4) auto 0;
-    padding: rem(0 16);
     text-align: left;
+    border-radius: rem(6);
+    overflow: hidden;
 
-    svg {
-      margin: rem(4) rem(8) 0 0;
+    &__icon {
+      background: $red-700;
+      padding: rem(8);
+      display: flex;
+      align-items: center;
 
-      path {
-        fill: $red-700;
+      svg {
+        path {
+          fill: $white;
+        }
       }
+    }
+
+    &__text {
+      color: $white;
+      font-size: rem(13);
+      padding: rem(8);
     }
   }
 
   &__confirm-delete-modal {
     background: $indigo-800;
-    box-shadow: 0 0 rem(30) $blue-gray-300;
+    box-shadow: 0 0 rem(30) rgba(0, 0, 0, 0.9);
     color: $white;
     padding: rem(8);
     text-align: center;

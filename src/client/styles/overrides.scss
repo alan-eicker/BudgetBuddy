@@ -1,10 +1,22 @@
+.atomikui-overlay.is-active {
+  backdrop-filter: blur(8px) !important;
+}
+
 .atomikui-switch__toggle {
-  background: $blue-gray-100;
+  background: $indigo-800;
   margin: rem(4) auto;
 }
 
 .atomikui-switch.is-checked .atomikui-switch__toggle {
-  background: $indigo-500;
+  background: $cyan-500;
+}
+
+.is-overdue .atomikui-switch .atomikui-switch__toggle {
+  background: $red-800;
+}
+
+.atomikui-switch__toggle::after {
+  box-shadow: none;
 }
 
 .atomikui-btn--indigo {
@@ -33,16 +45,19 @@
 
 .atomikui-formfield__input,
 .atomikui-formfield__textarea {
-  background-color: $white;
-  border-bottom: rem(1.5) solid $blue-gray-100;
-  border-radius: 0;
+  background: $indigo-800;
+  text-align: center;
+  border-radius: rem(6);
+  border: 0;
+  color: $white;
+  transition: all 0.15s linear;
 }
 
 .atomikui-formfield__input:not(:read-only):focus,
 .atomikui-formfield__textarea:not(:read-only):focus {
-  background: lighten($cyan-50, 4%);
-  box-shadow: none;
-  border-bottom: rem(1.5) solid $cyan-500;
+  background: $indigo-900 !important;
+  border: none !important;
+  box-shadow: 0 0 0 2px $indigo-400 !important;
 }
 
 .atomikui-formfield.has-error > .atomikui-formfield__input,
@@ -62,13 +77,17 @@
   text-decoration: none;
 }
 
+.atomikui-alert {
+  border-radius: rem(6);
+}
+
 .atomikui-alert.atomikui-alert--error {
-  background: $red-50;
-  color: $red-700;
+  background: $white;
+  color: $red-500;
 
   svg {
     path {
-      fill: $red-700;
+      fill: $red-500;
     }
   }
 }

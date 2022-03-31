@@ -4,10 +4,12 @@
   height: 100%;
   justify-content: center;
   text-align: center;
+  color: $white;
 
   &__form {
+    background: $indigo-500;
     border-radius: rem(8);
-    box-shadow: 0 0 rem(45) darken($blue-gray-50, 3%);
+    //box-shadow: 0 0 rem(45) darken($indigo-900, 3%);
     overflow: hidden;
     width: rem(300);
   }
@@ -21,7 +23,7 @@
   }
 
   &__title {
-    background: no-repeat $teal-800 center 20px/70px
+    background: no-repeat $black center 20px/70px
       url('/static/images/budget.png');
     color: $white;
     font-size: rem(24);
@@ -39,10 +41,6 @@
 
     & > :last-child {
       margin-top: rem(24);
-    }
-
-    input {
-      text-align: center;
     }
   }
 

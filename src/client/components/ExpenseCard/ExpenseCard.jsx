@@ -34,7 +34,7 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
           <Button
             {...(!deleteInProgress && { tabIndex: '-1' })}
             shape="pill"
-            theme="white"
+            theme="lime"
             size="md"
             onClick={() => onDelete(deleteId)}
           >
@@ -43,7 +43,7 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
           <Button
             {...(!deleteInProgress && { tabIndex: '-1' })}
             shape="pill"
-            theme="indigo"
+            theme="white"
             size="md"
             onClick={() => setDeleteId()}
           >
