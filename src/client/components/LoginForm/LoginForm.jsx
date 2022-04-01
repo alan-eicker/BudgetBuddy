@@ -29,7 +29,7 @@ const LoginForm = ({
             <FormField
               name="username"
               placeholder="username"
-              ariaLable="username"
+              aria-label="username"
               autoComplete="off"
               onChange={handleChange}
               defaultValue={values.username}
@@ -43,7 +43,7 @@ const LoginForm = ({
             <FormField
               type="password"
               name="password"
-              ariaLabel="password"
+              aria-label="password"
               placeholder="password"
               autocomplete="off"
               onChange={handleChange}
