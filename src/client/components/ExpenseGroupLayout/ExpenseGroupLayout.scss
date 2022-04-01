@@ -1,4 +1,26 @@
 .expense-group {
+  &__alert {
+    overflow: hidden;
+    transition: all 0.3s ease-in-out 0.25s;
+    transition-timing-function: cubic-bezier(0.42, 0, 0, 1);
+    height: 0;
+
+    & > * {
+      transition: all 0.25s ease-in-out;
+      transition-timing-function: cubic-bezier(0.42, 0, 0, 1);
+      position: relative;
+      left: -100%;
+    }
+
+    &.is-active {
+      height: rem(85);
+
+      & > * {
+        left: 0;
+      }
+    }
+  }
+
   &__head {
     border-bottom: rem(1) solid $indigo-400;
     display: flex;
@@ -37,8 +59,8 @@
       font-size: rem(13);
       height: rem(36);
       justify-content: center;
-      width: rem(36);
       transition: background 0.2s linear;
+      width: rem(36);
 
       &:hover {
         background: $indigo-300;
@@ -71,17 +93,17 @@
 
   &__budget-warning {
     background: $red-500;
+    border-radius: rem(6);
     display: flex;
     margin: rem(4) auto 0;
-    text-align: left;
-    border-radius: rem(6);
     overflow: hidden;
+    text-align: left;
 
     &__icon {
-      background: $red-700;
-      padding: rem(8);
-      display: flex;
       align-items: center;
+      background: $red-700;
+      display: flex;
+      padding: rem(8);
 
       svg {
         path {

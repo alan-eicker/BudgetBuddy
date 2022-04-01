@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {
   ButtonControls,
@@ -75,16 +76,16 @@ const ExpenseGroupLayout = ({
         </div>
         <div className="expense-group__body">
           <div className="expense-group__expenses">
-            {showAlert && (
-              <Alert
-                theme="error"
-                className="margin-bottom-16"
-                onClose={() => setShowAlert(false)}
-              >
+            <div
+              className={classnames('expense-group__alert', {
+                'is-active': showAlert,
+              })}
+            >
+              <Alert theme="error" onClose={() => setShowAlert(false)}>
                 You have {overdueExpenses} unpaid overdue expense{''}
                 {overdueExpenses > 1 && 's'}.
               </Alert>
-            )}
+            </div>
             <ExpenseList expenses={expenses} />
           </div>
           <div className="expense-group__summary">
