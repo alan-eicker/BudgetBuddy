@@ -7,6 +7,13 @@ main,
 
 body {
   background: $indigo-800;
+  background: rgb(8, 19, 93);
+  background: linear-gradient(
+    180deg,
+    rgba(8, 19, 93, 1) 0%,
+    rgba(30, 44, 134, 1) 29%,
+    rgba(40, 54, 147, 1) 46%
+  );
   color: $white;
   font-size: rem(16);
   font-weight: 400;

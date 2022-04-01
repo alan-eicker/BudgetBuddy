@@ -44,8 +44,13 @@
       transition: all 0.2s linear;
 
       &:hover,
+      &:focus,
       &.active {
         background: $indigo-500;
+      }
+
+      &:focus {
+        outline: 0;
       }
     }
   }

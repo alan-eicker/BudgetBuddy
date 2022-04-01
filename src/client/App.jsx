@@ -34,7 +34,7 @@ const App = () => {
             <Link key="nav-item-1" to="/expense-groups/add">
               + Expense Group
             </Link>
-            <Button onClick={logout}>Logout</Button>
+            <button onClick={logout}>Logout</button>
           </Masthead>
         ) : null
       }
