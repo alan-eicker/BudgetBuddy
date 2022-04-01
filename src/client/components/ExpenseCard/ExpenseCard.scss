@@ -10,8 +10,8 @@
 
   &__delete-confirm {
     align-items: center;
-    backdrop-filter: blur(5px);
-    background: rgba(0, 0, 0, 0.75);
+    background: $indigo-900;
+    box-shadow: inset 0 0 rem(30) darken($indigo-900, 5%);
     bottom: 0;
     display: flex;
     justify-content: space-between;
