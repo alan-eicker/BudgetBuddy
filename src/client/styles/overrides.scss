@@ -67,9 +67,7 @@
 
 .atomikui-formfield.has-error > .atomikui-formfield__input:focus,
 .atomikui-formfield.has-error > .atomikui-formfield__textarea:focus {
-  background: lighten($red-50, 2%);
   box-shadow: none;
-  border-bottom: rem(1.5) solid $red-800;
 }
 
 .atomikui-check-option__icon {

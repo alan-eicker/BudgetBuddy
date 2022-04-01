@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import cookie from 'js-cookie';
 import * as yup from 'yup';
@@ -9,6 +9,8 @@ import useLogin from '../../hooks/useLogin';
 const Login = () => {
   const { loginUser, data, error } = useLogin();
   const history = useHistory();
+
+  const usernameRef = useRef();
 
   const initialValues = {
     username: '',
@@ -29,6 +31,10 @@ const Login = () => {
   });
 
   useEffect(() => {
+    usernameRef?.current?.focus();
+  }, [error, data?.response?.error]);
+
+  useEffect(() => {
     if (data) {
       const { response } = data;
 
@@ -41,7 +47,13 @@ const Login = () => {
     }
   }, [data, history]);
 
-  return <LoginForm authError={error || data?.response?.error} {...formik} />;
+  return (
+    <LoginForm
+      authError={error || data?.response?.error}
+      {...formik}
+      ref={usernameRef}
+    />
+  );
 };
 
 export default Login;
