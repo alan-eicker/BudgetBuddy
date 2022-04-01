@@ -1,15 +1,15 @@
 .expense-group {
   &__alert {
+    height: 0;
     overflow: hidden;
     transition: all 0.3s ease-in-out 0.25s;
     transition-timing-function: cubic-bezier(0.42, 0, 0, 1);
-    height: 0;
 
     & > * {
+      left: -100%;
+      position: relative;
       transition: all 0.25s ease-in-out;
       transition-timing-function: cubic-bezier(0.42, 0, 0, 1);
-      position: relative;
-      left: -100%;
     }
 
     &.is-active {
@@ -52,7 +52,7 @@
 
     a {
       align-items: center;
-      background: $indigo-400;
+      background: $cyan-500;
       border-radius: 50%;
       color: $white;
       display: flex;
@@ -63,12 +63,13 @@
       width: rem(36);
 
       &:hover {
-        background: $indigo-300;
+        background: $cyan-600;
       }
     }
 
     button {
       border-radius: 50%;
+      font-size: rem(18);
       height: rem(36);
       padding: 0;
       width: rem(36);

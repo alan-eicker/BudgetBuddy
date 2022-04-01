@@ -53,14 +53,14 @@ const ExpenseGroupLayout = ({
           </h1>
           <ButtonControls className="expense-group__controls">
             <Link title="go back" aria-label="go back" to="/expense-groups">
-              <Icon icon={faArrowLeft} size="lg" />
+              <Icon icon={faArrowLeft} size="lg" color="black" />
             </Link>
             <Link
               title="edit expense"
               aria-label="edit expense"
               to={`/expense-groups/edit/${id}`}
             >
-              <Icon icon={faPen} />
+              <Icon icon={faPen} color="black" />
             </Link>
             <Button
               theme="white"
