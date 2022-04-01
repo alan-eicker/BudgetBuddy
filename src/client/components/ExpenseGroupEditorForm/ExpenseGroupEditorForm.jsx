@@ -179,7 +179,7 @@ const ExpenseGroupEditorForm = forwardRef(
         })}
       </fieldset>
       <Button
-        theme="white"
+        theme="cyan"
         shape="pill"
         className="margin-bottom-20"
         onClick={onAddExpense}

@@ -22,11 +22,10 @@
   }
 
   &__title {
-    background: no-repeat center 20px/70px url('/static/images/budget.png');
     color: $white;
     font-size: rem(24);
     font-weight: 600;
-    padding: rem(90 20 20);
+    padding: rem(0 20 20);
   }
 
   &__fields {

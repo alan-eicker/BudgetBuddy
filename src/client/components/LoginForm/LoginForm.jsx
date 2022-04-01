@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormField, Button } from '@atomikui/core';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import BrandLogo from '../BrandLogo';
 
 const LoginForm = ({
   authError,
@@ -13,7 +14,9 @@ const LoginForm = ({
 }) => (
   <div className="login">
     <form className="login__form" onSubmit={handleSubmit} noValidate>
-      <h1 className="login__title">Budget Buddy</h1>
+      <h1 className="login__title" aria-label="budget buddy">
+        <BrandLogo size="lg" withText />
+      </h1>
 
       <Grid className="login__fields">
         <Row>

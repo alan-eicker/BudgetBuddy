@@ -11,13 +11,13 @@
   &__delete-confirm {
     align-items: center;
     backdrop-filter: blur(5px);
-    background: rgba(3, 9, 66, 0.7);
+    background: rgba(0, 0, 0, 0.75);
     bottom: 0;
     display: flex;
     justify-content: space-between;
     left: 100%;
     min-width: 100%;
-    padding: rem(16);
+    padding: rem(16 24);
     position: absolute;
     right: 0;
     top: 0;

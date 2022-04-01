@@ -1,0 +1,39 @@
+.brand-logo {
+  &__icon {
+    align-items: center;
+    background: $lime-500;
+    border-radius: 50%;
+    color: $indigo-800;
+    display: flex;
+    font-family: Righteous;
+    justify-content: center;
+    margin: 0 auto;
+
+    & > :first-child {
+      margin-right: rem(-12);
+      transform: scaleX(-1);
+    }
+
+    & > :last-child {
+      margin-left: rem(-12);
+    }
+  }
+
+  &__text {
+    margin-top: rem(8);
+    text-transform: uppercase;
+    font-family: 'Saira Extra Condensed', Arial, Helvetica, sans-serif;
+  }
+
+  &--lg {
+    .brand-logo__icon {
+      font-size: rem(150);
+      height: rem(150);
+      width: rem(150);
+    }
+
+    .brand-logo__text {
+      font-size: rem(35);
+    }
+  }
+}
