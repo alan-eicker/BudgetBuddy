@@ -8,12 +8,16 @@
 
   &__logo {
     align-items: center;
-    background: no-repeat transparent 16px center/contain
-      url('/static/images/budget.png');
     display: flex;
-    font-size: rem(20);
+    font-size: rem(24);
     height: rem(36);
-    padding-left: rem(62);
+    margin-left: rem(16);
+    font-family: 'Saira Extra Condensed', Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+  }
+
+  &__app-name {
+    margin-left: rem(3);
   }
 
   &__nav {
@@ -34,7 +38,7 @@
       font-size: rem(16);
       font-weight: 600;
       height: 100%;
-      padding: rem(0 14);
+      padding: rem(0 16);
       text-decoration: none;
       transition: all 0.2s linear;
 

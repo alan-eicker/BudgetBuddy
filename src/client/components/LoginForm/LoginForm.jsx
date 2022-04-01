@@ -15,7 +15,7 @@ const LoginForm = ({
   <div className="login">
     <form className="login__form" onSubmit={handleSubmit} noValidate>
       <h1 className="login__title" aria-label="budget buddy">
-        <BrandLogo size="lg" withText />
+        <BrandLogo size="lg" textLeft />
       </h1>
 
       <Grid className="login__fields">

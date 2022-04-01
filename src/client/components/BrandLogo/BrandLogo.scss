@@ -1,39 +1,17 @@
 .brand-logo {
-  &__icon {
-    align-items: center;
-    background: $lime-500;
-    border-radius: 50%;
-    color: $indigo-800;
-    display: flex;
-    font-family: Righteous;
-    justify-content: center;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    & > :first-child {
-      margin-right: rem(-12);
-      transform: scaleX(-1);
-    }
-
-    & > :last-child {
-      margin-left: rem(-12);
+  svg {
+    g {
+      fill: $lime-400;
     }
   }
 
   &__text {
-    margin-top: rem(8);
+    font-size: rem(35);
     text-transform: uppercase;
     font-family: 'Saira Extra Condensed', Arial, Helvetica, sans-serif;
-  }
-
-  &--lg {
-    .brand-logo__icon {
-      font-size: rem(125);
-      height: rem(120);
-      width: rem(120);
-    }
-
-    .brand-logo__text {
-      font-size: rem(35);
-    }
   }
 }
