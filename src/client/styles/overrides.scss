@@ -54,9 +54,9 @@
 
 .atomikui-formfield__input:not(:read-only):focus,
 .atomikui-formfield__textarea:not(:read-only):focus {
-  background: $indigo-900 !important;
-  border: none !important;
-  box-shadow: 0 0 0 2px $indigo-400 !important;
+  background: $indigo-900;
+  border: none;
+  box-shadow: 0 0 0 2px $indigo-400;
 }
 
 .atomikui-formfield.has-error > .atomikui-formfield__input,
@@ -69,6 +69,19 @@
   background: lighten($red-50, 2%);
   box-shadow: none;
   border-bottom: rem(1.5) solid $red-800;
+}
+
+.atomikui-check-option__icon {
+  background: $indigo-200;
+}
+
+.atomikui-check-option > input:checked + .atomikui-check-option__icon {
+  background: $indigo-900;
+  border-color: $indigo-900;
+}
+
+.atomikui-check-option > input:checked:focus + .atomikui-check-option__icon {
+  box-shadow: 0 0 0 2px $indigo-400;
 }
 
 .atomikui-hint--error {
