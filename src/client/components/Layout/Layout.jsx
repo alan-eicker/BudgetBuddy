@@ -20,6 +20,7 @@ const Layout = ({ header, subheader, children, isIndexPage, ...others }) => {
             </div>
           </div>
         )}
+        <div id="expnense-summary-portal-container" />
         <div
           id="layout-body"
           className="layout__body"

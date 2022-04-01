@@ -17,6 +17,7 @@
   }
 
   &__app-name {
+    display: none;
     margin-left: rem(3);
   }
 
@@ -46,6 +47,12 @@
       &.active {
         background: $indigo-500;
       }
+    }
+  }
+
+  @media (min-width: $breakpoint-medium) {
+    &__app-name {
+      display: block;
     }
   }
 }
