@@ -2,10 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronRight,
+  faExclamationCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import { formatDate } from '../../utilities/date';
 import {
   getSubTotalFromCollection,
+  getOverDueExpenses,
   formatNumber,
 } from '../../utilities/numbers';
 
@@ -14,6 +18,8 @@ const ExpenseGroupsSummaryHero = ({ _id, startDate, endDate, expenses }) => {
   const balance = `$${formatNumber(
     getSubTotalFromCollection(expenses, 'balance'),
   )}`;
+
+  const overdueExpenses = getOverDueExpenses(expenses);
 
   return (
     <Link className="expense-group-summary-hero" to={`/expense-groups/${_id}`}>
@@ -25,6 +31,16 @@ const ExpenseGroupsSummaryHero = ({ _id, startDate, endDate, expenses }) => {
         <div className="expense-group-summary-hero__balance">
           Total balance: {balance}
         </div>
+        {overdueExpenses && (
+          <div className="expense-group-summary-hero__overdue-tag">
+            <Icon
+              icon={faExclamationCircle}
+              color="white"
+              className="margin-right-4"
+            />{' '}
+            {overdueExpenses} overdue expense{overdueExpenses > 1 && 's'}
+          </div>
+        )}
       </div>
       <div className="expense-group-summary-hero__footer">
         <Icon icon={faChevronRight} size="2x" color="white" />

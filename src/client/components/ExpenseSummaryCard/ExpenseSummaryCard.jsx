@@ -19,11 +19,7 @@ const ExpenseSummaryCard = ({ id, title, balance, overdueExpenses }) => (
       <div className="expense-group-summary-card__title">
         {!!overdueExpenses && (
           <div className="expense-group-summary-card__tag">
-            <Icon
-              icon={faExclamationCircle}
-              size="xl"
-              className="margin-bottom-4"
-            />
+            <Icon icon={faExclamationCircle} size="xl" />
             <span>
               {overdueExpenses} unpaid overdue expense
               {overdueExpenses > 1 && 's'}

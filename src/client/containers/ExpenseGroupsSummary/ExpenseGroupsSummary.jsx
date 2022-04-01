@@ -3,10 +3,11 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import useExpenseGroupsSummary from '../../hooks/useExpenseGroupsSummary';
 import ExpenseGroupsSummaryHero from '../../components/ExpenseGroupsSummaryHero';
 import ExpenseSummaryCard from '../../components/ExpenseSummaryCard';
-import { formatDate, getDaysPastDue } from '../../utilities/date';
+import { formatDate } from '../../utilities/date';
 import {
   getSubTotalFromCollection,
   formatNumber,
+  getOverDueExpenses,
 } from '../../utilities/numbers';
 
 const ExpenseGroupsSummary = () => {
@@ -40,15 +41,7 @@ const ExpenseGroupsSummary = () => {
                 getSubTotalFromCollection(group.expenses, 'balance'),
               )}`;
 
-              const overdueExpenses = group.expenses.reduce(
-                (prevValue, nextValue) =>
-                  nextValue.dueDate &&
-                  !nextValue.paid &&
-                  getDaysPastDue(nextValue.dueDate).isPastDue
-                    ? prevValue + 1
-                    : prevValue,
-                0,
-              );
+              const overdueExpenses = getOverDueExpenses(group.expenses);
 
               return (
                 <Col className="margin-bottom-16" key={group._id} md={6} lg={4}>
