@@ -29,6 +29,7 @@ const LoginForm = forwardRef(
                 defaultValue={values.username}
                 hasError={!!(errors.username && touched.username)}
                 errorText={errors.username}
+                autoComplete="off"
               />
             </Col>
           </Row>
@@ -43,6 +44,7 @@ const LoginForm = forwardRef(
                 defaultValue={values.password}
                 hasError={!!(errors.password && touched.password)}
                 errorText={errors.password}
+                autoComplete="off"
               />
             </Col>
           </Row>

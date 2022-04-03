@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Switch, Button, Tag, ButtonControls } from '@atomikui/core';
+import { Switch, Button, Tag } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { formatNumber } from '../../utilities/numbers';
 import { getDaysPastDue, formatDate } from '../../utilities/date';
 import useExpense from '../../hooks/useExpense';
 import { useExpenseListContext } from '../../providers/ExpenseListProvider';
+import ConfirmationSlider from '../ConfirmationSlider';
 
 const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
   const { onPaidChange, onDelete } = useExpense();
@@ -24,33 +25,12 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
         'is-overdue': flagAsOverdue,
       })}
     >
-      <div
-        className={classnames('expense-card__delete-confirm', {
-          'is-active': deleteInProgress,
-        })}
-      >
-        <div className="text-size-20">Delete {title}?</div>
-        <ButtonControls>
-          <Button
-            {...(!deleteInProgress && { tabIndex: '-1' })}
-            shape="pill"
-            theme="lime"
-            size="md"
-            onClick={() => onDelete(deleteId)}
-          >
-            delete
-          </Button>
-          <Button
-            {...(!deleteInProgress && { tabIndex: '-1' })}
-            shape="pill"
-            theme="white"
-            size="md"
-            onClick={() => setDeleteId()}
-          >
-            cancel
-          </Button>
-        </ButtonControls>
-      </div>
+      <ConfirmationSlider
+        title={`Delete ${title}?`}
+        isActive={deleteInProgress}
+        onCancel={setDeleteId}
+        onConfirm={() => onDelete(deleteId)}
+      />
       <div className="expense-card__head">
         <div className="expense-card__name">{title}</div>
         <div className="expense-card__balance">
