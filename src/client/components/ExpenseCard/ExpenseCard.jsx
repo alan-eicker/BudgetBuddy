@@ -15,7 +15,6 @@ const ExpenseCard = ({ _id, title, balance, dueDate, paid, note }) => {
   const { deleteId, setDeleteId } = useExpenseListContext();
   const { isPastDue, daysOverdue } = getDaysPastDue(dueDate);
   const flagAsOverdue = isPastDue && !paid && dueDate;
-
   const deleteInProgress = deleteId === _id;
 
   return (
