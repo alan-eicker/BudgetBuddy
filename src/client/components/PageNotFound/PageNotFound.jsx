@@ -11,7 +11,7 @@ const PageNotFound = () => {
         <div className="page-not-found__title">404</div>
         <div className="page-not-found__subtitle">Page Not Found</div>
         <Button
-          theme="indigo"
+          theme="lime"
           shape="pill"
           size="lg"
           onClick={() => history.goBack()}
