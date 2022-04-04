@@ -5,9 +5,11 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import LoginForm from '../../components/LoginForm';
 import useLogin from '../../hooks/useLogin';
+import { useAppContext } from '../../providers/AppProvider';
 
 const Login = () => {
   const { loginUser, data, error } = useLogin();
+  const { setLoggedIn } = useAppContext();
   const history = useHistory();
 
   const usernameRef = useRef();
@@ -43,6 +45,7 @@ const Login = () => {
       }
 
       cookie.set('userToken', response.token, { expires: 0.02, path: '/' });
+      setLoggedIn(true);
       history.push('/expense-groups');
     }
   }, [data, history]);
