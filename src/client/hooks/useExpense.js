@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useAppContext } from '../providers/AppProvider';
-import { GET_EXPENSE_GROUP } from '../queries';
 import { UPDATE_PAID_STATUS, DELETE_EXPENSE } from '../mutations';
 
 const useExpense = () => {

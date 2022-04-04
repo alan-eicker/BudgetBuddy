@@ -52,7 +52,7 @@ const ExpenseGroupsSummaryHero = ({ _id, startDate, endDate, expenses }) => {
           <div className="expense-group-summary-hero__balance">
             Total balance: {balance}
           </div>
-          {overdueExpenses.length > 0 && (
+          {overdueExpenses > 0 && (
             <div className="expense-group-summary-hero__overdue-tag">
               <Icon
                 icon={faExclamationCircle}
