@@ -23,7 +23,7 @@
 
   &__body {
     overflow: auto;
-    padding: rem(24);
+    padding: rem(16);
 
     & > * {
       max-width: rem(1200);
@@ -33,5 +33,11 @@
 
   &__alert {
     margin-bottom: rem(16);
+  }
+
+  @media (min-width: $breakpoint-medium) {
+    &__body {
+      padding: rem(24);
+    }
   }
 }
