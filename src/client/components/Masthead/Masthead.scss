@@ -5,14 +5,14 @@
   display: flex;
   height: rem(65);
   justify-content: space-between;
+  padding: rem(16);
 
   &__logo {
     align-items: center;
     display: flex;
+    font-family: 'Saira Extra Condensed', Arial, Helvetica, sans-serif;
     font-size: rem(24);
     height: rem(36);
-    margin-left: rem(16);
-    font-family: 'Saira Extra Condensed', Arial, Helvetica, sans-serif;
     text-transform: uppercase;
   }
 
@@ -21,13 +21,30 @@
     margin-left: rem(3);
   }
 
+  &__utils {
+    align-items: stretch;
+    display: flex;
+
+    & > * + * {
+      margin-left: rem(16);
+    }
+  }
+
+  &__date {
+    border-left: rem(1) solid $blue-gray-800;
+    padding-left: rem(16);
+    font-size: rem(12);
+  }
+
   &__nav {
     align-items: stretch;
     align-self: stretch;
     display: flex;
 
-    & > * {
-      font-size: rem(16);
+    &__nav {
+      & > * {
+        font-size: rem(14);
+      }
     }
 
     & > * > * {
@@ -36,17 +53,16 @@
       border: 0;
       color: $white;
       display: flex;
-      font-size: rem(16);
       font-weight: 600;
       height: 100%;
-      padding: rem(0 16);
+      margin-left: rem(16);
       text-decoration: none;
       transition: all 0.2s linear;
 
       &:hover,
       &:focus,
       &.active {
-        background: $indigo-500;
+        color: $lime-500;
       }
 
       &:focus {
@@ -58,6 +74,18 @@
   @media (min-width: $breakpoint-medium) {
     &__app-name {
       display: block;
+    }
+
+    &__nav {
+      & > * {
+        font-size: rem(16);
+      }
+    }
+
+    &__date {
+      border-left: rem(1) solid $blue-gray-800;
+      padding: rem(16);
+      font-size: rem(16);
     }
   }
 }

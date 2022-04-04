@@ -1,15 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import LoginForm from '../../components/LoginForm';
 import useLogin from '../../hooks/useLogin';
-import { useAppContext } from '../../providers/AppProvider';
 
 const Login = () => {
   const { loginUser, data, error } = useLogin();
-  const { setLoggedIn } = useAppContext();
   const history = useHistory();
 
   const usernameRef = useRef();
@@ -44,8 +42,7 @@ const Login = () => {
         return;
       }
 
-      cookie.set('userToken', response.token, { expires: 0.02, path: '/' });
-      setLoggedIn(true);
+      Cookies.set('userToken', response.token, { expires: 0.02, path: '/' });
       history.push('/expense-groups');
     }
   }, [data, history]);

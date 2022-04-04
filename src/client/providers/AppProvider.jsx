@@ -15,7 +15,6 @@ const AppProvider = ({ children }) => {
     onErrorRedirect: '/',
   });
 
-  const [loggedIn, setLoggedIn] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [alert, setAlert] = useState();
 
@@ -34,8 +33,6 @@ const AppProvider = ({ children }) => {
       value={{
         alert,
         setAlert,
-        loggedIn,
-        setLoggedIn,
         showLoader,
         setShowLoader,
         budgetLimitPercentage,

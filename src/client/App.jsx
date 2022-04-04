@@ -5,7 +5,6 @@ import Layout from './components/Layout';
 import Masthead from './components/Masthead';
 import ExpenseGroupEditorForm from './containers/ExpenseGroupEditor/ExpenseGroupEditor';
 import useLogout from './hooks/useLogout';
-import { useAppContext } from './providers/AppProvider';
 
 const Login = lazy(() => import('./containers/Login'));
 const ExpenseGroupsSummary = lazy(() =>
@@ -21,7 +20,6 @@ const App = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const { logout } = useLogout();
-  const { loggedIn } = useAppContext();
   const isIndexPage = pathname === '/';
   const isExpenseGroupEditor = pathname.match(/add|edit/);
 
@@ -32,9 +30,9 @@ const App = () => {
       isIndexPage
       header={
         !isIndexPage ? (
-          <Masthead appName="Budget Buddy" isLoggedIn={loggedIn}>
+          <Masthead appName="Budget Buddy">
             <Link key="nav-item-1" to="/expense-groups/add">
-              + Expense Group
+              + Add Group
             </Link>
             <button onClick={logout}>Logout</button>
           </Masthead>
