@@ -22,7 +22,7 @@
   }
 
   &__utils {
-    align-items: stretch;
+    align-items: center;
     display: flex;
 
     & > * + * {
@@ -32,8 +32,8 @@
 
   &__date {
     border-left: rem(1) solid $blue-gray-800;
+    font-size: rem(13);
     padding-left: rem(16);
-    font-size: rem(12);
   }
 
   &__nav {
@@ -51,18 +51,28 @@
       align-items: center;
       background: transparent;
       border: 0;
-      color: $white;
       display: flex;
       font-weight: 600;
       height: 100%;
       margin-left: rem(16);
       text-decoration: none;
-      transition: all 0.2s linear;
+
+      svg {
+        height: rem(30);
+
+        path {
+          fill: $white;
+        }
+      }
 
       &:hover,
       &:focus,
       &.active {
-        color: $lime-500;
+        svg {
+          path {
+            fill: $lime-500;
+          }
+        }
       }
 
       &:focus {
@@ -84,8 +94,8 @@
 
     &__date {
       border-left: rem(1) solid $blue-gray-800;
-      padding: rem(16);
       font-size: rem(16);
+      padding: rem(16);
     }
   }
 }
