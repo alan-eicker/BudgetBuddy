@@ -37,10 +37,11 @@ const App = () => {
               key="nav-item-1"
               to="/expense-groups/add"
               aria-label="add expense group"
+              title="add expense group"
             >
               <Icon icon={faPlus} />
             </Link>
-            <button onClick={logout} aria-label="log out">
+            <button onClick={logout} aria-label="log out" title="log out">
               <svg
                 version="1.1"
                 id="Layer_1"
