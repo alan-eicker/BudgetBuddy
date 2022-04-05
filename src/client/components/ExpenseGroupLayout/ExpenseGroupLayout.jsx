@@ -19,6 +19,7 @@ import {
 import { formatDate } from '../../utilities/date';
 import { formatNumber } from '../../utilities/numbers';
 import ExpenseList from '../ExpenseList';
+import AlertMessage from '../AlertMessage';
 import useExpenseGroup from '../../hooks/useExpenseGroup';
 
 const ExpenseGroupLayout = ({
@@ -76,16 +77,14 @@ const ExpenseGroupLayout = ({
         </div>
         <div className="expense-group__body">
           <div className="expense-group__expenses">
-            <div
-              className={classnames('expense-group__alert', {
-                'is-active': showAlert,
-              })}
-            >
-              <Alert theme="error" onClose={() => setShowAlert(false)}>
-                You have {overdueExpenses} unpaid overdue expense{''}
-                {overdueExpenses > 1 && 's'}.
-              </Alert>
-            </div>
+            <AlertMessage
+              theme="error"
+              text={`You have ${overdueExpenses} unpaid overdue expense ${
+                overdueExpenses > 1 && 's'
+              }`}
+              isActive={showAlert}
+              onClose={() => setShowAlert(false)}
+            />
             <ExpenseList expenses={expenses} />
           </div>
           <div className="expense-group__summary">
