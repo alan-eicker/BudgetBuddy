@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 const cors = require('cors');
 const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
@@ -11,6 +13,8 @@ const typeDefs = require('./graphql/typedefs');
 (async () => {
   const app = express();
   const port = process.env.PORT || 8080;
+
+  const csrfMiddleware = csrf({ cookie: true });
 
   dotenv.config();
 
@@ -25,9 +29,18 @@ const typeDefs = require('./graphql/typedefs');
     console.log(err);
   }
 
+  app.use(cookieParser());
   app.use(cors());
   app.use(express.json());
   app.use(express.static('dist'));
+
+  app.use('*', csrfMiddleware, (_, res, next) => {
+    next();
+  });
+
+  app.get('/crsfToken', (req, res) => {
+    res.send({ csrfToken: req.csrfToken() });
+  });
 
   app.get('*', (req, res) => {
     res.sendFile(path.join(process.cwd(), 'dist/index.html'), (error) => {
@@ -37,7 +50,10 @@ const typeDefs = require('./graphql/typedefs');
     });
   });
 
-  const context = ({ req }) => ({ token: req.headers.authorization });
+  const context = ({ req }) => ({
+    token: req.headers.authorization,
+    csrfToken: req.cookies._csrf,
+  });
 
   const server = new ApolloServer({
     typeDefs,

@@ -7,9 +7,9 @@ const User = require('../mongodb/usersSchema');
 module.exports = {
   Query: {
     login: async (root, { username, password }) => {
-      try {
-        const loginErrorMessage = 'invalid user credentials';
+      const loginErrorMessage = 'invalid user credentials';
 
+      try {
         const user = await User.findOne({ username });
 
         if (!user) {
@@ -28,7 +28,7 @@ module.exports = {
 
         return { username, token };
       } catch (err) {
-        return { error: err.message };
+        return { error: loginErrorMessage };
       }
     },
     expenseGroups: async (root, args, context) => {
@@ -37,7 +37,7 @@ module.exports = {
       try {
         return await ExpenseGroup.find({});
       } catch (err) {
-        return { error: err.message };
+        return { error: 'An error occurred while fetching expense groups' };
       }
     },
     expenseGroup: async (root, { _id }, context) => {
@@ -46,7 +46,7 @@ module.exports = {
       try {
         return await ExpenseGroup.findById({ _id });
       } catch (err) {
-        return { error: err.message };
+        return { error: 'An error occurred while fetching the expense group' };
       }
     },
   },
@@ -60,7 +60,7 @@ module.exports = {
         });
         return input;
       } catch (err) {
-        return { error: err.message };
+        return { error: 'An error occurred while updating the expense group' };
       }
     },
     createExpenseGroup: async (root, { input }, context) => {
@@ -71,7 +71,7 @@ module.exports = {
         newExpenseGroup.save();
         return newExpenseGroup;
       } catch (err) {
-        return { error: err.message };
+        return { error: 'An error occurred while creating the expense group' };
       }
     },
     deleteExpenseGroup: async (root, { groupId }, context) => {
@@ -81,7 +81,7 @@ module.exports = {
         await ExpenseGroup.deleteOne({ _id: groupId });
         return { groupId };
       } catch (err) {
-        return { error: err.message };
+        return { error: 'An error occurred while deleting the expense group' };
       }
     },
     updatePaidStatus: async (root, { groupId, expenseId, paid }, context) => {
@@ -101,7 +101,9 @@ module.exports = {
           paid,
         };
       } catch (err) {
-        return { error: err.message };
+        return {
+          error: 'An error occurred while updating the expense group status',
+        };
       }
     },
     deleteExpense: async (root, { groupId, expenseId }, context) => {
@@ -117,7 +119,7 @@ module.exports = {
 
         return { groupId, expenseId };
       } catch (err) {
-        return { error: err.message };
+        return { error: 'An error occurred while deleting the expense' };
       }
     },
   },

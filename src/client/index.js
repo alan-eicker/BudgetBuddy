@@ -20,13 +20,17 @@ import './styles/main.scss';
 
 const httpLink = createHttpLink({ uri: 'http://localhost:8080/graphql' });
 
-const authLink = setContext((_, { headers }) => {
+const authLink = setContext(async (_, { headers }) => {
   const token = Cookies.get('userToken');
+
+  const csrfTokenResponse = await fetch('http://localhost:8080/crsfToken');
+  const { csrfToken } = await csrfTokenResponse.json();
 
   return {
     headers: {
       ...headers,
-      ...(token && { authorization: `Bearer ${token}` }),
+      ...(token && { Authorization: `Bearer ${token}` }),
+      'CSRF-TOKEN': csrfToken,
     },
   };
 });
