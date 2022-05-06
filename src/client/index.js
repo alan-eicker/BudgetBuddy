@@ -35,7 +35,7 @@ const authLink = setContext(async (_, { headers }) => {
     headers: {
       ...headers,
       ...(userToken && { Authorization: `Bearer ${userToken}` }),
-      'CSRF-TOKEN': csrfToken,
+      'X-CSRF-Token': csrfToken,
     },
   };
 });
