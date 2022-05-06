@@ -38,7 +38,7 @@ app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
 app.use(express.json({ limit: '50kb' }));
 app.use(express.static('dist'));
 
-app.use('*', csrfMiddleware, (_, res, next) => {
+app.use('*', csrfMiddleware, (_, __, next) => {
   next();
 });
 

@@ -23,17 +23,18 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext(async (_, { headers }) => {
-  const token = Cookies.get('userToken');
+  const userToken = Cookies.get('userToken');
 
   const csrfTokenResponse = await fetch(
     `${process.env.BASE_URI}${process.env.CSRF_TOKEN_ENDPOINT}`,
   );
+
   const { csrfToken } = await csrfTokenResponse.json();
 
   return {
     headers: {
       ...headers,
-      ...(token && { Authorization: `Bearer ${token}` }),
+      ...(userToken && { Authorization: `Bearer ${userToken}` }),
       'CSRF-TOKEN': csrfToken,
     },
   };
