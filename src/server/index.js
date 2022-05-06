@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const path = require('path');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const { ApolloServer } = require('apollo-server-express');
 
 const resolvers = require('./graphql/resolvers');
@@ -14,6 +16,11 @@ const typeDefs = require('./graphql/typedefs');
   const port = process.env.PORT || 8080;
 
   const csrfMiddleware = csrf({ cookie: true });
+
+  const limiter = rateLimit({
+    windowMs: 24 * 60 * 60 * 1000,
+    max: 100,
+  });
 
   dotenv.config();
 
@@ -29,7 +36,10 @@ const typeDefs = require('./graphql/typedefs');
   }
 
   app.use(cookieParser());
-  app.use(express.json());
+  app.use(limiter);
+  app.use(helmet());
+  app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+  app.use(express.json({ limit: '50kb' }));
   app.use(express.static('dist'));
 
   app.use('*', csrfMiddleware, (_, res, next) => {
