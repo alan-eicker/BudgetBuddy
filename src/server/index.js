@@ -1,4 +1,3 @@
-const dotenv = require('dotenv');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -7,78 +6,75 @@ const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { ApolloServer } = require('apollo-server-express');
-
 const resolvers = require('./graphql/resolvers');
 const typeDefs = require('./graphql/typedefs');
+require('dotenv').config();
 
-(async () => {
-  const app = express();
-  const port = process.env.PORT || 8080;
+const app = express();
+const port = process.env.PORT || 8080;
 
-  const csrfMiddleware = csrf({ cookie: true });
+const csrfMiddleware = csrf({ cookie: true });
 
-  const limiter = rateLimit({
-    windowMs: 24 * 60 * 60 * 1000,
-    max: 100,
+const limiter = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000,
+  max: 100,
+});
+
+try {
+  mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
   });
+} catch (err) {
+  console.log(err);
+}
 
-  dotenv.config();
+app.use(cookieParser());
+app.use(limiter);
+app.use(helmet());
+app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+app.use(express.json({ limit: '50kb' }));
+app.use(express.static('dist'));
 
-  try {
-    mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-    });
-  } catch (err) {
-    console.log(err);
-  }
+app.use('*', csrfMiddleware, (_, res, next) => {
+  next();
+});
 
-  app.use(cookieParser());
-  app.use(limiter);
-  app.use(helmet());
-  app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
-  app.use(express.json({ limit: '50kb' }));
-  app.use(express.static('dist'));
+app.get('/csrfToken', (req, res) => {
+  const { referer } = req.headers;
+  const isSAmeOrigin =
+    typeof referer !== 'undefined' && !!referer.match(process.env.BASE_URI);
 
-  app.use('*', csrfMiddleware, (_, res, next) => {
-    next();
+  if (!isSAmeOrigin) throw new Error('403: Forbidden. Request denied.');
+
+  res.send({ csrfToken: req.csrfToken() });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'dist/index.html'), (error) => {
+    if (error) {
+      res.status(500).send(error);
+    }
   });
+});
 
-  app.get('/csrfToken', (req, res) => {
-    const { referer } = req.headers;
-    const isSAmeOrigin =
-      typeof referer !== 'undefined' && !!referer.match(process.env.BASE_URI);
+const context = ({ req }) => ({
+  token: req.headers.authorization,
+  csrfToken: req.cookies._csrf,
+});
 
-    if (!isSAmeOrigin) throw new Error('403: Forbidden. Request denied.');
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context,
+});
 
-    res.send({ csrfToken: req.csrfToken() });
-  });
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(process.cwd(), 'dist/index.html'), (error) => {
-      if (error) {
-        res.status(500).send(error);
-      }
-    });
-  });
-
-  const context = ({ req }) => ({
-    token: req.headers.authorization,
-    csrfToken: req.cookies._csrf,
-  });
-
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context,
-  });
-
-  await server.start();
+server.start().then(() => {
   server.applyMiddleware({ app, path: '/graphql' });
+});
 
-  app.listen(port, () => {
-    console.log('App listening on port', port);
-  });
-})();
+app.listen(port, () => {
+  console.log('App listening on port', port);
+});
