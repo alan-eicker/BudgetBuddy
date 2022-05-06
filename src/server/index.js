@@ -10,7 +10,6 @@ const resolvers = require('./graphql/resolvers');
 const typeDefs = require('./graphql/typedefs');
 require('dotenv').config();
 
-const app = express();
 const port = process.env.PORT || 8080;
 
 const csrfMiddleware = csrf({ cookie: true });
@@ -20,16 +19,14 @@ const limiter = rateLimit({
   max: 100,
 });
 
-try {
-  mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  });
-} catch (err) {
-  console.log(err);
-}
+const app = express();
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+});
 
 app.use(cookieParser());
 app.use(limiter);
