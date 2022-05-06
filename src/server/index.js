@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
-const cors = require('cors');
 const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
 
@@ -30,7 +29,6 @@ const typeDefs = require('./graphql/typedefs');
   }
 
   app.use(cookieParser());
-  app.use(cors());
   app.use(express.json());
   app.use(express.static('dist'));
 
@@ -38,7 +36,13 @@ const typeDefs = require('./graphql/typedefs');
     next();
   });
 
-  app.get('/crsfToken', (req, res) => {
+  app.get('/csrfToken', (req, res) => {
+    const { referer } = req.headers;
+    const isSAmeOrigin =
+      typeof referer !== 'undefined' && !!referer.match(process.env.BASE_URI);
+
+    if (!isSAmeOrigin) throw new Error('403: Forbidden. Request denied.');
+
     res.send({ csrfToken: req.csrfToken() });
   });
 

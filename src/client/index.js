@@ -18,12 +18,16 @@ import './styles/main.scss';
   }
 })();
 
-const httpLink = createHttpLink({ uri: 'http://localhost:8080/graphql' });
+const httpLink = createHttpLink({
+  uri: `${process.env.BASE_URI}${process.env.GRAPGQL_ENDPOINT}`,
+});
 
 const authLink = setContext(async (_, { headers }) => {
   const token = Cookies.get('userToken');
 
-  const csrfTokenResponse = await fetch('http://localhost:8080/crsfToken');
+  const csrfTokenResponse = await fetch(
+    `${process.env.BASE_URI}${process.env.CSRF_TOKEN_ENDPOINT}`,
+  );
   const { csrfToken } = await csrfTokenResponse.json();
 
   return {
