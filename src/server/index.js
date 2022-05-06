@@ -52,7 +52,7 @@ app.get('/csrfToken', (req, res) => {
   res.send({ csrfToken: req.csrfToken() });
 });
 
-app.get('*', (req, res) => {
+app.get('*', (_, res) => {
   res.sendFile(path.join(process.cwd(), 'dist/index.html'), (error) => {
     if (error) {
       res.status(500).send(error);
