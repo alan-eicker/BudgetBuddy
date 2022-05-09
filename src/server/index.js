@@ -16,7 +16,7 @@ const csrfMiddleware = csrf({ cookie: true });
 
 const limiter = rateLimit({
   windowMs: 24 * 60 * 60 * 1000,
-  max: 100,
+  max: 1000,
 });
 
 const app = express();
