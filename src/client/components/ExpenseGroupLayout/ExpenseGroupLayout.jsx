@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {
   ButtonControls,
   Button,
   Statistic,
-  Alert,
   Modal,
+  FormField,
 } from '@atomikui/core';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import {
   faExclamationTriangle,
   faPen,
+  faCopy,
   faTimes,
   faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
@@ -37,8 +37,20 @@ const ExpenseGroupLayout = ({
   endDate,
 }) => {
   const [showAlert, setShowAlert] = useState(false);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const { onDeleteExpenseGroup } = useExpenseGroup();
+  const [showDuplicateExpenseModal, setShowDuplicateExpenseModal] =
+    useState(false);
+  const [duplicateExpenseGroupData, setDuplicateExpenseGroupData] = useState(
+    {},
+  );
+  const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
+  const { onDeleteExpenseGroup, onDuplicateExpenseGroup } = useExpenseGroup();
+
+  const handleDuplicateFormChange = (e) => {
+    setDuplicateExpenseGroupData({
+      ...duplicateExpenseGroupData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   useEffect(() => {
     setShowAlert(overdueExpenses > 0);
@@ -58,18 +70,28 @@ const ExpenseGroupLayout = ({
             </Link>
             <Link
               title="edit expense"
-              aria-label="edit expense"
+              aria-label="edit expense group"
               to={`/expense-groups/edit/${id}`}
             >
               <Icon icon={faPen} color="black" />
             </Link>
             <Button
+              theme="cyan"
+              size="md"
+              shape="pill"
+              title="duplicate expense group"
+              aria-label="duplicate expense group"
+              onClick={() => setShowDuplicateExpenseModal(true)}
+            >
+              <Icon icon={faCopy} size="sm" color="black" />
+            </Button>
+            <Button
               theme="white"
               size="md"
               shape="pill"
               title="delete group"
-              aria-label="delete group"
-              onClick={() => setShowDeleteConfirm(true)}
+              aria-label="delete expense group"
+              onClick={() => setShowDeleteConfirmModal(true)}
             >
               <Icon icon={faTimes} color="#f44336" />
             </Button>
@@ -126,8 +148,66 @@ const ExpenseGroupLayout = ({
           </div>
         </div>
       </div>
+      <form>
+        <Modal
+          disableEscapKey
+          disableOverlayclick
+          isOpen={showDuplicateExpenseModal}
+          className="expense-group__confirm-delete-modal"
+          title="Duplicate Expense Group"
+          footer={
+            <>
+              <>
+                <Button
+                  shape="pill"
+                  theme="lime"
+                  onClick={(e) =>
+                    onDuplicateExpenseGroup(
+                      e,
+                      expenses,
+                      duplicateExpenseGroupData,
+                    )
+                  }
+                >
+                  duplicate
+                </Button>
+                <Button
+                  shape="pill"
+                  className="margin-left-16"
+                  theme="white"
+                  onClick={() => setShowDuplicateExpenseModal(false)}
+                >
+                  cancel
+                </Button>
+              </>
+            </>
+          }
+        >
+          <FormField
+            className="margin-bottom-8"
+            label="Total Budget"
+            name="totalBudget"
+            onChange={handleDuplicateFormChange}
+          />
+          <FormField
+            className="margin-bottom-16"
+            label="Start Date"
+            name="startDate"
+            type="date"
+            onChange={handleDuplicateFormChange}
+          />
+          <FormField
+            label="End Date"
+            name="endDate"
+            type="date"
+            onChange={handleDuplicateFormChange}
+          />
+        </Modal>
+      </form>
       <Modal
-        isOpen={showDeleteConfirm}
+        disableEscapKey
+        disableOverlayclick
+        isOpen={showDeleteConfirmModal}
         className="expense-group__confirm-delete-modal"
         title="Whoa, hold on a second!"
         footer={
@@ -143,7 +223,7 @@ const ExpenseGroupLayout = ({
               shape="pill"
               className="margin-left-16"
               theme="white"
-              onClick={() => setShowDeleteConfirm(false)}
+              onClick={() => setShowDeleteConfirmModal(false)}
             >
               cancel
             </Button>
