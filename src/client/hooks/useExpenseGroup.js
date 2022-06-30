@@ -50,9 +50,14 @@ const useExpenseGroup = () => {
       totalBudget: Number(duplicateExpenseGroupData.totalBudget),
       expenses: expenses.map((expense) => {
         const expenseCopy = { ...expense };
+
         delete expenseCopy._id;
         delete expenseCopy.__typename;
+
         expenseCopy.paid = false;
+        expenseCopy.dueDate = '';
+        expenseCopy.note = '';
+
         return expenseCopy;
       }),
     };
