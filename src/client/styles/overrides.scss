@@ -4,12 +4,12 @@
 }
 
 .atomikui-switch__toggle {
-  background: $indigo-800;
+  background: $dark-navy;
   margin: rem(4) auto;
 }
 
 .atomikui-switch.is-checked .atomikui-switch__toggle {
-  background: $cyan-500;
+  background: $xlight-navy;
 }
 
 .is-overdue .atomikui-switch .atomikui-switch__toggle {
@@ -46,18 +46,32 @@
 
 .atomikui-formfield__input,
 .atomikui-formfield__textarea {
-  background: $indigo-900;
-  border-radius: rem(6);
+  background: $medium-navy;
+  border-radius: rem(2);
   border: 0;
   color: $white;
   transition: all 0.15s linear;
+
+  &::-webkit-input-placeholder {
+    /* Edge */
+    color: $xlight-navy;
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $xlight-navy;
+  }
+
+  &::placeholder {
+    color: $xlight-navy;
+  }
 }
 
 .atomikui-formfield__input:not(:read-only):focus,
 .atomikui-formfield__textarea:not(:read-only):focus {
-  background: $indigo-900;
+  background: $medium-navy;
   border: none;
-  box-shadow: 0 0 0 2px $indigo-400;
+  box-shadow: 0 0 0 2px $xlight-navy;
 }
 
 .atomikui-formfield.has-error > .atomikui-formfield__input,
@@ -71,16 +85,17 @@
 }
 
 .atomikui-check-option__icon {
-  background: $indigo-200;
+  background: $light-navy;
 }
 
 .atomikui-check-option > input:checked + .atomikui-check-option__icon {
-  background: $indigo-900;
-  border-color: $indigo-900;
+  background: $light-navy;
+  border-color: $light-navy;
 }
 
+.atomikui-check-option > input:focus + .atomikui-check-option__icon,
 .atomikui-check-option > input:checked:focus + .atomikui-check-option__icon {
-  box-shadow: 0 0 0 2px $indigo-400;
+  box-shadow: 0 0 0 2px $xlight-navy;
 }
 
 .atomikui-hint--error {
@@ -130,5 +145,15 @@
 
   &:empty {
     display: none;
+  }
+}
+
+.atomikui-btn {
+  &.atomikui-btn--yellow {
+    background: $yellow;
+
+    &:hover {
+      background: $amber-500;
+    }
   }
 }

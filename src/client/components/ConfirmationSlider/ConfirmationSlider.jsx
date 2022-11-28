@@ -14,7 +14,7 @@ const ConfirmationSlider = ({ isActive, title, onCancel, onConfirm }) => (
       <Button
         {...(!isActive && { tabIndex: '-1' })}
         shape="pill"
-        theme="lime"
+        theme="yellow"
         size="md"
         onClick={onConfirm}
       >

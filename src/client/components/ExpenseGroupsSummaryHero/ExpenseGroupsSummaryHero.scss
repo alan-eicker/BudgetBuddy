@@ -1,8 +1,7 @@
 $heroBg: darken($indigo-900, 8%);
 
 .expense-group-summary-hero {
-  background: $heroBg;
-  box-shadow: inset 0 0 rem(48) darken($indigo-900, 16%);
+  background: darken($dark-navy, 3%);
   color: $white;
   display: flex;
   justify-content: center;
@@ -10,12 +9,8 @@ $heroBg: darken($indigo-900, 8%);
   text-decoration: none;
   transition: background 0.2s linear;
 
-  &:hover {
-    background: $heroBg;
-  }
-
   &:focus {
-    box-shadow: 0 0 0 rem(2) $indigo-200;
+    box-shadow: 0 0 0 rem(2) $xlight-navy;
   }
 
   &__content {
@@ -32,19 +27,19 @@ $heroBg: darken($indigo-900, 8%);
 
   &__title {
     align-items: flex-end;
-    color: $lime-500;
+    color: $yellow;
     display: flex;
     font-size: rem(16);
     font-weight: 500;
   }
 
   &__title__icon {
-    fill: $indigo-400;
+    fill: $xlight-navy;
     margin-right: rem(8);
     width: rem(34);
 
     .is-today {
-      fill: $lime-500;
+      fill: $yellow;
     }
   }
 

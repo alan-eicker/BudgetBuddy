@@ -50,7 +50,7 @@ const LoginForm = forwardRef(
           </Row>
           <Row>
             <Col md={12}>
-              <Button type="submit" shape="pill" theme="lime" block>
+              <Button type="submit" shape="pill" theme="yellow" block>
                 Login
               </Button>
             </Col>

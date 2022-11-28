@@ -84,7 +84,7 @@ const App = () => {
         subheader: (
           <>
             <Button
-              theme="lime"
+              theme="yellow"
               shape="pill"
               onClick={() =>
                 ExpenseGroupEditorForm.triggerSubmit(ExpenseGroupEditorRef)

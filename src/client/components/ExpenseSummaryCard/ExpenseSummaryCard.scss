@@ -1,6 +1,6 @@
 .expense-group-summary-card {
   align-items: center;
-  background: $indigo-500;
+  background: $medium-navy;
   border-radius: rem(8);
   color: $white;
   display: flex;
@@ -12,11 +12,15 @@
   transition: background 0.2s linear;
 
   &:hover {
-    background: lighten($indigo-500, 4%);
+    background: lighten($medium-navy, 4%);
+
+    .expense-group-summary-card__footer {
+      background: lighten($light-navy, 4%);
+    }
   }
 
   &:focus {
-    box-shadow: 0 0 0 rem(2) $indigo-200;
+    box-shadow: 0 0 0 rem(2) $xlight-navy;
   }
 
   &__body {
@@ -27,7 +31,7 @@
   &__footer {
     align-items: center;
     align-self: stretch;
-    background: $indigo-900;
+    background: $light-navy;
     display: flex;
     padding: rem(0 16);
     transition: background 0.2s linear;
@@ -40,7 +44,7 @@
   }
 
   &__title {
-    border-bottom: rem(1) solid $indigo-300;
+    border-bottom: rem(1) solid $xlight-navy;
     font-size: rem(20);
     font-weight: 500;
     line-height: 1.2;

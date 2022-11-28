@@ -1,6 +1,6 @@
 .expense-card {
   align-items: center;
-  background: $indigo-500;
+  background: $medium-navy;
   border-radius: rem(6);
   display: flex;
   overflow: hidden;
@@ -40,7 +40,7 @@
 
   &__action-btns {
     align-items: center;
-    border-left: rem(1) solid $indigo-300;
+    border-left: rem(1) solid $xlight-navy;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,7 +57,7 @@
 
       &:hover,
       &:focus {
-        background: lighten($indigo-400, 2%);
+        background: $xlight-navy;
       }
 
       svg {

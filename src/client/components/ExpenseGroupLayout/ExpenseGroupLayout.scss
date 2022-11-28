@@ -22,7 +22,7 @@
   }
 
   &__head {
-    border-bottom: rem(1) solid $indigo-400;
+    border-bottom: rem(1) solid $light-navy;
     display: flex;
     flex-direction: column;
     margin: rem(0 0 20);
@@ -50,9 +50,10 @@
       margin: rem(0 0 0 8);
     }
 
-    a {
+    a,
+    button:not(:last-of-type) {
       align-items: center;
-      background: $cyan-500;
+      background: $yellow;
       border-radius: 50%;
       color: $white;
       display: flex;
@@ -63,7 +64,7 @@
       width: rem(36);
 
       &:hover {
-        background: $cyan-600;
+        background: $xlight-navy;
       }
     }
 
@@ -73,6 +74,22 @@
       height: rem(36);
       padding: 0;
       width: rem(36);
+
+      &:focus {
+        box-shadow: rem(0 0 0 2) $xlight-navy;
+      }
+    }
+
+    button:last-of-type {
+      &:hover {
+        background: $xlight-navy;
+
+        svg {
+          path {
+            fill: $white;
+          }
+        }
+      }
     }
   }
 
@@ -86,10 +103,13 @@
   }
 
   &__summary {
+    background: darken($dark-navy, 3%);
     flex: rem(250) 0 0;
-    margin-left: rem(32);
+    margin-left: rem(16);
     margin-top: rem(32);
+    padding: rem(20 16);
     text-align: center;
+    align-self: flex-start;
   }
 
   &__budget-warning {
@@ -121,8 +141,8 @@
   }
 
   &__confirm-delete-modal {
-    background: $indigo-800;
-    box-shadow: 0 0 rem(30) rgba(0, 0, 0, 0.3);
+    background: $dark-navy;
+    box-shadow: 0 0 rem(30) rgba(0, 0, 0, 0.4);
     color: $white;
     padding: rem(8);
     text-align: center;

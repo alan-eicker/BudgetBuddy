@@ -76,14 +76,14 @@ const ExpenseGroupLayout = ({
               <Icon icon={faPen} color="black" />
             </Link>
             <Button
-              theme="cyan"
+              theme="yellow"
               size="md"
               shape="pill"
               title="duplicate expense group"
               aria-label="duplicate expense group"
               onClick={() => setShowDuplicateExpenseModal(true)}
             >
-              <Icon icon={faCopy} size="sm" color="black" />
+              <Icon icon={faCopy} color="black" />
             </Button>
             <Button
               theme="white"
@@ -93,7 +93,7 @@ const ExpenseGroupLayout = ({
               aria-label="delete expense group"
               onClick={() => setShowDeleteConfirmModal(true)}
             >
-              <Icon icon={faTimes} color="#f44336" />
+              <Icon icon={faTimes} />
             </Button>
           </ButtonControls>
         </div>
@@ -160,7 +160,7 @@ const ExpenseGroupLayout = ({
               <>
                 <Button
                   shape="pill"
-                  theme="lime"
+                  theme="yellow"
                   onClick={(e) =>
                     onDuplicateExpenseGroup(
                       e,
@@ -214,7 +214,7 @@ const ExpenseGroupLayout = ({
           <>
             <Button
               shape="pill"
-              theme="lime"
+              theme="yellow"
               onClick={() => onDeleteExpenseGroup(id)}
             >
               delete

@@ -1,6 +1,6 @@
 .masthead {
   align-items: center;
-  background: $black;
+  background: $medium-navy;
   color: $white;
   display: flex;
   height: rem(65);
@@ -11,7 +11,7 @@
     align-items: center;
     display: flex;
     font-family: 'Saira Extra Condensed', Arial, Helvetica, sans-serif;
-    font-size: rem(24);
+    font-size: rem(20);
     height: rem(36);
     text-transform: uppercase;
   }
@@ -70,7 +70,7 @@
       &.active {
         svg {
           path {
-            fill: $lime-500;
+            fill: $yellow;
           }
         }
       }

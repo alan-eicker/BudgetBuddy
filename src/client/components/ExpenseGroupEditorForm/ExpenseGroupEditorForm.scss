@@ -4,7 +4,7 @@
   padding-bottom: rem(20);
 
   &__title {
-    border-bottom: rem(1) solid $indigo-400;
+    border-bottom: rem(1) solid $light-navy;
     font-size: rem(25);
     font-weight: 600;
     margin-bottom: rem(20);
@@ -24,13 +24,12 @@
   }
 
   &__fieldset__content {
-    background: $indigo-700;
+    background: darken($dark-navy, 2%);
     margin-bottom: rem(32);
     padding: rem(16);
   }
 
   legend {
-    background: $indigo-800;
     font-size: rem(20);
     margin-bottom: rem(8);
     margin-left: rem(-6);
