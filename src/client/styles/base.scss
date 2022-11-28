@@ -24,15 +24,15 @@ button {
 }
 
 ::-webkit-input-placeholder {
-  color: $indigo-300;
+  color: lighten($xlight-navy, 3%);
 }
 
 :-ms-input-placeholder {
-  color: $indigo-300;
+  color: lighten($xlight-navy, 3%);
 }
 
 ::placeholder {
-  color: $indigo-300;
+  color: lighten($xlight-navy, 3%);
 }
 
 ::-webkit-calendar-picker-indicator {

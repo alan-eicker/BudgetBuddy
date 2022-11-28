@@ -20,14 +20,6 @@
   box-shadow: none;
 }
 
-.atomikui-btn--indigo {
-  background: $indigo-500;
-
-  &:hover {
-    background: $indigo-900;
-  }
-}
-
 .atomikui-btn--white {
   box-shadow: inset 0 0 0 rem(1) $blue-gray-200;
 }
@@ -51,20 +43,6 @@
   border: 0;
   color: $white;
   transition: all 0.15s linear;
-
-  &::-webkit-input-placeholder {
-    /* Edge */
-    color: $xlight-navy;
-  }
-
-  &:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: $xlight-navy;
-  }
-
-  &::placeholder {
-    color: $xlight-navy;
-  }
 }
 
 .atomikui-formfield__input:not(:read-only):focus,
